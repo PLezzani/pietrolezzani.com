@@ -64,7 +64,17 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   2 occorrenze di `mailto:andréwkaplan@gmail.com` (con carattere corrotto "é").
   File: `contact/index.html`. AC: sostituita con l'email reale o rimossa.
 
-- [ ] **AUDIT-17 · Progetti portfolio demo o incompleti** *(segnalato da Pietro, verificato)*
+- [~] **AUDIT-17 · Progetti portfolio demo o incompleti** *(segnalato da Pietro, verificato)*
+  **(a) FATTO ✅ 2026-08-20**: rimosse le pagine `bunero/`, `mood/`, `symphony/`, le loro
+  card da `work/` e dalle pagine tag, e i relativi URL dal sitemap.
+  Conseguenze gestite: 5 pagine tag restavano vuote perché contenevano solo progetti
+  demo (`art-direction`, `branding`, `performance-and-growth`, `user-research`,
+  `user-testing`) → rimosse anch'esse (nessun progetto reale le referenziava);
+  la sezione "Next project" di `talentware/` puntava a Mood → ricostruita verso OptiKPI.
+  Sitemap: da 23 a 15 URL.
+  **(b) PARZIALE**: rimossa la tagline duplicata in OptiKPI. ⚠️ Restano da sostituire i
+  paragrafi "Challenge" demo in `energy-co/`, `optikpi/`, `talentware/`: servono i testi
+  reali Challenge/Goal/Result da Pietro.
   Due gruppi:
   **(a) Interamente demo — Bunero, Mood, Symphony**: cliente fittizio "Beyond Brewery",
   sito `flowcrafts.com`, anno 2022, testi del birrificio demo ("raising a glass to the
