@@ -25,7 +25,10 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   AC: `grep -ri "pixelpier\|1-800-356\|Seventh Ave" --include="*.html" .` → 0 risultati
   nei contenuti visibili (i path del tema `pixelpiernyc` in CSS/asset sono ok e restano).
 
-- [ ] **AUDIT-02 · Social placeholder nel footer**
+- [x] **AUDIT-02 · Social placeholder nel footer** ✅ 2026-08-20
+  Fatto: rimosse le voci Behance e Twitter; corretti anche gli URL generici
+  `instagram.com` / `linkedin.com` (presenti su tutte le pagine tranne home e contact)
+  con i profili reali. Restano solo Instagram + LinkedIn, coerenti su tutto il sito.
   Link generici `https://twitter.com/home` e `https://www.behance.net` (86 occ. ciascuno).
   LinkedIn e Instagram sono invece corretti (`/in/pietrolezzani/`, `pietro_lezzani`).
   ⚠️ Decidere: Pietro ha profili Behance/X reali da linkare, o si rimuovono le due icone?
