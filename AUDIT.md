@@ -42,7 +42,13 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   File: `about/index.html`. AC: zero riferimenti a PixelPier/team/New York; il testo
   parla di Pietro in prima persona (coerente con "Freelance Digital Designer").
 
-- [ ] **AUDIT-04 · Privacy Policy = placeholder WordPress**
+- [x] **AUDIT-04 · Privacy Policy = placeholder WordPress** ✅ 2026-08-20
+  Fatto: informativa riscritta da zero (titolare Pietro Lezzani, contatto
+  `info@pietrolezzani.com`), sezioni: chi siamo · cosa il sito non fa · hosting e log
+  GitHub (con trasferimento extra-UE) · contatti via email · link esterni · diritti GDPR
+  e Garante · aggiornamenti. Verificato: nessun analytics/cookie proprio nel sito;
+  dichiarato l'uso di `localStorage` da parte degli script Elementor ereditati.
+  Da aggiornare quando AUDIT-06 introdurrà un form funzionante.
   Contiene letteralmente "Suggested text:", cita `pixelpiernyc.vamtam.com`, commenti
   e Gravatar (funzioni che il sito statico non ha). Pietro opera in Italia → GDPR.
   Nuovo testo semplice e veritiero: sito statico, nessun cookie proprio, nessun form
