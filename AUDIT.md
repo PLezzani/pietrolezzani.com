@@ -51,7 +51,10 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   File: `privacy-policy/index.html`. AC: niente "Suggested text", niente URL demo,
   informativa coerente con le funzioni reali del sito.
 
-- [ ] **AUDIT-05 · Email demo residua nella pagina Contact**
+- [x] **AUDIT-05 · Email demo residua nella pagina Contact** ✅ 2026-08-20
+  Fatto: `mailto:andréwkaplan@gmail.com` → `info@pietrolezzani.com` in `contact/` e
+  `index.html` (la CTA era presente anche in home); uniformata anche l'email visibile,
+  ora `info@pietrolezzani.com` su tutto il sito.
   2 occorrenze di `mailto:andréwkaplan@gmail.com` (con carattere corrotto "é").
   File: `contact/index.html`. AC: sostituita con l'email reale o rimossa.
 
