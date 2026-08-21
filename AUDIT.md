@@ -127,7 +127,17 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
 
 ## P1 — Alti: funzionalità e SEO
 
-- [ ] **AUDIT-06 · Form contatti non funzionante**
+- [x] **AUDIT-06 · Form contatti non funzionante** ✅ 2026-08-21
+  Risolto alla radice: su decisione di Pietro la **pagina `contact/` è stata rimossa**
+  del tutto (con il form rotto, i suoi bug e l'indirizzo di casa che vi compariva).
+  La home non la linkava già — usa l'ancora interna `index.html#contacts` — ma le altre
+  12 pagine sì, da menu e footer: quei link sono stati riportati a `/#contacts`
+  (24 voci di menu + 24 bottoni footer), così la sezione contatti della home resta
+  il punto d'arrivo unico. URL tolto dal `sitemap.xml` (7 URL rimasti).
+  Il footer **"Let's talk"** ora apre una **mail precompilata** a `info@pietrolezzani.com`
+  (oggetto "Project enquiry" e una riga "I'm looking for…") con una **freccia cliccabile**
+  accanto al testo. La freccia che c'era prima era una `background-image` decorativa,
+  fuori dal link e quindi non cliccabile: rimossa per non averne due.
   Il form fa POST agli endpoint WordPress (`admin-ajax.php`) che non esistono più.
   Bug ereditati: campo "message" con `type="tel"`; nessuna `<label>` (solo placeholder).
   Opzioni gratuite: (a) Formspree piano free → cambio di `action` + method, minimo
