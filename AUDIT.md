@@ -109,7 +109,18 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   progetti: cliente + tipo di intervento; ecc.). Aggiungere `<meta name="description">`
   nell'`<head>` di ciascuna pagina. AC: presente e unica in ogni pagina; nessuna vuota.
 
-- [ ] **AUDIT-08 · Gerarchia heading rotta**
+- [x] **AUDIT-08 · Gerarchia heading rotta** ✅ 2026-08-21
+  Fatto: 1 solo H1 per pagina su tutte e 15. Logo "P L" `h2`→`div`; home "Lezzani"
+  `h1`→`div` (resta H1 "Pietro"); titolo progetti `h4`→`h1`.
+  **Attenzione per il futuro**: il kit Elementor stila anche **per tag**
+  (`.elementor-kit-4 h2{font-size:…}`), non solo per classe. Cambiare tag è sicuro
+  SOLO se il widget ha tipografia esplicita sul proprio `data-id` (che vince per
+  specificità). Verificato widget per widget prima di ogni modifica.
+  Perciò NON sono stati toccati: le etichette `h6` (Services/Client/Year/Challenge/
+  Goal/Result) e gli `h4` delle card in `work/` e `tag/`, privi di regole proprie →
+  cambiarli altererebbe la resa. Restano quindi dei salti di livello (h2→h6, h1→h4):
+  compromesso accettato per rispettare il vincolo di parità visiva.
+  Verifica: screenshot headless prima/dopo → `energy-co` pixel-identica, home identica.
   Home: doppio H1 ("Pietro" + "Lezzani"). Pagine progetto: nessun H1 (il titolo del
   progetto è un `<h4>`; etichette come "Services/Client/Year" sono `<h6>`; il logo "P L"
   è un `<h2>`). Correggere i tag mantenendo identiche le classi CSS (l'aspetto non
