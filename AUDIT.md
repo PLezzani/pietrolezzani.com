@@ -244,7 +244,14 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   Aggiungere `rel="noopener noreferrer"` a tutti (sicurezza/privacy, fix meccanico).
   AC: `grep -r 'target="_blank"' --include="*.html" . | grep -v 'rel='` → 0.
 
-- [ ] **AUDIT-15 · Pagine tag: valutare indicizzazione**
+- [x] **AUDIT-15 · Pagine tag: valutare indicizzazione** ✅ 2026-08-21
+  Scelta di Pietro: opzione (a). Aggiunto `<meta name="robots" content="noindex, follow,
+  max-image-preview:large">` alle 6 pagine tag (sostituendo il robots ereditato, così
+  `max-image-preview` non si perde) e rimossi i loro URL dal `sitemap.xml`.
+  Restano navigabili e i link vengono seguiti, ma non competono con le pagine progetto.
+  Sitemap: 8 URL, tutti indicizzabili; `lastmod` aggiornate al 2026-08-21.
+  `robots.txt` invariato (Allow: / + riga Sitemap): coerente, perché il noindex è a
+  livello di pagina — bloccare via robots.txt impedirebbe a Google di leggerlo.
   10 pagine `/tag/...` con contenuto scarso/duplicato (griglie di card). Opzioni:
   (a) aggiungere `<meta name="robots" content="noindex,follow">` e toglierle dal
   sitemap; (b) lasciarle se utili alla navigazione. ⚠️ Decidere.
