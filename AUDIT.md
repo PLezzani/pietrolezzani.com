@@ -146,9 +146,20 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   insieme alle 4 voci di menu "Reviews" (l'ancora `#reviews` non esiste più) e al
   `<link>` al CSS del widget, ora inutile (19 KB in meno da scaricare).
   Per rimetterla in futuro servirà anche il JS del carosello, da riscrivere come il menu.
-  ⚠️ **Restano in 404, da verificare se servono davvero**:
-  `loop`, `load-more`, `ajax-pagination` (Elementor Pro), `text-editor` (Elementor),
-  `vamtam/assets/js/low-priority.js` (tema) e un CSS del plugin GoDaddy.
+  ⚠️ **Anche le gallerie delle pagine progetto sono caroselli muti** (widget
+  `image-carousel` in `optikpi/`, `talentware/`, `energy-co/`, `about/`): 5 slide
+  affiancate, di cui solo le prime 3 entrano nel contenitore — **le ultime 2 sono
+  fuori schermo e irraggiungibili**, non essendoci né frecce né swipe.
+  Da affrontare insieme ad AUDIT-17(b), visto che quelle immagini sono comunque demo:
+  quando arrivano i materiali reali si decide se servono 5 immagini a scorrimento
+  (allora serve il JS) o se bastano 3 affiancate (nessun JS necessario).
+  Verificato invece che le **griglie di progetti** (`loop-grid` in home, work e tag)
+  funzionano: sono renderizzate staticamente nell'export, i chunk `loop`/`load-more`/
+  `ajax-pagination` servirebbero solo a paginazione e "carica altro", che qui non ci sono.
+  Restano quindi in 404 senza conseguenze note: `loop`, `load-more`, `ajax-pagination`,
+  `text-editor`, `vamtam/assets/js/low-priority.js` e un CSS del plugin GoDaddy.
+  (Anche `nav-menu` resta in 404: Elementor prova comunque a caricarlo, ma il menu ora
+  funziona grazie a `menu-toggle.js`.)
   Nota: le pagine interne su mobile non hanno alcun menu di navigazione (solo le icone
   social); l'hamburger esiste solo in home. Valutare se aggiungerlo anche lì.
 
