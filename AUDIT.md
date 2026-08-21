@@ -138,11 +138,17 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   dipendenze) incluso in tutte le pagine. Testato: si apre, si chiude, funziona da
   tastiera ed Esc. **Nota**: Elementor Pro è a pagamento e i suoi file non sono
   recuperabili da fonti pubbliche, perciò la strada è riscrivere il minimo necessario.
+  **Carosello recensioni — RISOLTO ✅ rimuovendo la sezione.** Aveva lo stesso problema
+  (4 slide, mai inizializzate: se ne vedeva una e non scorreva), ma il contenuto era
+  comunque demo: "Joan Doe – CEO at Bain & Company", "Michael Brown" ripetuto due volte
+  con ruoli diversi, e 4 testi che in realtà erano 2 ripetuti a coppie. Su decisione di
+  Pietro la sezione è stata rimossa dalla home finché non ci sono testimonianze vere,
+  insieme alle 4 voci di menu "Reviews" (l'ancora `#reviews` non esiste più) e al
+  `<link>` al CSS del widget, ora inutile (19 KB in meno da scaricare).
+  Per rimetterla in futuro servirà anche il JS del carosello, da riscrivere come il menu.
   ⚠️ **Restano in 404, da verificare se servono davvero**:
-  `carousel`, `loop`, `load-more`, `ajax-pagination` (Elementor Pro), `text-editor`
-  (Elementor), `vamtam/assets/js/low-priority.js` (tema) e un CSS del plugin GoDaddy.
-  Da controllare in particolare il **carosello delle recensioni in home**: se non
-  scorre, serve lo stesso trattamento del menu.
+  `loop`, `load-more`, `ajax-pagination` (Elementor Pro), `text-editor` (Elementor),
+  `vamtam/assets/js/low-priority.js` (tema) e un CSS del plugin GoDaddy.
   Nota: le pagine interne su mobile non hanno alcun menu di navigazione (solo le icone
   social); l'hamburger esiste solo in home. Valutare se aggiungerlo anche lì.
 
