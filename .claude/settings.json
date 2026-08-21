@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Read(//tmp/shots/**)",
-      "Read(//private/tmp/shots/**)"
+      "Read(//private/tmp/shots/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(which node *)",
+      "Read(//usr/local/lib/node_modules/**)",
+      "Bash(node cdp_test.mjs \"http://localhost:8765/work/\")",
+      "Bash(node cdp_test.mjs \"http://localhost:8765/\")",
+      "Bash(node cdp_404.mjs \"http://localhost:8765/\")",
+      "Bash(python3 -)",
+      "Bash(node cdp_burger.mjs \"http://localhost:8765/\")"
     ]
   }
 }

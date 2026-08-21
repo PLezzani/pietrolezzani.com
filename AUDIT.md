@@ -125,6 +125,27 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   AC: `grep -r 'page_id=' --include="*.html" .` → 0 risultati; nessuna voce di menu
   rimanda a pagine inesistenti.
 
+- [~] **AUDIT-19 · Script Elementor mancanti dall'export (menu hamburger rotto)**
+  *(trovato il 2026-08-21, segnalato da Pietro)*
+  L'export statico non ha scaricato i **chunk webpack** di Elementor, che il sito carica
+  dinamicamente e che quindi non comparivano nell'HTML. Risultato: 9 richieste in 404 e
+  le funzioni relative morte. Diagnosi fatta pilotando Chrome via DevTools Protocol.
+  **RISOLTO ✅**: il menu **hamburger su mobile** non si apriva (mancava
+  `elementor-pro/assets/js/nav-menu.<hash>.bundle.min.js` e
+  `elementor/assets/js/shared-frontend-handlers.<hash>.bundle.min.js`).
+  Il CSS del tema era a posto — mostra il menu quando il toggle ha la classe
+  `elementor-active` — quindi è bastato `menu-toggle.js` in root (~70 righe, zero
+  dipendenze) incluso in tutte le pagine. Testato: si apre, si chiude, funziona da
+  tastiera ed Esc. **Nota**: Elementor Pro è a pagamento e i suoi file non sono
+  recuperabili da fonti pubbliche, perciò la strada è riscrivere il minimo necessario.
+  ⚠️ **Restano in 404, da verificare se servono davvero**:
+  `carousel`, `loop`, `load-more`, `ajax-pagination` (Elementor Pro), `text-editor`
+  (Elementor), `vamtam/assets/js/low-priority.js` (tema) e un CSS del plugin GoDaddy.
+  Da controllare in particolare il **carosello delle recensioni in home**: se non
+  scorre, serve lo stesso trattamento del menu.
+  Nota: le pagine interne su mobile non hanno alcun menu di navigazione (solo le icone
+  social); l'hamburger esiste solo in home. Valutare se aggiungerlo anche lì.
+
 ## P1 — Alti: funzionalità e SEO
 
 - [x] **AUDIT-06 · Form contatti non funzionante** ✅ 2026-08-21
