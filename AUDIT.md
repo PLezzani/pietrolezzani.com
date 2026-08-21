@@ -160,7 +160,24 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
 
 ## P2 — Medi: performance, accessibilità, pulizia
 
-- [ ] **AUDIT-12 · Immagini sovrappeso**
+- [x] **AUDIT-12 · Immagini sovrappeso** ✅ 2026-08-21 *(branch `audit-12-immagini`)*
+  `wp-content/uploads`: **19,2 MB → 10 MB**. Nessuna immagine oltre 300 KB tranne
+  l'hero `PietroMargot3.jpg` (316 KB), entro la tolleranza dell'AC.
+  1. Rimosse 18 immagini **orfane** (3 MB): residui dei progetti demo eliminati.
+     Verificato l'uso sia negli HTML sia nei CSS prima di cancellare.
+  2. Foto PNG → **JPEG** q84, lato lungo max 2048px, con rinomina dei riferimenti
+     (12 HTML aggiornati): `PietroMargot3` 3,0 MB→316 KB, cover OptiKPI 1,3 MB→160 KB,
+     Energy Co 918→286 KB, Talentware 466→189 KB. Deroga consapevole alla regola
+     "stessi nomi file": per una foto il PNG è inefficiente e nessuna ricompressione
+     PNG scendeva sotto i 300 KB (testato: 659 KB nel caso migliore).
+  3. PNG con trasparenza (`blur-spot-*`) quantizzati a 256 colori, formato invariato:
+     447→58 KB e 304→39 KB.
+  4. `GettyImages-...-scaled.jpg` (background CSS della home): 374→244 KB.
+  Verifica parità visiva: screenshot headless prima/dopo con confronto pixel →
+  home e contact **0,000%** di pixel diversi; OptiKPI 0,33% con scarto >8/255 e
+  0,01% >24 (artefatti JPEG non percepibili). Zero riferimenti a immagini mancanti.
+  Nota: `elementorFrontendConfig` cita ancora varianti `-1024x614` mai esistite sul
+  disco; è metadata JS ereditata, non provoca richieste di rete.
   Le peggiori: `PietroMargot3.png` 3,0 MB (+ varianti 1,3 MB / 784 KB),
   `Project-cover-OptiKPI-min.png` 1,3 MB, `EnergyCo-Project-cover-min.png` 920 KB,
   `tech-device-with-nature-background-scaled.jpg` 860 KB.
