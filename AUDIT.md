@@ -100,7 +100,17 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   AC: `grep -ri "Beyond Brewery\|flowcrafts\|raising a glass\|In response to the dynamic shifts" --include="*.html" .`
   → 0 risultati; ogni progetto pubblicato ha Services/Client/Year compilati e testi propri.
 
-- [ ] **AUDIT-18 · Voci di menu demo che portano tutte alla home** *(trovato il 2026-08-21)*
+- [x] **AUDIT-18 · Voci di menu demo che portano tutte alla home** ✅ 2026-08-21
+  Fatto su tutte le pagine: rimosse le voci **Careers** e **Services** dai menu (42 `<li>`),
+  il dropdown **"Homes"** con le sue voci demo (Home page, Branding Agency, Horizontal
+  Layout) è stato collassato nella sola voce valida **"Home"** (14 pagine); rimosso il
+  bottone footer **"Services"** (13 pagine) e rinominato **"Agency" → "About"** (13).
+  Footer ora: About · Work · Contact. Verificato con confronto pixel: cambia solo
+  quella riga, nessun buco nel layout.
+  ⚠️ Resta 1 `page_id` in `about/`: il bottone "See all Open Positions" della sezione
+  demo "Open positions" → si risolve con AUDIT-03.
+  Nota: il menu principale usa ancora le etichette del tema **"Studio"** (→ `/about/`)
+  e **"Journal"** (→ `/blog/`); puntano a pagine reali, ma valuta se rinominarle.
   Non era nell'audit iniziale. L'export WordPress ha lasciato link in forma
   `/?page_id=NNN`: su GitHub Pages la query string viene ignorata, quindi **ogni
   link di questo tipo serve la home**, qualunque cosa prometta.
