@@ -75,6 +75,12 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   **(b) PARZIALE**: rimossa la tagline duplicata in OptiKPI. ⚠️ Restano da sostituire i
   paragrafi "Challenge" demo in `energy-co/`, `optikpi/`, `talentware/`: servono i testi
   reali Challenge/Goal/Result da Pietro.
+  ⚠️ **Trovato il 2026-08-21 (nuovo, non era nell'audit iniziale)**: anche le **gallerie
+  di immagini** delle 3 pagine progetto sono demo. Verificato aprendo i file:
+  OptiKPI e Talentware mostrano **le stesse identiche 10 foto stock** (cuffie su un
+  laptop, scrivanie, ecc.); Energy Co ne ha 7, tra cui il mockup di un brand di
+  skincare ("Beautiful Skin For Life") che con l'energia non c'entra nulla.
+  Servono quindi anche **screenshot/immagini reali** dei tre progetti, non solo i testi.
   Due gruppi:
   **(a) Interamente demo — Bunero, Mood, Symphony**: cliente fittizio "Beyond Brewery",
   sito `flowcrafts.com`, anno 2022, testi del birrificio demo ("raising a glass to the
@@ -185,7 +191,18 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   mantenendo gli stessi nomi file per non toccare gli HTML.
   AC: nessuna immagine >300 KB (tolleranza per 1–2 hero); parità visiva a occhio.
 
-- [ ] **AUDIT-13 · Alt text mancanti su immagini significative**
+- [x] **AUDIT-13 · Alt text mancanti su immagini significative** ✅ 2026-08-21
+  Fatto:
+  1. **Logo `logo-symbol.svg` (13 pagine)**: era `alt=""` ma è l'**unico contenuto di un
+     link alla home** → il link non aveva nome accessibile (WCAG 2.4.4 / 4.1.2).
+     Ora `alt="Pietro Lezzani — home"`.
+  2. **Ritratto `PietroMargot3.jpg`** (home + contact): alt descrittivo.
+  3. **12 immagini avevano il nome del file come alt** (es. `alt="photo-1693841114632-…"`):
+     peggio di un alt vuoto, perché uno screen reader legge la stringa. Azzerati.
+  Verificate una per una le immagini delle gallerie progetto: **sono foto stock
+  d'atmosfera** (cuffie su un laptop, mockup di skincare…), non materiali dei progetti
+  → `alt=""` è la scelta WCAG corretta finché restano decorative. Vedi AUDIT-17(b).
+  Restano 3 alt demo in `about/` ("Office space / 2023" ecc.) → coperti da AUDIT-03.
   ~60 immagini con `alt=""`: per quelle informative (ritratti, screenshot progetti,
   cover) scrivere alt descrittivi; le puramente decorative (blur, texture) possono
   restare con alt vuoto (corretto per WCAG). File: tutte le pagine.
