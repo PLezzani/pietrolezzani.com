@@ -104,7 +104,11 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   di destinazione. File: `contact/index.html`.
   AC: invio testato con successo; ogni campo ha label o `aria-label`; message è textarea/text.
 
-- [ ] **AUDIT-07 · Meta description assenti in tutte le 12 pagine principali**
+- [x] **AUDIT-07 · Meta description assenti in tutte le 12 pagine principali** ✅ 2026-08-21
+  Fatto: description unica di 150–160 caratteri su tutte e 15 le pagine (incluse le
+  6 pagine tag), inserita subito dopo il `<title>`. Verificato: nessuna mancante,
+  nessuna duplicata. ⚠️ Quella di `about/` descrive Pietro ma la pagina contiene ancora
+  il testo demo: va riletta insieme ad AUDIT-03.
   Scrivere descrizioni uniche di 150–160 caratteri (home: chi è Pietro + valore;
   progetti: cliente + tipo di intervento; ecc.). Aggiungere `<meta name="description">`
   nell'`<head>` di ciascuna pagina. AC: presente e unica in ogni pagina; nessuna vuota.
