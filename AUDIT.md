@@ -143,7 +143,15 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   dal sitemap finché non ci sono contenuti; (b) pubblicare un primo articolo.
   AC: nessuna pagina raggiungibile dal menu è vuota o placeholder.
 
-- [ ] **AUDIT-11 · Anteprime social assenti (Open Graph incompleto)**
+- [x] **AUDIT-11 · Anteprime social assenti (Open Graph incompleto)** ✅ 2026-08-21
+  Fatto: blocco OG + Twitter completo su tutte e 15 le pagine (type, site_name, locale,
+  title, description, url, image 1200×630 con width/height/alt, twitter:card
+  `summary_large_image`). Immagini generate con `sips` (nessuna dipendenza) in
+  `wp-content/uploads/og/`: `og-default.jpg` (ritratto della home) + una cover per
+  ciascun progetto; tutte 1200×630, 92–188 KB.
+  Trovato e corretto strada facendo: le 6 pagine tag erano **prive di canonical** →
+  aggiunto, e `og:url` allineato all'URL reale (altrimenti puntava alla home).
+  ⚠️ Da fare a mano: validare con LinkedIn Post Inspector dopo il deploy.
   Nessuna `og:image` né `twitter:card`: condividendo il sito su LinkedIn/WhatsApp
   non appare alcuna immagine. Aggiungere og:image (es. ritratto o cover con logo,
   1200×630) + `twitter:card=summary_large_image` su tutte le pagine; og:image
