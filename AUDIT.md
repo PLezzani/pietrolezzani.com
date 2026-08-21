@@ -100,6 +100,21 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   AC: `grep -ri "Beyond Brewery\|flowcrafts\|raising a glass\|In response to the dynamic shifts" --include="*.html" .`
   → 0 risultati; ogni progetto pubblicato ha Services/Client/Year compilati e testi propri.
 
+- [ ] **AUDIT-18 · Voci di menu demo che portano tutte alla home** *(trovato il 2026-08-21)*
+  Non era nell'audit iniziale. L'export WordPress ha lasciato link in forma
+  `/?page_id=NNN`: su GitHub Pages la query string viene ignorata, quindi **ogni
+  link di questo tipo serve la home**, qualunque cosa prometta.
+  Nel **footer di tutte le pagine** (visibile) c'è il bottone **"Services" → `/?page_id=1230`**
+  che porta alla home; accanto c'è **"Agency" → `/about/`**, linguaggio da agenzia
+  benché il sito sia di un freelance.
+  Nei menu a discesa (non visibili nell'header desktop, presenti nel DOM e navigabili)
+  restano voci del tema demo: **"Careers"** (28 occ.), **"Homes"**, **"Home page"**,
+  **"Branding Agency"**, **"Horizontal Layout"** — tutte verso `/?page_id=NNN`.
+  ⚠️ Decidere: rimuovere le voci demo e il bottone "Services" (oppure puntarlo a `/work/`),
+  e se rinominare "Agency" in qualcosa di coerente con un freelance (es. "About").
+  AC: `grep -r 'page_id=' --include="*.html" .` → 0 risultati; nessuna voce di menu
+  rimanda a pagine inesistenti.
+
 ## P1 — Alti: funzionalità e SEO
 
 - [ ] **AUDIT-06 · Form contatti non funzionante**
