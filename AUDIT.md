@@ -168,7 +168,11 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   puntare a `/work/`? File: `about/index.html` (probabilmente si risolve con AUDIT-03).
   AC: zero link interni a percorsi inesistenti.
 
-- [ ] **AUDIT-10 · Blog vuoto**
+- [x] **AUDIT-10 · Blog vuoto** ✅ 2026-08-21
+  Scelta di Pietro: rimuovere del tutto la pagina. Eliminata `blog/`, tolte le 13 voci
+  "Journal" dai menu e l'URL dal `sitemap.xml` (14 URL rimasti). Zero riferimenti
+  residui a `/blog/`. Menu principale ora: Home · Work · Studio.
+  Se in futuro vorrai pubblicare articoli, la pagina va ricreata da zero.
   La pagina Blog non ha articoli (un solo `<article>` placeholder che linka la home),
   ma è nel menu di ogni pagina. ⚠️ Decidere: (a) togliere "Blog" dal menu e la pagina
   dal sitemap finché non ci sono contenuti; (b) pubblicare un primo articolo.
