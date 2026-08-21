@@ -151,7 +151,10 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   restare con alt vuoto (corretto per WCAG). File: tutte le pagine.
   AC: ogni immagine informativa ha alt significativo; decorative con `alt=""`.
 
-- [ ] **AUDIT-14 · 406 link `target="_blank"` senza `rel`**
+- [x] **AUDIT-14 · 406 link `target="_blank"` senza `rel`** ✅ 2026-08-21
+  Fatto: `rel="noopener noreferrer"` su 140 link; i 2 link al CV avevano già
+  `rel="nofollow"` → estesi a `rel="nofollow noopener noreferrer"`.
+  (Il conteggio reale dopo la rimozione dei progetti demo era 139, non 406.)
   Aggiungere `rel="noopener noreferrer"` a tutti (sicurezza/privacy, fix meccanico).
   AC: `grep -r 'target="_blank"' --include="*.html" . | grep -v 'rel='` → 0.
 
