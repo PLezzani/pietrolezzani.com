@@ -211,7 +211,13 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   File: `index.html` + 6 pagine progetto (+ verifica sulle altre).
   AC: esattamente 1 H1 per pagina; nessun salto di livello illogico; parità visiva.
 
-- [ ] **AUDIT-09 · 4 link rotti `/services#...` nella pagina About**
+- [x] **AUDIT-09 · 4 link rotti `/services#...` nella pagina About** ✅ 2026-08-21
+  Erano 8 tag `<a>` (4 ancore, ciascuna usata due volte: titolo + icona) nella sezione
+  "Our services". Fatti puntare a `/work/`: restando dei link, l'aspetto non cambia
+  (verificato con confronto pixel: **0,0000%** di differenza) e sparisce il 404.
+  Scelta conservativa in attesa di AUDIT-03: la sezione è comunque demo e quando
+  riscriverai About questi link andranno rivisti insieme al resto.
+  Ora il sito non ha **nessun link interno rotto**.
   Pre-esistenti (404 anche sul vecchio sito). ⚠️ Decidere: rimuovere i link, o farli
   puntare a `/work/`? File: `about/index.html` (probabilmente si risolve con AUDIT-03).
   AC: zero link interni a percorsi inesistenti.
