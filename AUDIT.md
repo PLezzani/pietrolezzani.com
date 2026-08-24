@@ -163,7 +163,18 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   Nota: le pagine interne su mobile non hanno alcun menu di navigazione (solo le icone
   social); l'hamburger esiste solo in home. Valutare se aggiungerlo anche lì.
 
-## P1 — Alti: funzionalità e SEO
+- [x] **AUDIT-20 · Pagina 404 personalizzata** ✅ 2026-08-21
+  *(nato dall'alert Search Console "URL inviato non trovato (404)")*
+  Google ha ricontrollato gli URL del vecchio sitemap e ha trovato le pagine che abbiamo
+  rimosso di proposito (progetti demo, blog, contact, 5 tag). Verificato che **nessuno
+  dei 7 URL del sitemap attuale dia 404**: l'alert riguarda solo le rimozioni volute.
+  Mancava però una 404 propria, quindi chi arrivava da un risultato Google obsoleto
+  vedeva la pagina generica di GitHub Pages. Creata `404.html` coerente col sito
+  (stesso sfondo `#E9E9E7`, font Plus Jakarta Sans del tema, logo, link a home/work e
+  contatto), autonoma e leggera: non carica i 35 CSS di Elementor.
+  **Percorsi assoluti**, perché GitHub Pages serve questo file per qualunque URL
+  inesistente e i relativi si romperebbero a seconda della profondità (`/tag/x/`).
+  In `noindex, follow`. Verificata su desktop e con emulazione mobile reale.
 
 - [x] **AUDIT-06 · Form contatti non funzionante** ✅ 2026-08-21
   Risolto alla radice: su decisione di Pietro la **pagina `contact/` è stata rimossa**
