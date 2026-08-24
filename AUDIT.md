@@ -176,6 +176,8 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   inesistente e i relativi si romperebbero a seconda della profondità (`/tag/x/`).
   In `noindex, follow`. Verificata su desktop e con emulazione mobile reale.
 
+## P1 — Alti: funzionalità e SEO
+
 - [x] **AUDIT-06 · Form contatti non funzionante** ✅ 2026-08-21
   Risolto alla radice: su decisione di Pietro la **pagina `contact/` è stata rimossa**
   del tutto (con il form rotto, i suoi bug e l'indirizzo di casa che vi compariva).
@@ -257,6 +259,21 @@ mai sostituiti. Oggi il sito comunica dati di contatto e identità **di qualcun 
   1200×630) + `twitter:card=summary_large_image` su tutte le pagine; og:image
   specifica per i progetti (la cover di ciascuno). AC: anteprima corretta nel
   validator LinkedIn Post Inspector.
+
+- [x] **AUDIT-21 · Link interni a `index.html` in conflitto con i canonical** ✅ 2026-08-21
+  *(dall'analisi Search Console: "Pagina duplicata, Google ha scelto una pagina canonica
+  diversa da quella specificata dall'utente" sulla home)*
+  Causa: su GitHub Pages ogni pagina risponde a **due URL** — `/work/` e
+  `/work/index.html` — entrambi 200 con lo stesso contenuto. I canonical dichiaravano
+  la forma con la barra, ma **113 link interni** puntavano alla forma `index.html`
+  (`../index.html`, `../../index.html`, `index.html#contacts`…). Google segue i link,
+  trova il contenuto a un URL diverso da quello dichiarato e sceglie da sé il canonico.
+  Fatto: riscritti tutti i 113 link nella forma assoluta con barra (`/`, `/work/`,
+  `/tag/website/`…), ancore comprese. Ora link e canonical dicono la stessa cosa.
+  Verificato: 0 link a `index.html`, 0 link rotti, parità visiva **0,0000%** su home e
+  work, navigazione testata pagina per pagina.
+  Nota: i doppioni `/x/index.html` restano raggiungibili — è il funzionamento di
+  GitHub Pages, non disattivabile — ma non c'è più alcun link che li indichi.
 
 ## P2 — Medi: performance, accessibilità, pulizia
 
