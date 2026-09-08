@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
+# File di lavoro, non contenuti del sito: GitHub Pages li serve perché
+# è attivo .nojekyll, ma non devono finire nei risultati di ricerca.
+Disallow: /AUDIT.md
+Disallow: /CLAUDE.md
+Disallow: /.claude/
+Disallow: /.agents/
+Disallow: /skills-lock.json
+
 Sitemap: https://pietrolezzani.com/sitemap.xml
