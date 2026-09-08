@@ -1,2 +1,5 @@
-.DS_Store
-Thumbs.db
+# Documenti di lavoro interni: NON versionare, il repository è pubblico.
+# Contengono dati commerciali (tariffe, soglie di prezzo, pipeline) e nomi
+# di clienti la cui pubblicabilità non è confermata.
+aggiornamento-sito-piano-e-contenuti.md
+/docs-interni/
