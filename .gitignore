@@ -3,3 +3,8 @@
 # di clienti la cui pubblicabilità non è confermata.
 aggiornamento-sito-piano-e-contenuti.md
 /docs-interni/
+
+# Skill degli agenti: strumenti locali, ricreabili con `npx skills add`.
+# Non vanno nel repo perché con .nojekyll GitHub Pages le servirebbe sul dominio.
+.agents/
+.claude/skills/
