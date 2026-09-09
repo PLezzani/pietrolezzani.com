@@ -8,3 +8,6 @@ aggiornamento-sito-piano-e-contenuti.md
 # Non vanno nel repo perché con .nojekyll GitHub Pages le servirebbe sul dominio.
 .agents/
 .claude/skills/
+
+# macOS
+.DS_Store
