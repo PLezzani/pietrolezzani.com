@@ -16,6 +16,7 @@
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	var SPEED = 1.5;     // drift and pointer follow, relative to the first pass
+	var LIFE = 1;        // amplitude of the resting wave, 0 leaves the field static
 	var GAP = 28;        // grid pitch, px
 	var SIZE = 2;        // square side at rest, px
 	var RADIUS = 170;    // reach of the pointer, px
@@ -43,13 +44,15 @@
 
 	function draw(now) {
 		ctx.clearRect(0, 0, w, h);
+		var t = reduce ? 0 : now / 1000;
 		if (idle && !reduce) {
-			// nobody is pointing: the chosen region drifts slowly so the page is not dead
-			var t = now / 1000;
-			tx = w * (0.66 + 0.16 * Math.cos(t * 0.19 * SPEED));
-			// the lower third of the field is masked out in CSS, so the drift is
-			// kept above it: a chosen region that fades away reads as a bug
-			ty = h * (0.44 + 0.20 * Math.sin(t * 0.14 * SPEED));
+			// Nobody is pointing, which on a phone is always. The travel is wide on
+			// purpose: the amplitudes are fractions of the viewport, so a timid one
+			// moves a few dozen pixels on a narrow screen and reads as standing still.
+			tx = w * (0.50 + 0.36 * Math.cos(t * 0.19 * SPEED));
+			// Vertically it stays above the masked band: a chosen region that fades
+			// out on its own reads as a fault rather than as an edge.
+			ty = h * (0.42 + 0.22 * Math.sin(t * 0.14 * SPEED));
 		}
 		var ease = Math.min(0.10 * SPEED, 0.9);
 		px += (tx - px) * ease;
@@ -61,8 +64,13 @@
 				var d = Math.sqrt(dx * dx + dy * dy);
 				var k = d < RADIUS ? 1 - d / RADIUS : 0;
 				k = k * k;
-				var s = SIZE + 3 * k;
-				var a = 0.18 + 0.82 * k;
+				// A slow diagonal wave over the whole field, so something is moving
+				// where the region is not. Two bands cross a desktop viewport, about
+				// one crosses a phone, and it is the only motion a reader without a
+				// pointer ever gets.
+				var wave = LIFE * Math.sin(x * 0.013 + y * 0.009 - t * 0.85 * SPEED);
+				var s = SIZE + 0.7 * wave + 3 * k;
+				var a = 0.17 + 0.10 * wave + 0.78 * k;
 				var c0 = CREAM[0] + (BLUE[0] - CREAM[0]) * k;
 				var c1 = CREAM[1] + (BLUE[1] - CREAM[1]) * k;
 				var c2 = CREAM[2] + (BLUE[2] - CREAM[2]) * k;
