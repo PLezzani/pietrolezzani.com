@@ -15,6 +15,7 @@
 	var ctx = canvas.getContext('2d');
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+	var SPEED = 1.5;     // drift and pointer follow, relative to the first pass
 	var GAP = 28;        // grid pitch, px
 	var SIZE = 2;        // square side at rest, px
 	var RADIUS = 170;    // reach of the pointer, px
@@ -45,11 +46,12 @@
 		if (idle && !reduce) {
 			// nobody is pointing: the chosen region drifts slowly so the page is not dead
 			var t = now / 1000;
-			tx = w * (0.66 + 0.16 * Math.cos(t * 0.19));
-			ty = h * (0.50 + 0.30 * Math.sin(t * 0.14));
+			tx = w * (0.66 + 0.16 * Math.cos(t * 0.19 * SPEED));
+			ty = h * (0.50 + 0.30 * Math.sin(t * 0.14 * SPEED));
 		}
-		px += (tx - px) * 0.10;
-		py += (ty - py) * 0.10;
+		var ease = Math.min(0.10 * SPEED, 0.9);
+		px += (tx - px) * ease;
+		py += (ty - py) * ease;
 		for (var j = 0; j < rows; j++) {
 			for (var i = 0; i < cols; i++) {
 				var x = ox + i * GAP, y = oy + j * GAP;
