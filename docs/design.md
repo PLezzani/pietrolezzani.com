@@ -40,18 +40,23 @@ typography:
   body-l:
     fontFamily: Inter
     fontSize: 18px
-    fontWeight: 400
+    fontWeight: 500
     lineHeight: 1.55
   body:
     fontFamily: Inter
     fontSize: 16px
-    fontWeight: 400
+    fontWeight: 500
     lineHeight: 1.6
   body-s:
     fontFamily: Inter
     fontSize: 14px
-    fontWeight: 400
+    fontWeight: 500
     lineHeight: 1.5
+  body-strong:
+    fontFamily: Inter
+    fontSize: 18px
+    fontWeight: 600
+    lineHeight: 1.45
   label:
     fontFamily: Inter
     fontSize: 13px
@@ -163,6 +168,8 @@ Two families with strictly separated jobs. Darker Grotesque is the display face:
 The scale has a deliberate gap. Text lives at 13, 14, 16 and 18px; display starts at 32 and climbs to 88. Nothing occupies the middle. That gap is the hierarchy: a reader never has to work out whether something is a large body or a small heading, because the two vocabularies do not overlap.
 
 `display-xl` tops out at 88px rather than the 140px-plus of the reference that inspired it, and the reason is the copy. The headlines here are arguments, nine or ten words long, not three-word slogans. At 160px an argument becomes a manifesto, which is the register this practice avoids. Eighty-eight pixels keeps a long sentence readable as a sentence.
+
+**Body text is set at 500, not 400, and this is not a stylistic preference.** The page renders with `-webkit-font-smoothing: antialiased`, which replaces subpixel rendering with a lighter grayscale one; on a black ground that thinning compounds with the optical erosion light glyphs already suffer, and Inter at 400 turns thin and washed out. Weight 500 restores the intended colour of the text. Both families are loaded as variable fonts across the 100 to 900 axis, so the middle weight costs no extra file. Two rules follow from this: never drop body text to 400 while the ground stays dark, and if a passage ever moves onto `surface-inverse`, step it back down to 400, because on a light ground 500 reads as emphasis.
 
 ## Layout
 

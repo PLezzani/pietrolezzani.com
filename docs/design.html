@@ -28,9 +28,10 @@
 		--type-display-l-size: 64px;    --type-display-l-weight: 500;  --type-display-l-lh: 1;     --type-display-l-ls: -0.02em;
 		--type-display-m-size: 44px;    --type-display-m-weight: 500;  --type-display-m-lh: 1.05;  --type-display-m-ls: -0.015em;
 		--type-display-s-size: 32px;    --type-display-s-weight: 500;  --type-display-s-lh: 1.1;   --type-display-s-ls: -0.01em;
-		--type-body-l-size: 18px;       --type-body-l-weight: 400;     --type-body-l-lh: 1.55;
-		--type-body-size: 16px;         --type-body-weight: 400;       --type-body-lh: 1.6;
-		--type-body-s-size: 14px;       --type-body-s-weight: 400;     --type-body-s-lh: 1.5;
+		--type-body-l-size: 18px;       --type-body-l-weight: 500;     --type-body-l-lh: 1.55;
+		--type-body-size: 16px;         --type-body-weight: 500;       --type-body-lh: 1.6;
+		--type-body-s-size: 14px;       --type-body-s-weight: 500;     --type-body-s-lh: 1.5;
+		--type-body-strong-size: 18px;  --type-body-strong-weight: 600; --type-body-strong-lh: 1.45;
 		--type-label-size: 13px;        --type-label-weight: 500;      --type-label-lh: 1.2;  --type-label-ls: 0.08em;
 		--type-nav-size: 16px;          --type-nav-weight: 500;        --type-nav-lh: 1.2;
 
@@ -50,7 +51,12 @@
 		color: var(--color-on-surface);
 		font-family: var(--font-text);
 		font-size: var(--type-body-size);
+		font-weight: var(--type-body-weight);
 		line-height: var(--type-body-lh);
+		/* Grayscale smoothing thins light glyphs on a dark ground.
+		   It is why body text is set at 500 rather than 400. */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 		padding: var(--space-xl) var(--space-lg) var(--space-3xl);
 	}
 	.wrap { max-width: 1120px; margin: 0 auto; }
@@ -93,9 +99,10 @@
 	.d-l  { font-family: var(--font-display); font-size: var(--type-display-l-size);  font-weight: var(--type-display-l-weight);  line-height: var(--type-display-l-lh);  letter-spacing: var(--type-display-l-ls); }
 	.d-m  { font-family: var(--font-display); font-size: var(--type-display-m-size);  font-weight: var(--type-display-m-weight);  line-height: var(--type-display-m-lh);  letter-spacing: var(--type-display-m-ls); }
 	.d-s  { font-family: var(--font-display); font-size: var(--type-display-s-size);  font-weight: var(--type-display-s-weight);  line-height: var(--type-display-s-lh);  letter-spacing: var(--type-display-s-ls); }
-	.t-bl { font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); max-width: 34em; }
-	.t-b  { font-size: var(--type-body-size);   line-height: var(--type-body-lh);   max-width: 34em; }
-	.t-bs { font-size: var(--type-body-s-size); line-height: var(--type-body-s-lh); max-width: 34em; }
+	.t-bl { font-size: var(--type-body-l-size); font-weight: var(--type-body-l-weight); line-height: var(--type-body-l-lh); max-width: 34em; }
+	.t-b  { font-size: var(--type-body-size);   font-weight: var(--type-body-weight); line-height: var(--type-body-lh);   max-width: 34em; }
+	.t-bs { font-size: var(--type-body-s-size); font-weight: var(--type-body-s-weight); line-height: var(--type-body-s-lh); max-width: 34em; }
+	.t-bstr { font-size: var(--type-body-strong-size); font-weight: var(--type-body-strong-weight); line-height: var(--type-body-strong-lh); max-width: 34em; }
 	.t-lb { font-size: var(--type-label-size); font-weight: var(--type-label-weight); line-height: var(--type-label-lh); letter-spacing: var(--type-label-ls); text-transform: uppercase; }
 	.t-nav{ font-size: var(--type-nav-size); font-weight: var(--type-nav-weight); line-height: var(--type-nav-lh); }
 
@@ -178,8 +185,10 @@
 		<div class="spec"><span class="tag">body-l, Inter 18 / 400 / 1.55</span><div class="t-bl">A product on its own does not make a company successful. What gets decided around it does.</div></div>
 		<div class="spec"><span class="tag">body, Inter 16 / 400 / 1.6</span><div class="t-b">Every quarter closes with a list of releases and no way to say which of them mattered, and you are the one who has to explain that to the board.</div></div>
 		<div class="spec"><span class="tag">body-s, Inter 14 / 400 / 1.5</span><div class="t-bs">Two phases, priced by phase. Four months. Development and primary research excluded.</div></div>
+		<div class="spec"><span class="tag">body-strong, Inter 18 / 600 / 1.45</span><div class="t-bstr">Product audit and roadmap. Two to three weeks.</div></div>
 		<div class="spec"><span class="tag">label, Inter 13 / 500 / 0.08em, uppercase</span><div class="t-lb">Selected work</div></div>
 		<div class="spec"><span class="tag">nav, Inter 16 / 500</span><div class="t-nav">Work &nbsp; About &nbsp; Book a call</div></div>
+		<p class="note" style="margin-top:var(--space-md)">Body text sits at 500, not 400. The page renders with grayscale font smoothing, which thins light glyphs on a black ground; 400 turns washed out. On the inverse cream ground, step body back down to 400, where 500 would read as emphasis.</p>
 	</section>
 
 	<section>
