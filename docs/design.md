@@ -219,7 +219,9 @@ The scale has a deliberate gap. Text lives at 13, 14, 16 and 18px; display start
 
 ## Motion
 
-There is almost none, and what there is has one job: to make text arrive rather than be found already in place. A heading rises 18px and fades over 700ms on a decelerating curve, once, and never again. The hero plays on load; everything else plays when it comes into view, triggered slightly early so the movement has finished by the time the reader is looking at it. Where several lines belong together they are staggered by 90ms, which is enough to read as a sequence and too little to read as a queue.
+There is almost none, and what there is has one job: to make text arrive rather than be found already in place. A heading rises 18px and fades over 1100ms on a decelerating curve, once, and never again. The hero plays on load; everything else plays when it comes into view, triggered slightly early so the movement has finished by the time the reader is looking at it. Where several lines belong together they are staggered by 140ms, which is enough to read as a sequence and too little to read as a queue.
+
+The curve matters as much as the duration. An exponential ease-out spends nearly its whole budget in the first third and leaves a long imperceptible tail, so lengthening one makes the text pause rather than slow down. A cubic ease-out distributes the movement, and that is what makes a slower reveal read as slower. Duration, rise, stagger and curve are tokens: change the number, not the rule.
 
 Three rules keep this from becoming an effect. Nothing moves on scroll position, nothing is pinned, and no element repeats its entrance: scroll-driven motion turns the scrollbar into a liar, and a reader who is deciding whether to book a call is not there to be shown a mechanism. Under `prefers-reduced-motion` every reveal is skipped and the page renders as if none of it existed. And the hidden state must always carry its own way out, a delayed keyframe that reveals the text with no script involved, because the one failure this system will not accept is a page whose words never appear.
 

@@ -56,6 +56,13 @@
 	--space-3xl: 144px;
 
 	--header-h: 80px;
+	--reveal-rise: 18px;
+	--reveal-duration: 1100ms;
+	--reveal-stagger: 140ms;
+	/* Distributed rather than front loaded: an expo curve spends its whole
+	   budget in the first third, so a longer one reads as a pause, not as slower. */
+	--reveal-ease: cubic-bezier(0.33, 1, 0.68, 1);
+
 	--container: 1280px;
 	--measure: 34em;
 }
@@ -97,17 +104,17 @@ img { max-width: 100%; height: auto; display: block; }
    its own way out: if reveal.js never marks the document ready, the keyframe
    below reveals the text after 3s with no script involved. */
 .js .reveal {
-	opacity: 0; transform: translateY(18px);
+	opacity: 0; transform: translateY(var(--reveal-rise));
 	animation: reveal-failsafe 300ms linear 3s forwards;
 }
 .js.reveal-ready .reveal { animation: none; }
 .js .reveal.is-in {
 	opacity: 1; transform: none; animation: none;
-	transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
-	            transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+	transition: opacity var(--reveal-duration) var(--reveal-ease),
+	            transform var(--reveal-duration) var(--reveal-ease);
 }
-.js .reveal-2.is-in { transition-delay: 90ms; }
-.js .reveal-3.is-in { transition-delay: 180ms; }
+.js .reveal-2.is-in { transition-delay: var(--reveal-stagger); }
+.js .reveal-3.is-in { transition-delay: calc(var(--reveal-stagger) * 2); }
 @keyframes reveal-failsafe { to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
 	.js .reveal, .js .reveal.is-in { opacity: 1; transform: none; animation: none; transition: none; }
