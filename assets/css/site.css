@@ -55,6 +55,7 @@
 	--space-2xl: 96px;
 	--space-3xl: 144px;
 
+	--header-h: 80px;
 	--container: 1280px;
 	--measure: 34em;
 }
@@ -126,7 +127,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- header ---------- */
 .site-header { border-bottom: 1px solid var(--color-border); }
-.site-header .container { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
 .brand { font: var(--nav); text-decoration: none; }
 .site-nav { display: flex; align-items: center; gap: var(--space-lg); }
 .nav-link { font: var(--nav); text-decoration: none; padding: var(--space-2xs) 0; }
@@ -148,9 +149,14 @@ img { max-width: 100%; height: auto; display: block; }
 /* ---------- hero ---------- */
 .hero {
 	position: relative; overflow: hidden;
-	min-height: min(760px, calc(100vh - 80px));
+	/* The hero stops short of the fold on purpose: the top of the next section
+	   stays visible, which says "there is more" without a second call to action. */
+	min-height: calc(100vh - var(--header-h) - 160px);
+	min-height: calc(100svh - var(--header-h) - 160px);
 	display: flex; align-items: center;
-	padding-top: var(--space-3xl); padding-bottom: var(--space-3xl);
+	/* fluid padding so a short laptop viewport still leaves the peek intact */
+	padding-top: clamp(var(--space-lg), 8vh, var(--space-2xl));
+	padding-bottom: clamp(var(--space-lg), 8vh, var(--space-2xl));
 }
 .hero > .container { position: relative; z-index: 1; width: 100%; }
 /* interactive ground: a canvas of small squares, see assets/js/hero-field.js */
@@ -210,6 +216,7 @@ img { max-width: 100%; height: auto; display: block; }
 @media (prefers-reduced-motion: reduce) { .case[open] .case-body { animation: none; } }
 .case-body p { max-width: var(--measure); color: var(--color-on-surface-muted); font: var(--body-l); }
 .case-body .proof { color: var(--color-accent); margin-top: var(--space-md); }
+.case-cover { width: 100%; aspect-ratio: 5 / 3; object-fit: cover; background: var(--color-surface-raised); }
 .case-body .more { display: inline-block; margin-top: var(--space-md); font: var(--nav); text-decoration: none; border-bottom: 1px solid var(--color-border); padding-bottom: 2px; }
 .case-body .more:hover { color: var(--color-accent); border-color: var(--color-accent); }
 
@@ -264,11 +271,10 @@ img { max-width: 100%; height: auto; display: block; }
 		--display-s: 500 24px/1.15 var(--font-display);
 		--space-2xl: 64px;
 		--space-3xl: 96px;
+		--header-h: 64px;
 	}
 	.container { padding-left: var(--space-md); padding-right: var(--space-md); }
 	.split, .row, .case-body { grid-template-columns: 1fr; gap: var(--space-sm); }
-	.hero { min-height: 0; }
-	.site-header .container { height: 64px; }
 	.site-nav { gap: var(--space-md); }
 	.site-nav .nav-link { display: none; }
 	.btn { display: block; }
