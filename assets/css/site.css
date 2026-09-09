@@ -300,11 +300,14 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 .case-body .more:hover { color: var(--color-accent); border-color: var(--color-accent); }
 
 /* ---------- affiliation ----------
-   The logo is admissible only because it is a single colour and that colour is
-   on-surface: it adds no hue the palette does not already have. */
-.affiliation { margin-top: var(--space-lg); }
+   It sits on the section label's own line, pushed to the far right: it names
+   the section rather than belonging to the title underneath. The logo is
+   admissible only because it is a single colour and that colour is on-surface,
+   so it adds no hue the palette does not already have. */
+.section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
+.affiliation { display: flex; align-items: center; gap: var(--space-md); }
 .affiliation p { font: var(--body-l); }
-.affiliation img { width: 180px; margin-top: var(--space-md); }
+.affiliation img { width: 150px; }
 
 /* ---------- image slots (temporary) ----------
    Dashed boxes that mark where an image is meant to go. Each carries a note
@@ -358,6 +361,11 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 	.container { padding-left: var(--space-md); padding-right: var(--space-md); }
 	.split, .row, .case-body { grid-template-columns: 1fr; gap: var(--space-sm); }
 	.split { gap: var(--space-lg); }
+	/* no room for both on one line: the affiliation drops under the label and
+	   stacks, so the name keeps one line instead of wrapping around the logo */
+	.section-head { flex-direction: column; align-items: flex-start; gap: var(--space-md); }
+	.affiliation { flex-direction: column; align-items: flex-start; gap: var(--space-xs); }
+	.affiliation img { width: 120px; }
 	.case-thumb { width: 80px; height: 19px; }
 	/* stacked: the joining hairline turns vertical */
 	.plan { grid-template-columns: 1fr; gap: var(--space-md); }

@@ -171,9 +171,10 @@
 	.plan li:not(:last-child)::after { content: ""; position: absolute; top: calc(var(--space-lg) + 8px); left: 100%; width: var(--space-lg); height: 1px; background: var(--color-border); }
 	.plan p { margin: 0; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
 
-	.affil { border-top: 1px solid var(--color-border); padding-top: var(--space-md); max-width: 24em; }
+	.affil-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
+	.affil { display: flex; align-items: center; gap: var(--space-md); }
 	.affil p { margin: 0; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
-	.affil img { display: block; width: 180px; margin-top: var(--space-md); }
+	.affil img { display: block; width: 150px; }
 
 	/* footer on the cream ground: every line steps back to weight 400 */
 	.ftr { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding: var(--space-2xl) var(--space-lg) var(--space-lg); }
@@ -341,11 +342,15 @@
 		</ol>
 
 		<h3 class="t-lb" style="margin-top:var(--space-xl)">Affiliation</h3>
-		<div class="affil" style="margin-top:var(--space-sm)">
-			<p>Part of Bain Advisory Network</p>
-			<img src="/assets/img/bain-company.svg" alt="Bain &amp; Company" width="279" height="31" />
+		<div class="affil-head" style="margin-top:var(--space-sm)">
+			<span class="t-lb seclabel">Affiliation</span>
+			<div class="affil">
+				<p>Part of Bain Advisory Network</p>
+				<img src="/assets/img/bain-company.svg" alt="Bain &amp; Company" width="279" height="31" />
+			</div>
 		</div>
-		<p class="note" style="margin-top:var(--space-sm)">Order is always label, divider, title, content. The divider sits lg below the label in every section, and the content opens lg below the divider. A borrowed logo is admissible only in one colour, and that colour is on-surface.</p>
+		<hr class="rule" style="margin-top:var(--space-lg)" />
+		<p class="note" style="margin-top:var(--space-sm)">The affiliation sits on the label's own line, far right: it qualifies the section, not the title below it. Order is always label, divider, title, content, with the divider lg below the label in every section. A borrowed logo is admissible only in one colour, and that colour is on-surface.</p>
 
 		<h3 class="t-lb" style="margin-top:var(--space-xl)">Footer on the inverse ground</h3>
 		<div class="ftr" style="margin-top:var(--space-sm)">
