@@ -176,6 +176,12 @@ components:
     backgroundColor: "{colors.border-inverse}"
     rounded: "{rounded.none}"
     height: 1px
+  plan-step:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    typography: "{typography.body-l}"
+    rounded: "{rounded.none}"
+    padding: 40px
 ---
 
 # Pietro Lezzani Design System
@@ -234,6 +240,8 @@ The rule is easy to hold: if you read it, it has square corners; if you click it
 
 `statement-band` sets one sentence in `display-l` on `surface-inverse`, full bleed, with `2xl` padding above and below. It is there to give the eye a rest between the situations and the offer. One band per page, never two.
 
+`plan-step` is how a sequence of steps is shown: a square with a hairline border, the step number in `accent` at the top in `label` type, and the step itself in `body-l` pushed to the bottom, so three squares of unequal text still share one baseline. Three of them sit in a row, and a hairline runs across each gap at the height of the numbers. That connector is the component: without it three squares read as three things on offer, which is the opposite of what a plan means. Below 720px the row stacks and the connector turns vertical. Squares carry steps only, never options: anything the reader chooses between belongs in `card-offer`.
+
 `footer-inverse` is the second and last ground change: the page ends on cream rather than fading out on black. It carries the name in `display-m`, the role and city under it, contact links in `body-l` underlined with `divider-inverse`, and a legal line below a rule. It holds no call to action. The one action already appears three times above it, and a fourth in the footer would turn a close into a nag.
 
 `affiliation` names a network or a body the practice belongs to: a `section-label` reading "Affiliation" and, under it, the name in `body-l`, set under a hairline in the title column. It carries no logo. Logos borrowed from other organisations bring their own colour and weight onto the page, and the palette here has no room for them.
@@ -250,6 +258,7 @@ The hero carries an interactive ground rather than an image: a canvas of identic
 - Keep body measure near 34em, even when the viewport allows more.
 - Let a section change ground when it needs to feel different, instead of reaching for a border or a fill.
 - Set every claim that carries a number in `proof-line`, and only when the number is verifiable.
+- Say a fact once. If a paragraph introduces a step and the step repeats it, the paragraph goes and the step keeps the detail.
 - Use display type for statements, and Inter for anything a reader has to work through.
 - While an image is not yet available, leave a dashed slot with a note on the intended subject. A wrong image is worse than a marked gap.
 

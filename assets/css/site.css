@@ -186,11 +186,32 @@ img { max-width: 100%; height: auto; display: block; }
 .bridge { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding-top: var(--space-2xl); padding-bottom: var(--space-2xl); }
 .bridge p { font: var(--display-l); letter-spacing: var(--ls-display-l); max-width: 16em; }
 
-/* ---------- steps ---------- */
-.steps { counter-reset: step; margin-top: var(--space-lg); max-width: var(--measure); }
-.steps li { counter-increment: step; border-top: 1px solid var(--color-border); padding: var(--space-md) 0; display: grid; grid-template-columns: 3em 1fr; gap: var(--space-sm); font: var(--body-l); }
-.steps li:last-child { border-bottom: 1px solid var(--color-border); }
-.steps li::before { content: counter(step, decimal-leading-zero); color: var(--color-accent); font: var(--label); letter-spacing: var(--ls-label); padding-top: 0.45em; }
+/* ---------- plan ----------
+   Three squares in a row, joined by a hairline. The line is the whole point:
+   it says the three are one sequence, not three things on offer. */
+.plan {
+	counter-reset: step;
+	margin-top: var(--space-xl);
+	display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--space-lg);
+}
+.plan li {
+	counter-increment: step; position: relative;
+	aspect-ratio: 1 / 1;
+	border: 1px solid var(--color-border);
+	padding: clamp(var(--space-md), 3vw, var(--space-lg));
+	display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-md);
+}
+.plan li::before {
+	content: counter(step, decimal-leading-zero);
+	font: var(--label); letter-spacing: var(--ls-label); color: var(--color-accent);
+}
+.plan li:not(:last-child)::after {
+	content: ""; position: absolute;
+	top: calc(clamp(var(--space-md), 3vw, var(--space-lg)) + 8px);
+	left: 100%; width: var(--space-lg); height: 1px; background: var(--color-border);
+}
+.plan p { font: var(--body-l); }
 
 /* ---------- case accordion ---------- */
 .cases { margin-top: var(--space-lg); border-top: 1px solid var(--color-border); }
@@ -275,6 +296,10 @@ img { max-width: 100%; height: auto; display: block; }
 	}
 	.container { padding-left: var(--space-md); padding-right: var(--space-md); }
 	.split, .row, .case-body { grid-template-columns: 1fr; gap: var(--space-sm); }
+	/* stacked: the joining hairline turns vertical */
+	.plan { grid-template-columns: 1fr; gap: var(--space-md); }
+	.plan li { aspect-ratio: auto; }
+	.plan li:not(:last-child)::after { top: 100%; left: var(--space-md); width: 1px; height: var(--space-md); }
 	.site-nav { gap: var(--space-md); }
 	.site-nav .nav-link { display: none; }
 	.btn { display: block; }
