@@ -123,6 +123,9 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* editorial two-column: title column against a wider content column */
 .split { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-xl); align-items: start; }
+/* Content that opens under the hairline, at the same distance from the label
+   as the first row of a list. Every section starts on the same line. */
+.ruled { margin-top: var(--space-lg); border-top: 1px solid var(--color-border); padding-top: var(--space-lg); }
 .stack > * + * { margin-top: var(--space-md); }
 
 /* ---------- header ---------- */
@@ -244,7 +247,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* ---------- affiliation ----------
    The logo is admissible only because it is a single colour and that colour is
    on-surface: it adds no hue the palette does not already have. */
-.affiliation { margin-top: var(--space-lg); border-top: 1px solid var(--color-border); padding-top: var(--space-md); }
+.affiliation { margin-top: var(--space-lg); }
 .affiliation p { font: var(--body-l); }
 .affiliation img { width: 180px; margin-top: var(--space-md); }
 
