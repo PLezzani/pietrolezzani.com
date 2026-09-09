@@ -181,18 +181,47 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 .nav-link { font: var(--nav); text-decoration: none; padding: var(--space-2xs) 0; }
 .nav-link:hover { color: var(--color-accent); }
 
-/* ---------- buttons ---------- */
+/* ---------- buttons ----------
+   The accent grows from the point where the cursor crossed the edge. The radius
+   is a registered property so it can be transitioned; where @property is missing
+   the value snaps and the button simply changes colour, which is what it did
+   before. assets/js/button-fill.js only records the entry point. */
+@property --btn-r {
+	syntax: '<length-percentage>';
+	inherits: false;
+	initial-value: 0%;
+}
+
 .btn {
 	display: inline-block; border: 1px solid transparent; cursor: pointer;
 	font: var(--nav); text-decoration: none; text-align: center;
 	border-radius: var(--rounded-pill); padding: 16px 32px;
 	transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
 }
-.btn-primary { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); }
-.btn-primary:hover { background: var(--color-accent); color: var(--color-on-surface); }
+.btn-primary {
+	background-color: var(--color-surface-inverse);
+	background-image: radial-gradient(circle at var(--btn-x, 50%) var(--btn-y, 50%),
+		var(--color-accent) 0 var(--btn-r), transparent calc(var(--btn-r) + 2px));
+	color: var(--color-on-surface-inverse);
+	transition: --btn-r 420ms cubic-bezier(0.33, 1, 0.68, 1),
+	            /* the text flips just after the edge has swept past it, which for a
+	               centred label is a little under half the travel */
+	            color 120ms ease 70ms,
+	            border-color 120ms ease;
+}
+.btn-primary:hover, .btn-primary:focus-visible {
+	--btn-r: 100%;
+	color: var(--color-on-surface);
+}
 .btn-ghost { background: transparent; color: var(--color-on-surface); border-color: var(--color-border); }
 .btn-ghost:hover { border-color: var(--color-on-surface); }
 .btn-small { padding: 10px 20px; }
+/* No spreading fill: the button changes colour and that is all. This has to
+   come after the rules above, or source order hands them the win. */
+@media (prefers-reduced-motion: reduce) {
+	.btn-primary { background-image: none; transition: background-color 120ms ease, color 120ms ease; }
+	.btn-primary:hover, .btn-primary:focus-visible { background-color: var(--color-accent); }
+}
 
 /* ---------- hero ---------- */
 .hero {
