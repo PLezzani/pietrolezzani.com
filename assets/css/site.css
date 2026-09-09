@@ -304,9 +304,14 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
    the section rather than belonging to the title underneath. The logo is
    admissible only because it is a single colour and that colour is on-surface,
    so it adds no hue the palette does not already have. */
-.section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
+/* min-height reproduces the line box the label occupies when it stands alone,
+   so the divider below lands at the same distance as in every other section. */
+.section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); min-height: 1.6em; }
 .affiliation { display: flex; align-items: center; gap: var(--space-md); }
-.affiliation p { font: var(--body-l); }
+/* Label type, but not the section-label component: no accent square, and the
+   name keeps on-surface while the label beside it stays muted. One is a label,
+   the other is what the section is about. */
+.affiliation p { font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; }
 .affiliation img { width: 150px; }
 
 /* ---------- image slots (temporary) ----------
