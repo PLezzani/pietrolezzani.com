@@ -141,6 +141,29 @@ components:
     typography: "{typography.body-s}"
     rounded: "{rounded.sm}"
     padding: 24px
+  case-accordion:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    typography: "{typography.display-m}"
+    rounded: "{rounded.none}"
+    padding: 24px 0px
+  accordion-toggle:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    rounded: "{rounded.pill}"
+    size: 40px
+  statement-band:
+    backgroundColor: "{colors.surface-inverse}"
+    textColor: "{colors.on-surface-inverse}"
+    typography: "{typography.display-l}"
+    rounded: "{rounded.none}"
+    padding: 96px 0px
+  affiliation:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    typography: "{typography.body-l}"
+    rounded: "{rounded.none}"
+    padding: 24px 0px
 ---
 
 # Pietro Lezzani Design System
@@ -157,7 +180,7 @@ The palette is deliberately narrow: a black ground, a warm off-white on top, one
 
 `surface` is pure black. `on-surface` is `#FEFCF6`, a cream rather than white, because pure white on pure black reads as a terminal and fatigues the eye over a long case study. Secondary text does not introduce new hues: `on-surface-muted` and `on-surface-subtle` are that same cream stepped down in luminance, so the page never accumulates greys that belong to no one.
 
-`accent` is a single saturated blue, used sparingly and always to mark something that has been earned: a section label, a proof line, a link in its hover state. It is the only chromatic event on the page, which is exactly what makes it work. `surface-inverse` carries the cream ground for long-form passages where sustained reading matters more than atmosphere, and inverts the text to black. `border` is the hairline: it does the work that shadows do elsewhere.
+`accent` is a single saturated blue, used sparingly and always to mark something that has been earned: a section label, a proof line, a link in its hover state. It is the only chromatic event on the page, which is exactly what makes it work. `surface-inverse` carries the cream ground in two places: long-form passages where sustained reading matters more than atmosphere, and the single `statement-band` that breaks the black page once, roughly a third of the way down. In both, text inverts to black. `border` is the hairline: it does the work that shadows do elsewhere.
 
 Contrast holds throughout: cream on black is roughly 19:1, and `on-surface-muted` on black still clears 7:1, comfortably past WCAG AA for body text. The blue is reserved for text at 18px or larger, where it clears AA against black.
 
@@ -195,6 +218,14 @@ The rule is easy to hold: if you read it, it has square corners; if you click it
 
 `section-label` sets small uppercase Inter in `on-surface-muted`, tracked out at 0.08em, preceded by a small square in `accent`. It names a section without a heading and keeps display type for the things that deserve it. `nav-link` stays plain until hover, when it takes `accent`.
 
+`case-accordion` is how the home lists the three cases: a row per case, the name in `display-m` on the left, an `accordion-toggle` on the right, and the hairline between rows. One case is open at a time and the first is open on arrival, so the list never reads as a closed door. The open row shows the description, the proof line and the link in a 2fr column against a 3fr cover image with square corners. The toggle is the one pill in the list, because it is the one thing you click; it draws a plus that loses its vertical bar when the row is open, and nothing rotates or slides. Use native `details` and `summary` so the accordion works without script.
+
+`statement-band` sets one sentence in `display-l` on `surface-inverse`, full bleed, with `2xl` padding above and below. It is the only ground change on the home and it is there to give the eye a rest between the situations and the offer. One band per page, never two.
+
+`affiliation` names a network or a body the practice belongs to: a `section-label` reading "Affiliation" and, under it, the name in `body-l`, set under a hairline in the title column. It carries no logo. Logos borrowed from other organisations bring their own colour and weight onto the page, and the palette here has no room for them.
+
+The hero carries an interactive ground rather than an image: a canvas of identical small squares in the cream at low opacity, and a region near the pointer where a few of them are chosen, grow slightly, and turn `accent`. It restates the headline without illustrating it. When nobody is pointing, the region drifts slowly; under `prefers-reduced-motion` it stands still. A reel can take the same slot later, kept muted, looped and behind the text, at reduced opacity so the headline stays the brightest thing on the screen.
+
 `card-offer` and `case-item` are not cards in the usual sense: they carry no fill and no border box, only a `divider` above and generous vertical padding. They are rows in an editorial list. `proof-line` is the one place a claim is allowed to stand alone, set in `accent` at `body-l` with space above and below, and it is used only for a verifiable fact. `scope-block` closes a case study on `surface-raised` in muted small text, declaring duration, phases and exclusions.
 
 ## Do's and Don'ts
@@ -206,6 +237,7 @@ The rule is easy to hold: if you read it, it has square corners; if you click it
 - Let a section change ground when it needs to feel different, instead of reaching for a border or a fill.
 - Set every claim that carries a number in `proof-line`, and only when the number is verifiable.
 - Use display type for statements, and Inter for anything a reader has to work through.
+- While an image is not yet available, leave a dashed slot with a note on the intended subject. A wrong image is worse than a marked gap.
 
 **Don't**
 

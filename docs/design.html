@@ -142,6 +142,26 @@
 	.scope strong { color: var(--color-on-surface); font-weight: 500; display: block; margin-bottom: var(--space-3xs); }
 
 	.inverse { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding: var(--space-lg); }
+	.band { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding: var(--space-2xl) var(--space-lg); }
+	.band p { margin: 0; max-width: 16em; }
+
+	.cases { border-top: 1px solid var(--color-border); }
+	.case { border-bottom: 1px solid var(--color-border); }
+	.case summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding: var(--space-md) 0; }
+	.case summary::-webkit-details-marker { display: none; }
+	.case summary h3 { margin: 0; font-family: var(--font-display); font-size: var(--type-display-m-size); font-weight: var(--type-display-m-weight); line-height: var(--type-display-m-lh); letter-spacing: var(--type-display-m-ls); }
+	.case summary:hover h3 { color: var(--color-accent); }
+	.toggle { position: relative; flex: none; width: 40px; height: 40px; border: 1px solid var(--color-border); border-radius: var(--rounded-pill); }
+	.toggle::before, .toggle::after { content: ""; position: absolute; left: 50%; top: 50%; background: var(--color-on-surface); }
+	.toggle::before { width: 14px; height: 1px; transform: translate(-50%, -50%); }
+	.toggle::after { width: 1px; height: 14px; transform: translate(-50%, -50%); }
+	.case[open] .toggle::after { opacity: 0; }
+	.case-body { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-xl); padding: var(--space-2xs) 0 var(--space-lg); }
+	.case-body p { margin: 0; color: var(--color-on-surface-muted); max-width: 34em; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
+	.cover { aspect-ratio: 3 / 2; background: var(--color-surface-raised); border: 1px dashed var(--color-border); }
+
+	.affil { border-top: 1px solid var(--color-border); padding-top: var(--space-md); max-width: 24em; }
+	.affil p { margin: var(--space-xs) 0 0; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
 	.inverse .t-bl { color: var(--color-on-surface-inverse); }
 
 	/* ---- do / don't ---- */
@@ -263,6 +283,35 @@
 			<div class="proof">Selected for the ADI Design Index 2025, 344 projects out of more than a thousand.</div>
 		</div>
 
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Case accordion</h3>
+		<div class="cases" style="margin-top:var(--space-sm)">
+			<details class="case" name="ds-cases" open>
+				<summary><h3>Edison, Risolve</h3><span class="toggle" aria-hidden="true"></span></summary>
+				<div class="case-body">
+					<div>
+						<p>Home services sold next to an energy bill. We built a centre with extensions instead of a catalogue.</p>
+						<div class="proof">Selected for the ADI Design Index 2025, 344 projects out of more than a thousand.</div>
+					</div>
+					<div class="cover"></div>
+				</div>
+			</details>
+			<details class="case" name="ds-cases">
+				<summary><h3>Talentware</h3><span class="toggle" aria-hidden="true"></span></summary>
+				<div class="case-body"><div><p>Closed row: the name and the toggle, nothing else.</p></div><div class="cover"></div></div>
+			</details>
+		</div>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Statement band</h3>
+		<div class="band" style="margin-top:var(--space-sm)">
+			<p class="d-l">A product on its own does not make a company successful. What gets decided around it does.</p>
+		</div>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Affiliation</h3>
+		<div class="affil" style="margin-top:var(--space-sm)">
+			<span class="t-lb seclabel">Affiliation</span>
+			<p>Part of Bain Advisory Network</p>
+		</div>
+
 		<h3 class="t-lb" style="margin-top:var(--space-xl)">Scope block</h3>
 		<div class="scope" style="margin-top:var(--space-sm)">
 			<strong>Scope</strong>
@@ -281,6 +330,7 @@
 					<li>Let a section change ground when it needs to feel different, instead of reaching for a border or a fill.</li>
 					<li>Set claims that carry a number in the proof line, and only when the number is verifiable.</li>
 					<li>Use display type for statements, Inter for anything a reader works through.</li>
+					<li>While an image is not available, leave a dashed slot with a note on the subject. A wrong image is worse than a marked gap.</li>
 				</ul>
 			</div>
 			<div>

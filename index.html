@@ -50,6 +50,9 @@
 
 		<!-- 1. hero -->
 		<section class="hero">
+			<canvas class="hero-field" aria-hidden="true"></canvas>
+			<!-- Phase 2: replace the canvas with a reel and drop hero-field.js.
+			     <video class="hero-media" autoplay muted loop playsinline poster="..." aria-hidden="true"><source src="..." type="video/mp4"></video> -->
 			<div class="container">
 				<h1 class="display-xl">You are building everything and choosing nothing.</h1>
 				<p class="lede body-l">I help B2B companies whose product is already on the market decide what to change, then change it. Two to three weeks for the decision, four to six for the work.</p>
@@ -93,11 +96,17 @@
 				<div class="rows">
 					<article class="row">
 						<h3>Product audit and roadmap. Two to three weeks.</h3>
-						<p>You end with your problems ranked by their effect on the number you are measured on, and a six month roadmap where every initiative carries a success criterion and a metric. Execution, design system and primary research are not included.</p>
+						<div>
+							<p>You end with your problems ranked by their effect on the number you are measured on, and a six month roadmap where every initiative carries a success criterion and a metric. Execution, design system and primary research are not included.</p>
+							<div class="img-slot" style="--ratio: 16 / 7"><span>The deliverable: one page of a real roadmap, initiatives with their criterion and metric, client details removed.</span></div>
+						</div>
 					</article>
 					<article class="row">
 						<h3>Redesign of one critical area. Four to six weeks, quoted phase by phase.</h3>
-						<p>The area you already know is costing you. The final phase hands engineering the requirements, so the decisions arrive intact instead of being reinterpreted.</p>
+						<div>
+							<p>The area you already know is costing you. The final phase hands engineering the requirements, so the decisions arrive intact instead of being reinterpreted.</p>
+							<div class="img-slot" style="--ratio: 16 / 7"><span>The deliverable: a requirements page as engineering receives it, next to the screen it describes.</span></div>
+						</div>
 					</article>
 				</div>
 				<p class="threshold">Engagements start at €8,000.</p>
@@ -108,32 +117,41 @@
 		<section class="section" id="work">
 			<div class="container">
 				<h2 class="label">Three decisions and what came of them</h2>
-				<div class="rows">
-					<article class="row">
-						<h3><a href="/energy-co/">Edison, Risolve</a></h3>
-						<div>
-							<p>Home services sold next to an energy bill, with the customer left to work out what they had to do with each other. We built a centre with extensions instead of a catalogue, which is why the work did not start from the interface.</p>
-							<p class="proof">Selected for the ADI Design Index 2025, 344 projects out of more than a thousand.</p>
-							<a class="more" href="/energy-co/">Read the case</a>
+				<div class="cases">
+					<details class="case" name="work" open>
+						<summary><h3>Edison, Risolve</h3><span class="toggle" aria-hidden="true"></span></summary>
+						<div class="case-body">
+							<div>
+								<p>Home services sold next to an energy bill, with the customer left to work out what they had to do with each other. We built a centre with extensions instead of a catalogue, which is why the work did not start from the interface.</p>
+								<p class="proof">Selected for the ADI Design Index 2025, 344 projects out of more than a thousand.</p>
+								<a class="more" href="/energy-co/">Read the case</a>
+							</div>
+							<div class="img-slot"><span>Cover: the centre with its extensions as a customer sees it, one screen, no gallery.</span></div>
 						</div>
-					</article>
-					<article class="row">
-						<h3><a href="/talentware/">Talentware</a></h3>
-						<div>
-							<p>The roadmap was written by whatever customers asked for last, so nothing could be chosen and nothing could be tested. We put in the missing criterion: design governance, a product strategy, a design system.</p>
-							<!-- Finestra temporale dei due numeri da confermare con i founder (piano, sezione 8, punto 2). -->
-							<p class="proof">From roughly 10 to 45 customers during the engagement. Sales brought them in, and the product carried them without being rewritten.</p>
-							<a class="more" href="/talentware/">Read the case</a>
+					</details>
+					<details class="case" name="work">
+						<summary><h3>Talentware</h3><span class="toggle" aria-hidden="true"></span></summary>
+						<div class="case-body">
+							<div>
+								<p>The roadmap was written by whatever customers asked for last, so nothing could be chosen and nothing could be tested. We put in the missing criterion: design governance, a product strategy, a design system.</p>
+								<!-- Finestra temporale dei due numeri da confermare con i founder (piano, sezione 8, punto 2). -->
+								<p class="proof">From roughly 10 to 45 customers during the engagement. Sales brought them in, and the product carried them without being rewritten.</p>
+								<a class="more" href="/talentware/">Read the case</a>
+							</div>
+							<div class="img-slot"><span>Cover: the roadmap page where the criterion appears, or the design system in use on a real screen.</span></div>
 						</div>
-					</article>
-					<article class="row">
-						<h3><a href="/optikpi/">OptiKPI</a></h3>
-						<div>
-							<p>Years of good engineering had taken the MVP as far as its structure allowed, exactly when the company started selling to larger customers. With the founder we chose to redesign rather than correct, and rebuilt 2.0 from the information architecture up.</p>
-							<!-- Risultato: in attesa di un dato verificabile (piano, sezione 8, punto 3). Senza, il caso esce senza numero. -->
-							<a class="more" href="/optikpi/">Read the case</a>
+					</details>
+					<details class="case" name="work">
+						<summary><h3>OptiKPI</h3><span class="toggle" aria-hidden="true"></span></summary>
+						<div class="case-body">
+							<div>
+								<p>Years of good engineering had taken the MVP as far as its structure allowed, exactly when the company started selling to larger customers. With the founder we chose to redesign rather than correct, and rebuilt 2.0 from the information architecture up.</p>
+								<!-- Risultato: in attesa di un dato verificabile (piano, sezione 8, punto 3). Senza, il caso esce senza numero. -->
+								<a class="more" href="/optikpi/">Read the case</a>
+							</div>
+							<div class="img-slot"><span>Cover: the information architecture of 2.0 beside the MVP it replaced, the decision in one picture.</span></div>
 						</div>
-					</article>
+					</details>
 				</div>
 			</div>
 		</section>
@@ -141,7 +159,14 @@
 		<!-- 5. why this combination -->
 		<section class="section" id="why">
 			<div class="container split">
-				<h2 class="display-m">Strategy consulting on one side of the table, product design on the other</h2>
+				<div>
+					<h2 class="display-m">Strategy consulting on one side of the table, product design on the other</h2>
+					<div class="affiliation">
+						<span class="label">Affiliation</span>
+						<p>Part of Bain Advisory Network</p>
+					</div>
+					<div class="img-slot" style="--ratio: 4 / 5; max-width: 320px; margin-top: var(--space-lg)"><span>Portrait: Pietro at a table, daylight, no studio backdrop.</span></div>
+				</div>
 				<div class="stack body-l muted measure">
 					<p>Product decisions rarely fail in the room where they are taken. They fail on the way to the screen, because the person who frames the business case and the person who designs the flow are almost never the same one.</p>
 					<p>Two and a half years at Bain &amp; Company, Vector practice, then independent since January 2024. That is why an audit here ends with a roadmap a board can read and requirements engineering can build from.</p>
@@ -178,5 +203,6 @@
 			</nav>
 		</div>
 	</footer>
+	<script src="/assets/js/hero-field.js" defer></script>
 </body>
 </html>

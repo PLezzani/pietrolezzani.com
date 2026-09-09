@@ -144,7 +144,17 @@ img { max-width: 100%; height: auto; display: block; }
 .btn-small { padding: 10px 20px; }
 
 /* ---------- hero ---------- */
-.hero { padding-top: var(--space-3xl); padding-bottom: var(--space-3xl); }
+.hero {
+	position: relative; overflow: hidden;
+	min-height: min(760px, calc(100vh - 80px));
+	display: flex; align-items: center;
+	padding-top: var(--space-3xl); padding-bottom: var(--space-3xl);
+}
+.hero > .container { position: relative; z-index: 1; width: 100%; }
+/* interactive ground: a canvas of small squares, see assets/js/hero-field.js */
+.hero-field { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+/* phase 2: a reel takes the same slot. Keep it muted, looped, and behind the text. */
+.hero-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
 .hero h1 { max-width: 12em; }
 .hero .lede { margin-top: var(--space-lg); max-width: var(--measure); }
 .hero .cta { margin-top: var(--space-lg); }
@@ -165,7 +175,7 @@ img { max-width: 100%; height: auto; display: block; }
 .threshold { margin-top: var(--space-lg); font: var(--body-l); }
 
 /* ---------- bridge ---------- */
-.bridge { padding-top: var(--space-2xl); padding-bottom: var(--space-2xl); }
+.bridge { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding-top: var(--space-2xl); padding-bottom: var(--space-2xl); }
 .bridge p { font: var(--display-l); letter-spacing: var(--ls-display-l); max-width: 16em; }
 
 /* ---------- steps ---------- */
@@ -173,6 +183,49 @@ img { max-width: 100%; height: auto; display: block; }
 .steps li { counter-increment: step; border-top: 1px solid var(--color-border); padding: var(--space-md) 0; display: grid; grid-template-columns: 3em 1fr; gap: var(--space-sm); font: var(--body-l); }
 .steps li:last-child { border-bottom: 1px solid var(--color-border); }
 .steps li::before { content: counter(step, decimal-leading-zero); color: var(--color-accent); font: var(--label); letter-spacing: var(--ls-label); padding-top: 0.45em; }
+
+/* ---------- case accordion ---------- */
+.cases { margin-top: var(--space-lg); border-top: 1px solid var(--color-border); }
+.case { border-bottom: 1px solid var(--color-border); }
+.case summary {
+	list-style: none; cursor: pointer;
+	display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
+	padding: var(--space-md) 0;
+}
+.case summary::-webkit-details-marker { display: none; }
+.case summary h3 { font: var(--display-m); letter-spacing: var(--ls-display-m); }
+.case summary:hover h3 { color: var(--color-accent); }
+.case summary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.toggle { position: relative; flex: none; width: 40px; height: 40px; border: 1px solid var(--color-border); border-radius: var(--rounded-pill); }
+.toggle::before, .toggle::after { content: ""; position: absolute; left: 50%; top: 50%; background: var(--color-on-surface); transition: transform 160ms ease, opacity 160ms ease; }
+.toggle::before { width: 14px; height: 1px; transform: translate(-50%, -50%); }
+.toggle::after { width: 1px; height: 14px; transform: translate(-50%, -50%); }
+.case[open] .toggle::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+.case summary:hover .toggle { border-color: var(--color-on-surface); }
+.case-body { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-xl); padding: var(--space-2xs) 0 var(--space-lg); }
+.case[open] .case-body { animation: case-in 220ms ease; }
+@keyframes case-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .case[open] .case-body { animation: none; } }
+.case-body p { max-width: var(--measure); color: var(--color-on-surface-muted); font: var(--body-l); }
+.case-body .proof { color: var(--color-accent); margin-top: var(--space-md); }
+.case-body .more { display: inline-block; margin-top: var(--space-md); font: var(--nav); text-decoration: none; border-bottom: 1px solid var(--color-border); padding-bottom: 2px; }
+.case-body .more:hover { color: var(--color-accent); border-color: var(--color-accent); }
+
+/* ---------- affiliation ---------- */
+.affiliation { margin-top: var(--space-lg); border-top: 1px solid var(--color-border); padding-top: var(--space-md); }
+.affiliation p { margin-top: var(--space-xs); font: var(--body-l); }
+
+/* ---------- image slots (temporary) ----------
+   Dashed boxes that mark where an image is meant to go. Each carries a note
+   on the intended subject. Remove this block once the real images are in. */
+.img-slot {
+	aspect-ratio: var(--ratio, 3 / 2);
+	border: 1px dashed var(--color-border); background: var(--color-surface-raised);
+	display: grid; place-items: center; text-align: center; padding: var(--space-md);
+}
+.img-slot span { font: var(--body-s); color: var(--color-on-surface-muted); max-width: 24em; }
+.img-slot span::before { content: "Image"; display: block; font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-subtle); margin-bottom: var(--space-2xs); }
+.row .img-slot { margin-top: var(--space-md); }
 
 /* ---------- footer ---------- */
 .site-footer { border-top: 1px solid var(--color-border); padding: var(--space-xl) 0; }
@@ -201,7 +254,8 @@ img { max-width: 100%; height: auto; display: block; }
 		--space-3xl: 96px;
 	}
 	.container { padding-left: var(--space-md); padding-right: var(--space-md); }
-	.split, .row { grid-template-columns: 1fr; gap: var(--space-sm); }
+	.split, .row, .case-body { grid-template-columns: 1fr; gap: var(--space-sm); }
+	.hero { min-height: 0; }
 	.site-header .container { height: 64px; }
 	.site-nav { gap: var(--space-md); }
 	.site-nav .nav-link { display: none; }
