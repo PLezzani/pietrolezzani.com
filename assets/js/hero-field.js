@@ -16,10 +16,10 @@
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	var SPEED = 1.5;     // drift and pointer follow, relative to the first pass
-	var LIFE = 1;        // amplitude of the resting wave, 0 leaves the field static
+	var BREATH = 0.28;   // how far the region swells and shrinks, 0 keeps it fixed
 	var GAP = 28;        // grid pitch, px
 	var SIZE = 2;        // square side at rest, px
-	var RADIUS = 170;    // reach of the pointer, px
+	var RADIUS = 210;    // reach of the pointer, px
 	var CREAM = [254, 252, 246];
 	var BLUE = [0, 111, 237];
 
@@ -46,14 +46,15 @@
 		ctx.clearRect(0, 0, w, h);
 		var t = reduce ? 0 : now / 1000;
 		if (idle && !reduce) {
-			// Nobody is pointing, which on a phone is always. The travel is wide on
-			// purpose: the amplitudes are fractions of the viewport, so a timid one
-			// moves a few dozen pixels on a narrow screen and reads as standing still.
-			tx = w * (0.50 + 0.36 * Math.cos(t * 0.19 * SPEED));
-			// Vertically it stays above the masked band: a chosen region that fades
-			// out on its own reads as a fault rather than as an edge.
-			ty = h * (0.42 + 0.22 * Math.sin(t * 0.14 * SPEED));
+			// nobody is pointing: the region drifts on its own. It stays right of
+			// centre, where the copy is not, and above the masked band, because a
+			// chosen region that fades out on its own reads as a fault.
+			tx = w * (0.66 + 0.16 * Math.cos(t * 0.19 * SPEED));
+			ty = h * (0.44 + 0.20 * Math.sin(t * 0.14 * SPEED));
 		}
+		// The region breathes: its reach swells and shrinks on its own. Only squares
+		// inside it are touched, so the grid outside stays exactly as it was.
+		var reach = RADIUS * (1 + BREATH * Math.sin(t * 0.45 * SPEED));
 		var ease = Math.min(0.10 * SPEED, 0.9);
 		px += (tx - px) * ease;
 		py += (ty - py) * ease;
@@ -62,15 +63,10 @@
 				var x = ox + i * GAP, y = oy + j * GAP;
 				var dx = x - px, dy = y - py;
 				var d = Math.sqrt(dx * dx + dy * dy);
-				var k = d < RADIUS ? 1 - d / RADIUS : 0;
+				var k = d < reach ? 1 - d / reach : 0;
 				k = k * k;
-				// A slow diagonal wave over the whole field, so something is moving
-				// where the region is not. Two bands cross a desktop viewport, about
-				// one crosses a phone, and it is the only motion a reader without a
-				// pointer ever gets.
-				var wave = LIFE * Math.sin(x * 0.013 + y * 0.009 - t * 0.85 * SPEED);
-				var s = SIZE + 0.7 * wave + 3 * k;
-				var a = 0.17 + 0.10 * wave + 0.78 * k;
+				var s = SIZE + 3 * k;
+				var a = 0.18 + 0.82 * k;
 				var c0 = CREAM[0] + (BLUE[0] - CREAM[0]) * k;
 				var c1 = CREAM[1] + (BLUE[1] - CREAM[1]) * k;
 				var c2 = CREAM[2] + (BLUE[2] - CREAM[2]) * k;
