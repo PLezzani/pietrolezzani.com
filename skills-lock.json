@@ -25,6 +25,12 @@
       "skillPath": "skills/build-mvp/SKILL.md",
       "computedHash": "c5f3896c0f7a7fc805b11b59e1d8f5bef9cafd298f3561e70037e2cdfbb72dd7"
     },
+    "copywriting": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/copywriting/SKILL.md",
+      "computedHash": "779f05c8be67da475e6a7af78de3e0400b0038e371ce898dd6ff9d3331aab7db"
+    },
     "design-better": {
       "source": "BuildGreatProducts/builder-os",
       "sourceType": "github",
