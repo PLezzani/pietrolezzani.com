@@ -10,8 +10,10 @@ colors:
   on-surface-muted: "#989794"
   on-surface-subtle: "#666562"
   on-surface-inverse: "#000000"
+  on-surface-inverse-muted: "#5C5B58"
   accent: "#006FED"
   border: "#333230"
+  border-inverse: "#CBCAC5"
 typography:
   display-xl:
     fontFamily: Darker Grotesque
@@ -164,6 +166,16 @@ components:
     typography: "{typography.body-l}"
     rounded: "{rounded.none}"
     padding: 24px 0px
+  footer-inverse:
+    backgroundColor: "{colors.surface-inverse}"
+    textColor: "{colors.on-surface-inverse}"
+    typography: "{typography.body-l}"
+    rounded: "{rounded.none}"
+    padding: 96px 0px 40px
+  divider-inverse:
+    backgroundColor: "{colors.border-inverse}"
+    rounded: "{rounded.none}"
+    height: 1px
 ---
 
 # Pietro Lezzani Design System
@@ -180,7 +192,7 @@ The palette is deliberately narrow: a black ground, a warm off-white on top, one
 
 `surface` is pure black. `on-surface` is `#FEFCF6`, a cream rather than white, because pure white on pure black reads as a terminal and fatigues the eye over a long case study. Secondary text does not introduce new hues: `on-surface-muted` and `on-surface-subtle` are that same cream stepped down in luminance, so the page never accumulates greys that belong to no one.
 
-`accent` is a single saturated blue, used sparingly and always to mark something that has been earned: a section label, a proof line, a link in its hover state. It is the only chromatic event on the page, which is exactly what makes it work. `surface-inverse` carries the cream ground in two places: long-form passages where sustained reading matters more than atmosphere, and the single `statement-band` that breaks the black page once, roughly a third of the way down. In both, text inverts to black. `border` is the hairline: it does the work that shadows do elsewhere.
+`accent` is a single saturated blue, used sparingly and always to mark something that has been earned: a section label, a proof line, a link in its hover state. It is the only chromatic event on the page, which is exactly what makes it work. `surface-inverse` carries the cream ground in three places: long-form passages where sustained reading matters more than atmosphere, the single `statement-band` that breaks the black page roughly a third of the way down, and the footer that closes it. In all three, text inverts to black, and `on-surface-inverse-muted` carries the secondary lines the way `on-surface-muted` does on black. `border` is the hairline on the dark ground and `border-inverse` its counterpart on the cream one: together they do the work that shadows do elsewhere.
 
 Contrast holds throughout: cream on black is roughly 19:1, and `on-surface-muted` on black still clears 7:1, comfortably past WCAG AA for body text. The blue is reserved for text at 18px or larger, where it clears AA against black.
 
@@ -220,7 +232,9 @@ The rule is easy to hold: if you read it, it has square corners; if you click it
 
 `case-accordion` is how the home lists the three cases: a row per case, the name in `display-m` on the left, an `accordion-toggle` on the right, and the hairline between rows. One case is open at a time and the first is open on arrival, so the list never reads as a closed door. The open row shows the description, the proof line and the link in a 2fr column against a 3fr cover image with square corners. The toggle is the one pill in the list, because it is the one thing you click; it draws a plus that loses its vertical bar when the row is open, and nothing rotates or slides. Use native `details` and `summary` so the accordion works without script.
 
-`statement-band` sets one sentence in `display-l` on `surface-inverse`, full bleed, with `2xl` padding above and below. It is the only ground change on the home and it is there to give the eye a rest between the situations and the offer. One band per page, never two.
+`statement-band` sets one sentence in `display-l` on `surface-inverse`, full bleed, with `2xl` padding above and below. It is there to give the eye a rest between the situations and the offer. One band per page, never two.
+
+`footer-inverse` is the second and last ground change: the page ends on cream rather than fading out on black. It carries the name in `display-m`, the role and city under it, contact links in `body-l` underlined with `divider-inverse`, and a legal line below a rule. It holds no call to action. The one action already appears three times above it, and a fourth in the footer would turn a close into a nag.
 
 `affiliation` names a network or a body the practice belongs to: a `section-label` reading "Affiliation" and, under it, the name in `body-l`, set under a hairline in the title column. It carries no logo. Logos borrowed from other organisations bring their own colour and weight onto the page, and the palette here has no room for them.
 
@@ -243,6 +257,7 @@ The hero carries an interactive ground rather than an image: a canvas of identic
 
 - Never add a shadow, a glow, or a blurred layer. Separation is hairlines and grounds.
 - Never introduce a grey that is not the cream stepped down, or a second accent hue.
+- Never let body text stay at 500 once it moves onto the cream ground, footer included. Step it down to 400.
 - Never set an argument at display sizes above 88px: past that, a sentence stops being read and starts being chanted.
 - Never place a second call to action on a page. One action, repeated at most, never rivalled.
 - Never use stock photography, icon sets, or a gradient. If it could belong to any consultancy, it belongs to none.

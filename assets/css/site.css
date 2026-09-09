@@ -16,8 +16,10 @@
 	--color-on-surface-muted: #989794;
 	--color-on-surface-subtle: #666562;
 	--color-on-surface-inverse: #000000;
+	--color-on-surface-inverse-muted: #5C5B58;
 	--color-accent: #006FED;
 	--color-border: #333230;
+	--color-border-inverse: #CBCAC5;
 
 	--font-display: "Darker Grotesque", Georgia, serif;
 	--font-text: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -227,13 +229,23 @@ img { max-width: 100%; height: auto; display: block; }
 .img-slot span::before { content: "Image"; display: block; font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-subtle); margin-bottom: var(--space-2xs); }
 .row .img-slot { margin-top: var(--space-md); }
 
-/* ---------- footer ---------- */
-.site-footer { border-top: 1px solid var(--color-border); padding: var(--space-xl) 0; }
-.site-footer .container { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-xl); justify-content: space-between; align-items: baseline; }
-.site-footer p { font: var(--body-s); color: var(--color-on-surface-muted); }
-.site-footer nav { display: flex; gap: var(--space-md); }
-.site-footer nav a { font: var(--body-s); color: var(--color-on-surface-muted); text-decoration: none; }
-.site-footer nav a:hover { color: var(--color-on-surface); }
+/* ---------- footer ----------
+   The footer inverts the ground and closes the page. On a light ground weight
+   500 reads as emphasis, so every line here steps back to 400. */
+.site-footer {
+	background: var(--color-surface-inverse);
+	color: var(--color-on-surface-inverse);
+	padding: var(--space-2xl) 0 var(--space-lg);
+}
+.footer-main { display: flex; flex-wrap: wrap; gap: var(--space-lg) var(--space-xl); justify-content: space-between; align-items: start; }
+.footer-brand { font: var(--display-m); letter-spacing: var(--ls-display-m); }
+.footer-role { margin-top: var(--space-2xs); font: var(--body-l); font-weight: 400; color: var(--color-on-surface-inverse-muted); }
+.footer-contact { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); }
+.footer-contact a { font: var(--body-l); font-weight: 400; text-decoration: none; border-bottom: 1px solid var(--color-border-inverse); padding-bottom: 2px; }
+.footer-contact a:hover { color: var(--color-accent); border-color: var(--color-accent); }
+.footer-legal { margin-top: var(--space-2xl); padding-top: var(--space-md); border-top: 1px solid var(--color-border-inverse); display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-lg); justify-content: space-between; }
+.footer-legal p, .footer-legal a { font: var(--body-s); font-weight: 400; color: var(--color-on-surface-inverse-muted); text-decoration: none; }
+.footer-legal a:hover { color: var(--color-on-surface-inverse); }
 
 /* ---------- responsive ---------- */
 @media (max-width: 1024px) {
@@ -261,5 +273,7 @@ img { max-width: 100%; height: auto; display: block; }
 	.site-nav .nav-link { display: none; }
 	.btn { display: block; }
 	.btn-small { display: inline-block; }
-	.site-footer .container { flex-direction: column; align-items: flex-start; }
+	.site-footer { padding-top: var(--space-xl); }
+	.footer-main { flex-direction: column; align-items: flex-start; }
+	.footer-legal { margin-top: var(--space-xl); }
 }

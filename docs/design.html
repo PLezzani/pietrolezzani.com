@@ -18,8 +18,10 @@
 		--color-on-surface-muted: #989794;
 		--color-on-surface-subtle: #666562;
 		--color-on-surface-inverse: #000000;
+		--color-on-surface-inverse-muted: #5C5B58;
 		--color-accent: #006FED;
 		--color-border: #333230;
+		--color-border-inverse: #CBCAC5;
 
 		--font-display: "Darker Grotesque", Georgia, serif;
 		--font-text: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -162,6 +164,16 @@
 
 	.affil { border-top: 1px solid var(--color-border); padding-top: var(--space-md); max-width: 24em; }
 	.affil p { margin: var(--space-xs) 0 0; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
+
+	/* footer on the cream ground: every line steps back to weight 400 */
+	.ftr { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding: var(--space-2xl) var(--space-lg) var(--space-lg); }
+	.ftr-main { display: flex; flex-wrap: wrap; gap: var(--space-lg) var(--space-xl); justify-content: space-between; align-items: start; }
+	.ftr-brand { margin: 0; font-family: var(--font-display); font-size: var(--type-display-m-size); font-weight: var(--type-display-m-weight); line-height: var(--type-display-m-lh); letter-spacing: var(--type-display-m-ls); }
+	.ftr-role { margin: var(--space-2xs) 0 0; font-size: var(--type-body-l-size); font-weight: 400; line-height: var(--type-body-l-lh); color: var(--color-on-surface-inverse-muted); }
+	.ftr-contact { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); }
+	.ftr-contact a { color: var(--color-on-surface-inverse); font-size: var(--type-body-l-size); font-weight: 400; text-decoration: none; border-bottom: 1px solid var(--color-border-inverse); padding-bottom: 2px; }
+	.ftr-legal { margin-top: var(--space-2xl); padding-top: var(--space-md); border-top: 1px solid var(--color-border-inverse); display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-lg); justify-content: space-between; }
+	.ftr-legal p, .ftr-legal a { margin: 0; font-size: var(--type-body-s-size); font-weight: 400; color: var(--color-on-surface-inverse-muted); text-decoration: none; }
 	.inverse .t-bl { color: var(--color-on-surface-inverse); }
 
 	/* ---- do / don't ---- */
@@ -312,6 +324,24 @@
 			<p>Part of Bain Advisory Network</p>
 		</div>
 
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Footer on the inverse ground</h3>
+		<div class="ftr" style="margin-top:var(--space-sm)">
+			<div class="ftr-main">
+				<div>
+					<p class="ftr-brand">Pietro Lezzani</p>
+					<p class="ftr-role">Product strategy and design. Milan.</p>
+				</div>
+				<div class="ftr-contact">
+					<a href="#">info@pietrolezzani.com</a>
+					<a href="#">LinkedIn</a>
+				</div>
+			</div>
+			<div class="ftr-legal">
+				<p>&copy; 2026 Pietro Lezzani</p>
+				<a href="#">Privacy policy</a>
+			</div>
+		</div>
+
 		<h3 class="t-lb" style="margin-top:var(--space-xl)">Scope block</h3>
 		<div class="scope" style="margin-top:var(--space-sm)">
 			<strong>Scope</strong>
@@ -338,6 +368,7 @@
 				<ul>
 					<li>Never add a shadow, a glow, or a blurred layer.</li>
 					<li>Never introduce a grey that is not the cream stepped down, or a second accent hue.</li>
+					<li>Never let body text stay at 500 once it moves onto the cream ground, footer included. Step it down to 400.</li>
 					<li>Never set an argument above 88px: past that a sentence stops being read and starts being chanted.</li>
 					<li>Never place a second call to action on a page.</li>
 					<li>Never use stock photography, icon sets, or a gradient.</li>
