@@ -241,9 +241,12 @@ img { max-width: 100%; height: auto; display: block; }
 .case-body .more { display: inline-block; margin-top: var(--space-md); font: var(--nav); text-decoration: none; border-bottom: 1px solid var(--color-border); padding-bottom: 2px; }
 .case-body .more:hover { color: var(--color-accent); border-color: var(--color-accent); }
 
-/* ---------- affiliation ---------- */
+/* ---------- affiliation ----------
+   The logo is admissible only because it is a single colour and that colour is
+   on-surface: it adds no hue the palette does not already have. */
 .affiliation { margin-top: var(--space-lg); border-top: 1px solid var(--color-border); padding-top: var(--space-md); }
-.affiliation p { margin-top: var(--space-xs); font: var(--body-l); }
+.affiliation p { font: var(--body-l); }
+.affiliation img { width: 180px; margin-top: var(--space-md); }
 
 /* ---------- image slots (temporary) ----------
    Dashed boxes that mark where an image is meant to go. Each carries a note
@@ -296,6 +299,7 @@ img { max-width: 100%; height: auto; display: block; }
 	}
 	.container { padding-left: var(--space-md); padding-right: var(--space-md); }
 	.split, .row, .case-body { grid-template-columns: 1fr; gap: var(--space-sm); }
+	.split { gap: var(--space-lg); }
 	/* stacked: the joining hairline turns vertical */
 	.plan { grid-template-columns: 1fr; gap: var(--space-md); }
 	.plan li { aspect-ratio: auto; }

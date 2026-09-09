@@ -244,7 +244,9 @@ The rule is easy to hold: if you read it, it has square corners; if you click it
 
 `footer-inverse` is the second and last ground change: the page ends on cream rather than fading out on black. It carries the name in `display-m`, the role and city under it, contact links in `body-l` underlined with `divider-inverse`, and a legal line below a rule. It holds no call to action. The one action already appears three times above it, and a fourth in the footer would turn a close into a nag.
 
-`affiliation` names a network or a body the practice belongs to: a `section-label` reading "Affiliation" and, under it, the name in `body-l`, set under a hairline in the title column. It carries no logo. Logos borrowed from other organisations bring their own colour and weight onto the page, and the palette here has no room for them.
+`affiliation` names a network or a body the practice belongs to. It sits under a hairline in the title column: the name in `body-l`, then the organisation's logo. A borrowed logo is admissible on one condition, that it is a single colour and that colour is `on-surface`, so it adds no hue the palette does not already carry; a logo in its own brand colours is not, and no amount of importance changes that. Keep it near 180px wide, well under the display type above it, because the affiliation supports the claim rather than making it.
+
+Sections follow one order without exception: `section-label`, then the title, then the content. A label that appears below the title it labels reads as a caption for whatever precedes it, which is never what was meant.
 
 The hero carries an interactive ground rather than an image: a canvas of identical small squares in the cream at low opacity, and a region near the pointer where a few of them are chosen, grow slightly, and turn `accent`. It restates the headline without illustrating it. When nobody is pointing, the region drifts slowly; under `prefers-reduced-motion` it stands still. A reel can take the same slot later, kept muted, looped and behind the text, at reduced opacity so the headline stays the brightest thing on the screen.
 

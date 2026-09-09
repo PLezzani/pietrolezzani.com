@@ -169,7 +169,8 @@
 	.plan p { margin: 0; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
 
 	.affil { border-top: 1px solid var(--color-border); padding-top: var(--space-md); max-width: 24em; }
-	.affil p { margin: var(--space-xs) 0 0; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
+	.affil p { margin: 0; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
+	.affil img { display: block; width: 180px; margin-top: var(--space-md); }
 
 	/* footer on the cream ground: every line steps back to weight 400 */
 	.ftr { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding: var(--space-2xl) var(--space-lg) var(--space-lg); }
@@ -333,9 +334,10 @@
 
 		<h3 class="t-lb" style="margin-top:var(--space-xl)">Affiliation</h3>
 		<div class="affil" style="margin-top:var(--space-sm)">
-			<span class="t-lb seclabel">Affiliation</span>
 			<p>Part of Bain Advisory Network</p>
+			<img src="/assets/img/bain-company.svg" alt="Bain &amp; Company" width="279" height="31" />
 		</div>
+		<p class="note" style="margin-top:var(--space-sm)">The label belongs above the section title, not inside the block. A borrowed logo is admissible only in one colour, and that colour is on-surface.</p>
 
 		<h3 class="t-lb" style="margin-top:var(--space-xl)">Footer on the inverse ground</h3>
 		<div class="ftr" style="margin-top:var(--space-sm)">
@@ -386,6 +388,7 @@
 					<li>Never set an argument above 88px: past that a sentence stops being read and starts being chanted.</li>
 					<li>Never place a second call to action on a page.</li>
 					<li>Never use stock photography, icon sets, or a gradient.</li>
+					<li>Never place a section label below the title it labels, and never show a borrowed logo in its own brand colours.</li>
 					<li>Never arrange mockups as a gallery. Images show the decision, not the craft.</li>
 				</ul>
 			</div>
