@@ -140,8 +140,9 @@
 
 	.proof { color: var(--color-accent); font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); padding: var(--space-md) 0; max-width: 34em; }
 
-	.scope { background: var(--color-surface-raised); color: var(--color-on-surface-muted); border-radius: var(--rounded-sm); padding: var(--space-md); font-size: var(--type-body-s-size); line-height: var(--type-body-s-lh); max-width: 34em; }
-	.scope strong { color: var(--color-on-surface); font-weight: 500; display: block; margin-bottom: var(--space-3xs); }
+	.facts { margin: 0; padding-top: var(--space-md); border-top: 1px solid var(--color-border); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg); }
+	.facts dt { color: var(--color-on-surface-muted); }
+	.facts dd { margin: var(--space-2xs) 0 0; font-size: var(--type-body-size); line-height: var(--type-body-lh); }
 
 	.inverse { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding: var(--space-lg); }
 	.band { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding: var(--space-2xl) var(--space-lg); }
@@ -269,7 +270,7 @@
 		<h2>Elevation &amp; depth</h2>
 		<div class="grid cols-2">
 			<div style="padding:var(--space-md); border-top:1px solid var(--color-border)"><div class="t-lb seclabel">Level 0</div><p class="t-bs" style="color:var(--color-on-surface-muted)">Flat on surface, separated by a hairline rule. The default for every content block.</p></div>
-			<div style="padding:var(--space-md); background:var(--color-surface-raised); border-radius:var(--rounded-sm)"><div class="t-lb">Level 1</div><p class="t-bs" style="color:var(--color-on-surface-muted)">Raised ground, used for technical asides such as the scope block. No shadow, only a change of ground.</p></div>
+			<div style="padding:var(--space-md); background:var(--color-surface-raised); border-radius:var(--rounded-sm)"><div class="t-lb">Level 1</div><p class="t-bs" style="color:var(--color-on-surface-muted)">Raised ground, held for a technical aside that needs to sit apart. No shadow, only a change of ground.</p></div>
 		</div>
 		<div class="inverse" style="margin-top:var(--space-md)"><div class="t-lb">Inverse ground</div><p class="t-bl" style="margin:var(--space-2xs) 0 0">For long reading passages, the page inverts to cream with black text. Sustained legibility beats atmosphere when a case study runs long.</p></div>
 		<p class="note" style="margin-top:var(--space-md)">There are no shadows anywhere in this system, by design.</p>
@@ -370,11 +371,13 @@
 			</div>
 		</div>
 
-		<h3 class="t-lb" style="margin-top:var(--space-xl)">Scope block</h3>
-		<div class="scope" style="margin-top:var(--space-sm)">
-			<strong>Scope</strong>
-			Two phases, priced by phase. Four months, April to July 2024. Development and primary research excluded.
-		</div>
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Case facts</h3>
+		<dl class="facts" style="margin-top:var(--space-sm)">
+			<div><dt class="t-lb">Engagement</dt><dd>2 phases, priced by phase</dd></div>
+			<div><dt class="t-lb">When</dt><dd>April to July 2024</dd></div>
+			<div><dt class="t-lb">Not included</dt><dd>Development, primary research</dd></div>
+		</dl>
+		<p class="note" style="margin-top:var(--space-sm)">A column is left out when its answer is not confirmed. The row becomes narrower and nothing is invented to fill it.</p>
 	</section>
 
 	<section>

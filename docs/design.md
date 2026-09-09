@@ -137,12 +137,18 @@ components:
     typography: "{typography.body-l}"
     rounded: "{rounded.none}"
     padding: 24px 0px
-  scope-block:
-    backgroundColor: "{colors.surface-raised}"
-    textColor: "{colors.on-surface-muted}"
-    typography: "{typography.body-s}"
-    rounded: "{rounded.sm}"
-    padding: 24px
+  case-facts:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
+    padding: 24px 0px
+  case-proof:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.accent}"
+    typography: "{typography.display-m}"
+    rounded: "{rounded.none}"
+    padding: 0px
   case-accordion:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.on-surface}"
@@ -241,7 +247,7 @@ Separation comes from two devices only: the `divider` hairline in `border`, and 
 
 ## Shapes
 
-Corners follow function, not taste. Content is rectangular: `rounded.none` on images, sections, and any block a reader looks at. Controls are fully round: `rounded.pill` on buttons and small labelled chips. `rounded.sm` exists only for the scope block, where a barely-softened edge signals a technical aside without turning it into a card.
+Corners follow function, not taste. Content is rectangular: `rounded.none` on images, sections, and any block a reader looks at. Controls are fully round: `rounded.pill` on buttons and small labelled chips. `rounded.sm` is held in reserve for a technical aside that needs a barely-softened edge without becoming a card. Nothing currently uses it: the case facts that once did are now a row under a hairline, which says the same thing with less.
 
 The rule is easy to hold: if you read it, it has square corners; if you click it, it is a pill. That single distinction does more for affordance than any amount of shading.
 
@@ -269,7 +275,9 @@ Sections follow one order without exception: `section-label`, then a `divider`, 
 
 The hero carries an interactive ground rather than an image: a canvas of identical small squares in the cream at low opacity, and a region near the pointer where a few of them are chosen, grow slightly, and turn `accent`. It restates the headline without illustrating it. The squares outside the region never change: the grid is uniform and fully visible at rest, and that uniformity is the whole metaphor, since a field where everything already shimmers has nothing left to say by choosing a few. Movement belongs to the region alone. It drifts, and its reach swells and shrinks on a slow cycle of its own, so on a phone, where no pointer will ever arrive, there is still something breathing. Make the region larger or let it breathe wider when it needs to be felt more; never animate the squares around it. The region also stays right of centre, clear of the copy, because a blue square between two words is noise rather than emphasis. The ground is masked out towards the bottom and reaches nothing before the section ends, because a field that stops on a straight edge turns the hero into a panel resting on the page rather than the top of it. Mask the slot rather than fading the drawn colour: the mask holds whatever occupies it, the canvas now and a reel later. Whatever moves inside the field then has to stay above the masked band, since a chosen region that dissolves on its own reads as a fault rather than as an edge. When nobody is pointing, the region drifts slowly; under `prefers-reduced-motion` it stands still. A reel can take the same slot later, kept muted, looped and behind the text, at reduced opacity so the headline stays the brightest thing on the screen.
 
-`card-offer` and `case-item` are not cards in the usual sense: they carry no fill and no border box, only a `divider` above and generous vertical padding. They are rows in an editorial list. `proof-line` is the one place a claim is allowed to stand alone, set in `accent` at `body-l` with space above and below, and it is used only for a verifiable fact. `scope-block` closes a case study on `surface-raised` in muted small text, declaring duration, phases and exclusions.
+`card-offer` and `case-item` are not cards in the usual sense: they carry no fill and no border box, only a `divider` above and generous vertical padding. They are rows in an editorial list. `proof-line` is the one place a claim is allowed to stand alone, set in `accent` at `body-l` with space above and below, and it is used only for a verifiable fact. A case study runs in one order, the same on all three pages: the client name at `display-xl`, a decision line at `display-m` in the form "from X to Y", a full width cover, the body, the proof, the facts, the one action, and the other cases. The name is the only place the display scale is used for something that is not an argument, and it earns it: a page that opens on a client's name states what it is before it explains anything.
+
+`case-facts` replaces what used to be a boxed scope note. It sets the engagement, the period and what was not included as a row of label and value columns under a hairline, which is the form a buyer scans rather than reads. A column is left out when its answer is not confirmed, and the row simply becomes narrower: an absent column is honest, an invented one is not, and a page that quietly fills the gap is worse than one that shows it. `case-proof` is the same claim as the home's `proof-line` set at `display-m` instead of `body-l`, alone above the facts, and it appears only where a verifiable number exists.
 
 ## Do's and Don'ts
 
