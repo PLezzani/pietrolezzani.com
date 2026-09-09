@@ -135,7 +135,11 @@ img { max-width: 100%; height: auto; display: block; }
 	position: sticky; top: 0; z-index: 10;
 	background: var(--color-surface);
 	border-bottom: 1px solid var(--color-border);
+	transition: transform 240ms ease;
 }
+/* set by assets/js/nav-scroll.js: away on the way down, back on the way up */
+.site-header.is-hidden { transform: translateY(-100%); }
+@media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
 /* an anchored section must clear the header instead of hiding behind it */
 section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 .site-header .container { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
