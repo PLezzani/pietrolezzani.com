@@ -272,10 +272,11 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 }
 .case summary::-webkit-details-marker { display: none; }
 .case summary h3 { font: var(--display-m); letter-spacing: var(--ls-display-m); flex: 1 1 auto; }
-/* A closed row still shows its case. Same file as the open cover, so it costs
-   one request for both and the big picture is already there on opening. */
+/* A closed row still shows its case, through the client's mark. No tile and no
+   fill: the marks are recoloured to on-surface and sit straight on the ground.
+   The three are balanced by area in the file, so one box serves all of them. */
 .case-thumb {
-	flex: none; width: 100px; height: 60px; object-fit: cover;
+	flex: none; width: 120px; height: 28px; object-fit: contain;
 	transition: width 200ms ease, opacity 140ms ease;
 }
 .case[open] .case-thumb { width: 0; opacity: 0; }
@@ -357,7 +358,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 	.container { padding-left: var(--space-md); padding-right: var(--space-md); }
 	.split, .row, .case-body { grid-template-columns: 1fr; gap: var(--space-sm); }
 	.split { gap: var(--space-lg); }
-	.case-thumb { width: 64px; height: 38px; }
+	.case-thumb { width: 80px; height: 19px; }
 	/* stacked: the joining hairline turns vertical */
 	.plan { grid-template-columns: 1fr; gap: var(--space-md); }
 	.plan li { aspect-ratio: auto; }
