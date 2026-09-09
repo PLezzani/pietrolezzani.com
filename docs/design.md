@@ -217,6 +217,12 @@ The scale has a deliberate gap. Text lives at 13, 14, 16 and 18px; display start
 
 **Body text is set at 500, not 400, and this is not a stylistic preference.** The page renders with `-webkit-font-smoothing: antialiased`, which replaces subpixel rendering with a lighter grayscale one; on a black ground that thinning compounds with the optical erosion light glyphs already suffer, and Inter at 400 turns thin and washed out. Weight 500 restores the intended colour of the text. Both families are loaded as variable fonts across the 100 to 900 axis, so the middle weight costs no extra file. Two rules follow from this: never drop body text to 400 while the ground stays dark, and if a passage ever moves onto `surface-inverse`, step it back down to 400, because on a light ground 500 reads as emphasis.
 
+## Motion
+
+There is almost none, and what there is has one job: to make text arrive rather than be found already in place. A heading rises 18px and fades over 700ms on a decelerating curve, once, and never again. The hero plays on load; everything else plays when it comes into view, triggered slightly early so the movement has finished by the time the reader is looking at it. Where several lines belong together they are staggered by 90ms, which is enough to read as a sequence and too little to read as a queue.
+
+Three rules keep this from becoming an effect. Nothing moves on scroll position, nothing is pinned, and no element repeats its entrance: scroll-driven motion turns the scrollbar into a liar, and a reader who is deciding whether to book a call is not there to be shown a mechanism. Under `prefers-reduced-motion` every reveal is skipped and the page renders as if none of it existed. And the hidden state must always carry its own way out, a delayed keyframe that reveals the text with no script involved, because the one failure this system will not accept is a page whose words never appear.
+
 ## Layout
 
 Spacing runs on a base-4 scale in nine steps, from 4px to 144px. The large end matters more than the small: `xl`, `2xl` and `3xl` separate sections, and the generosity between blocks is what makes a dark page feel composed rather than heavy.
@@ -275,6 +281,8 @@ The hero carries an interactive ground rather than an image: a canvas of identic
 **Don't**
 
 - Never add a shadow, a glow, or a blurred layer. Separation is hairlines and grounds.
+- Never hide text behind a state that only script can undo. Every hidden state needs a scriptless way out.
+- Never tie motion to scroll position or pin a section. Motion happens once, on arrival, and then it is over.
 - Never introduce a grey that is not the cream stepped down, or a second accent hue.
 - Never let body text stay at 500 once it moves onto the cream ground, footer included. Step it down to 400.
 - Never set an argument at display sizes above 88px: past that, a sentence stops being read and starts being chanted.

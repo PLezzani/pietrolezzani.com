@@ -260,6 +260,11 @@
 	</section>
 
 	<section>
+		<h2>Motion</h2>
+		<p class="note">Text arrives rather than being found in place: 18px of rise and a fade over 700ms, once, on a decelerating curve. The hero plays on load, everything else when it enters the view. Lines that belong together are staggered by 90ms. Nothing is tied to scroll position, nothing is pinned, nothing repeats. Under reduced motion every reveal is skipped, and the hidden state always carries a delayed keyframe that reveals it without script, so a failed file can never leave the page wordless.</p>
+	</section>
+
+	<section>
 		<h2>Elevation &amp; depth</h2>
 		<div class="grid cols-2">
 			<div style="padding:var(--space-md); border-top:1px solid var(--color-border)"><div class="t-lb seclabel">Level 0</div><p class="t-bs" style="color:var(--color-on-surface-muted)">Flat on surface, separated by a hairline rule. The default for every content block.</p></div>
@@ -387,6 +392,7 @@
 				<h3>✗ Don't</h3>
 				<ul>
 					<li>Never add a shadow, a glow, or a blurred layer.</li>
+					<li>Never hide text behind a state that only script can undo, and never tie motion to scroll position.</li>
 					<li>Never introduce a grey that is not the cream stepped down, or a second accent hue.</li>
 					<li>Never let body text stay at 500 once it moves onto the cream ground, footer included. Step it down to 400.</li>
 					<li>Never set an argument above 88px: past that a sentence stops being read and starts being chanted.</li>

@@ -92,6 +92,27 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .skip:focus { top: var(--space-md); }
 
+/* ---------- reveal ----------
+   The hidden state applies only while JS is running (html.js), and it carries
+   its own way out: if reveal.js never marks the document ready, the keyframe
+   below reveals the text after 3s with no script involved. */
+.js .reveal {
+	opacity: 0; transform: translateY(18px);
+	animation: reveal-failsafe 300ms linear 3s forwards;
+}
+.js.reveal-ready .reveal { animation: none; }
+.js .reveal.is-in {
+	opacity: 1; transform: none; animation: none;
+	transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+	            transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.js .reveal-2.is-in { transition-delay: 90ms; }
+.js .reveal-3.is-in { transition-delay: 180ms; }
+@keyframes reveal-failsafe { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+	.js .reveal, .js .reveal.is-in { opacity: 1; transform: none; animation: none; transition: none; }
+}
+
 /* ---------- type ---------- */
 .display-xl { font: var(--display-xl); letter-spacing: var(--ls-display-xl); }
 .display-l  { font: var(--display-l);  letter-spacing: var(--ls-display-l); }
