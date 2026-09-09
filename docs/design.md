@@ -176,6 +176,11 @@ components:
     backgroundColor: "{colors.border-inverse}"
     rounded: "{rounded.none}"
     height: 1px
+  case-thumb:
+    backgroundColor: "{colors.surface-raised}"
+    rounded: "{rounded.none}"
+    width: 100px
+    height: 60px
   plan-step:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.on-surface}"
@@ -216,6 +221,8 @@ The scale has a deliberate gap. Text lives at 13, 14, 16 and 18px; display start
 
 Spacing runs on a base-4 scale in nine steps, from 4px to 144px. The large end matters more than the small: `xl`, `2xl` and `3xl` separate sections, and the generosity between blocks is what makes a dark page feel composed rather than heavy.
 
+Sections are not all the same weight, and this matters more on a long page than any single spacing value. Seven sections of equal density read as one undifferentiated block however tall each one is, so the page needs a pulse: a tight section against an airy one. Density is the measure, not height. The statement band holds one sentence in a whole screen and the list sections hold three arguments in two thirds of one, and it is that ratio, better than ten to one across the page, that makes the reader feel movement while scrolling. Use `section--tight` and the full-height band sparingly: two deliberate exceptions give a page rhythm, five give it noise.
+
 The grid is editorial and asymmetric. On desktop, a title column of roughly 40% sits against a wider column for image or supporting text; body copy is capped near 34em so lines stay readable. On mobile everything collapses to a single column and the same vertical rhythm carries the page. Content is bounded by a container of about 1280px with `lg` gutters.
 
 ## Elevation & Depth
@@ -236,7 +243,7 @@ The rule is easy to hold: if you read it, it has square corners; if you click it
 
 `section-label` sets small uppercase Inter in `on-surface-muted`, tracked out at 0.08em, preceded by a small square in `accent`. It names a section without a heading and keeps display type for the things that deserve it. `nav-link` stays plain until hover, when it takes `accent`. The header that holds it is sticky and opaque on `surface`, and it leaves on the way down and returns on the way up: reading a long page happens downward, so the bar gets out of the way, and the one action is never more than a small scroll back. It never hides while the top of the page is in view, it returns the moment anything inside it takes focus, and under `prefers-reduced-motion` it simply stands still, because a bar that slides in and out is motion the reader has asked not to receive. Anything the navigation links to needs `scroll-margin-top` clearing the header height, or the anchor lands underneath it.
 
-`case-accordion` is how the home lists the three cases: a row per case, the name in `display-m` on the left, an `accordion-toggle` on the right, and the hairline between rows. One case is open at a time and the first is open on arrival, so the list never reads as a closed door. The open row shows the description, the proof line and the link in a 2fr column against a 3fr cover image with square corners, set at 5 by 3 and cropped from the centre. The cover shows the product that was decided about, not an atmosphere: a real screen, or the screens the customer meets, never a photograph standing in for one. The toggle is the one pill in the list, because it is the one thing you click; it draws a plus that loses its vertical bar when the row is open, and nothing rotates or slides. Use native `details` and `summary` so the accordion works without script.
+`case-accordion` is how the home lists the three cases: a row per case, the name in `display-m` on the left, an `accordion-toggle` on the right, and the hairline between rows. One case is open at a time and the first is open on arrival, so the list never reads as a closed door. The open row shows the description, the proof line and the link in a 2fr column against a 3fr cover image with square corners, set at 5 by 3 and cropped from the centre. The cover shows the product that was decided about, not an atmosphere: a real screen, or the screens the customer meets, never a photograph standing in for one. The toggle is the one pill in the list, because it is the one thing you click; it draws a plus that loses its vertical bar when the row is open, and nothing rotates or slides. Use native `details` and `summary` so the accordion works without script. A closed row is not empty: it carries a `case-thumb`, the same image as the cover it will open, at 100 by 60. It points at the same file, so the two cost one request between them and the full cover is already in the browser when the row opens. The thumbnail collapses to zero width on opening rather than disappearing, and its `alt` stays empty, because the cover underneath already describes the picture and a screen reader should not hear it twice.
 
 `statement-band` sets one sentence in `display-l` on `surface-inverse`, full bleed, with `2xl` padding above and below. It is there to give the eye a rest between the situations and the offer. One band per page, never two.
 
@@ -258,6 +265,7 @@ The hero carries an interactive ground rather than an image: a canvas of identic
 
 - Reserve `accent` for what has been earned: a proof, a label, a hover. One blue event per screen is the target.
 - Keep body measure near 34em, even when the viewport allows more.
+- Keep the densest and the airiest section far apart in density, several times over. Even spacing on every section is what makes a page read flat.
 - Let a section change ground when it needs to feel different, instead of reaching for a border or a fill.
 - Set every claim that carries a number in `proof-line`, and only when the number is verifiable.
 - Say a fact once. If a paragraph introduces a step and the step repeats it, the paragraph goes and the step keeps the detail.

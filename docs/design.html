@@ -161,6 +161,9 @@
 	.case-body { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-xl); padding: var(--space-2xs) 0 var(--space-lg); }
 	.case-body p { margin: 0; color: var(--color-on-surface-muted); max-width: 34em; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
 	.cover { aspect-ratio: 5 / 3; background: var(--color-surface-raised); border: 1px dashed var(--color-border); }
+	.thumb { flex: none; width: 100px; height: 60px; background: var(--color-surface-raised); border: 1px dashed var(--color-border); }
+	.case[open] .thumb { display: none; }
+	.case summary h3 { flex: 1 1 auto; }
 
 	.plan { counter-reset: step; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg); margin: 0; padding: 0; list-style: none; }
 	.plan li { counter-increment: step; position: relative; aspect-ratio: 1 / 1; border: 1px solid var(--color-border); padding: var(--space-lg); display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-md); }
@@ -315,8 +318,8 @@
 				</div>
 			</details>
 			<details class="case" name="ds-cases">
-				<summary><h3>Talentware</h3><span class="toggle" aria-hidden="true"></span></summary>
-				<div class="case-body"><div><p>Closed row: the name and the toggle, nothing else.</p></div><div class="cover"></div></div>
+				<summary><h3>Talentware</h3><span class="thumb" aria-hidden="true"></span><span class="toggle" aria-hidden="true"></span></summary>
+				<div class="case-body"><div><p>A closed row keeps its thumbnail: same file as the cover, so the two cost one request and the cover is ready when the row opens.</p></div><div class="cover"></div></div>
 			</details>
 		</div>
 
@@ -372,6 +375,7 @@
 				<ul>
 					<li>Reserve the accent for what has been earned: a proof, a label, a hover. One blue event per screen.</li>
 					<li>Keep body measure near 34em, even when the viewport allows more.</li>
+					<li>Keep the densest and the airiest section far apart in density, several times over. Even spacing everywhere is what makes a page read flat.</li>
 					<li>Let a section change ground when it needs to feel different, instead of reaching for a border or a fill.</li>
 					<li>Set claims that carry a number in the proof line, and only when the number is verifiable.</li>
 					<li>Say a fact once. If a paragraph introduces a step and the step repeats it, the paragraph goes and the step keeps the detail.</li>

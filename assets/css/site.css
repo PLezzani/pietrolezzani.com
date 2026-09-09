@@ -120,6 +120,11 @@ img { max-width: 100%; height: auto; display: block; }
 
 .section { padding-top: var(--space-2xl); padding-bottom: var(--space-2xl); }
 .section + .section { border-top: 1px solid var(--color-border); }
+/* Rhythm. Seven sections of the same density read as one long block, whatever
+   their height. A tight section next to an airy one is what gives the page a
+   pulse, so the modifiers exist to be used sparingly and on purpose. */
+.section--tight { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+.section--tight .row { padding: var(--space-md) 0; }
 
 /* editorial two-column: title column against a wider content column */
 .split { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-xl); align-items: start; }
@@ -198,7 +203,15 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 .threshold { margin-top: var(--space-lg); font: var(--body-l); }
 
 /* ---------- bridge ---------- */
-.bridge { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding-top: var(--space-2xl); padding-bottom: var(--space-2xl); }
+/* The one pause on the page: a whole screen of cream holding a single
+   sentence. Its job is the emptiness, not the sentence. */
+.bridge {
+	background: var(--color-surface-inverse); color: var(--color-on-surface-inverse);
+	min-height: 720px;
+	min-height: min(100svh, 900px);
+	display: flex; align-items: center;
+	padding-top: var(--space-2xl); padding-bottom: var(--space-2xl);
+}
 .bridge p { font: var(--display-l); letter-spacing: var(--ls-display-l); max-width: 16em; }
 
 /* ---------- plan ----------
@@ -237,7 +250,15 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 	padding: var(--space-md) 0;
 }
 .case summary::-webkit-details-marker { display: none; }
-.case summary h3 { font: var(--display-m); letter-spacing: var(--ls-display-m); }
+.case summary h3 { font: var(--display-m); letter-spacing: var(--ls-display-m); flex: 1 1 auto; }
+/* A closed row still shows its case. Same file as the open cover, so it costs
+   one request for both and the big picture is already there on opening. */
+.case-thumb {
+	flex: none; width: 100px; height: 60px; object-fit: cover;
+	transition: width 200ms ease, opacity 140ms ease;
+}
+.case[open] .case-thumb { width: 0; opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .case-thumb { transition: none; } }
 .case summary:hover h3 { color: var(--color-accent); }
 .case summary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 .toggle { position: relative; flex: none; width: 40px; height: 40px; border: 1px solid var(--color-border); border-radius: var(--rounded-pill); }
@@ -315,6 +336,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 	.container { padding-left: var(--space-md); padding-right: var(--space-md); }
 	.split, .row, .case-body { grid-template-columns: 1fr; gap: var(--space-sm); }
 	.split { gap: var(--space-lg); }
+	.case-thumb { width: 64px; height: 38px; }
 	/* stacked: the joining hairline turns vertical */
 	.plan { grid-template-columns: 1fr; gap: var(--space-md); }
 	.plan li { aspect-ratio: auto; }
