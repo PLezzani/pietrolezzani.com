@@ -17,6 +17,7 @@
 	--color-on-surface-subtle: #666562;
 	--color-on-surface-inverse: #000000;
 	--color-on-surface-inverse-muted: #5C5B58;
+	--color-on-surface-inverse-faint: #BDBBB5;
 	--color-accent: #006FED;
 	--color-border: #333230;
 	--color-border-inverse: #CBCAC5;
@@ -263,6 +264,8 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 .row h3 a { text-decoration: none; }
 .row h3 a:hover { color: var(--color-accent); }
 .row p { max-width: var(--measure); color: var(--color-on-surface-muted); font: var(--body-l); }
+/* duration and pricing basis of a format, on their own line above the description */
+.row .terms { color: var(--color-on-surface); font: var(--body-strong); margin-bottom: var(--space-xs); }
 .row .proof { color: var(--color-accent); font: var(--body-l); margin-top: var(--space-md); }
 .row .more { display: inline-block; margin-top: var(--space-md); font: var(--nav); text-decoration: none; border-bottom: 1px solid var(--color-border); padding-bottom: 2px; }
 .row .more:hover { color: var(--color-accent); border-color: var(--color-accent); }
@@ -271,26 +274,33 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 
 /* ---------- bridge ---------- */
 /* The one pause on the page: a whole screen of cream holding a single
-   sentence. Its job is the emptiness, not the sentence. */
+   sentence. Its job is the emptiness, not the sentence. The section is two
+   and a half screens tall and the sentence stays pinned while the page moves
+   underneath, so the scroll reads it out word by word (see
+   assets/js/highlight-text.js). This is the one place motion follows the
+   scroll position: it is the section's whole reason to exist. */
 .bridge {
 	background: var(--color-surface-inverse); color: var(--color-on-surface-inverse);
-	min-height: 720px;
-	min-height: min(100svh, 900px);
+	min-height: 240vh;
+	min-height: 240svh;
+}
+.bridge > .container {
+	position: sticky; top: 0;
+	min-height: 100vh;
+	min-height: 100svh;
 	display: flex; align-items: center;
 	padding-top: var(--space-2xl); padding-bottom: var(--space-2xl);
 }
-.bridge p { font: var(--display-l); letter-spacing: var(--ls-display-l); max-width: 16em; }
-/* Set by assets/js/highlight-text.js. Until it runs, and if it never does, the
-   sentence is plain on-surface-inverse: the clipping only starts once the lines
-   exist, so no state here can leave a word unreadable. */
-.bridge p.is-split { color: transparent; }
-.hl-line {
-	display: block; width: fit-content;
-	background-image: linear-gradient(90deg,
-		var(--color-on-surface-inverse) 0 var(--hl, 0%),
-		var(--color-on-surface-inverse-muted) calc(var(--hl, 0%) + 5%));
-	-webkit-background-clip: text;
-	background-clip: text;
+.bridge p { font: var(--display-xl); letter-spacing: var(--ls-display-xl); max-width: 14em; }
+/* Set by the script. Until it runs, and if it never does, the sentence is
+   plain on-surface-inverse: the muted tone exists only on split words, so no
+   state here can leave a word unreadable. */
+.bridge p.is-split .hl-w { display: inline-block; color: var(--color-on-surface-inverse-faint); will-change: color; }
+@media (prefers-reduced-motion: reduce) {
+	/* nothing to read out: one screen, no pin, full ink */
+	.bridge { min-height: 720px; min-height: min(100svh, 900px); }
+	.bridge > .container { position: static; }
+	.bridge p.is-split .hl-w { color: inherit; }
 }
 
 /* ---------- plan ----------
@@ -354,6 +364,9 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 .case-body p { max-width: var(--measure); color: var(--color-on-surface-muted); font: var(--body-l); }
 .case-body .proof { color: var(--color-accent); margin-top: var(--space-md); }
 .case-cover { width: 100%; aspect-ratio: 5 / 3; object-fit: cover; background: var(--color-surface-raised); }
+/* the same facts the case page opens with, compacted to the accordion's text column */
+.case-body .case-facts { margin-top: var(--space-lg); gap: var(--space-md); grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+.case-body .case-facts dd { font: var(--body-s); }
 .case-body .more { display: inline-block; margin-top: var(--space-md); font: var(--nav); text-decoration: none; border-bottom: 1px solid var(--color-border); padding-bottom: 2px; }
 .case-body .more:hover { color: var(--color-accent); border-color: var(--color-accent); }
 
@@ -384,6 +397,20 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 }
 .case-facts dt { font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-muted); }
 .case-facts dd { margin: var(--space-2xs) 0 0; font: var(--body); }
+/* the facts sit in the head, under the decision line: a buyer reads the limits before the story */
+.case-head .case-facts { margin-top: var(--space-xl); }
+/* when the proof or the KPIs open a section, the section's own padding is the space above */
+.case-proof:first-child, .case-kpis:first-child { margin-top: 0; }
+
+/* Three numbers and what each one measures, the last thing before the action.
+   Hairline boxes, no fill: the number is the only thing that should be loud.
+   The placeholder variant is dashed, like an image slot, and leaves with it. */
+.case-kpis { list-style: none; margin: var(--space-xl) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+.kpi { border: 1px solid var(--color-border); padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-xs); min-height: 160px; justify-content: space-between; }
+.kpi strong { font: var(--display-l); letter-spacing: var(--ls-display-l); }
+.kpi span { font: var(--body-s); color: var(--color-on-surface-muted); }
+.kpi--placeholder { border-style: dashed; background: var(--color-surface-raised); }
+.kpi--placeholder strong { color: var(--color-on-surface-subtle); }
 
 /* the strongest verifiable claim on a page, set at display size and alone */
 .case-proof {
@@ -399,6 +426,35 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 }
 .more-case span { font: var(--display-m); letter-spacing: var(--ls-display-m); }
 .more-case:hover span { color: var(--color-accent); }
+
+/* ---------- case chapters and media ----------
+   The body runs as chapters, each a label over a paragraph, and the media sit
+   between them at the rhythm MetaLab uses: text never runs long before a
+   screen interrupts it. Four kinds of media and no others: the cover, one
+   optional video, one gallery, and pairs of screens side by side. */
+.case-chapter .label + .prose { margin-top: var(--space-lg); }
+.case-chapter .section-media { margin-top: var(--space-xl); }
+.section-media img, .section-media video { width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: cover; background: var(--color-surface-raised); }
+
+/* Two screens side by side, the block used most on the reference. Square
+   corners, same height, one gap. Stacks below 720px. */
+.case-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); }
+.case-pair img { width: 100%; display: block; aspect-ratio: 4 / 3; object-fit: cover; background: var(--color-surface-raised); }
+
+/* The gallery is a scroll-snap strip, no script. Each screen takes most of
+   the width so the next one peeks in from the right, which is the whole
+   invitation to scroll. The region is focusable so it can be scrolled from
+   the keyboard, and the scrollbar is hidden because the peek already says
+   there is more. */
+.case-gallery {
+	display: flex; gap: var(--space-md);
+	overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 0;
+	scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.case-gallery::-webkit-scrollbar { display: none; }
+.case-gallery > * { flex: 0 0 min(720px, 82%); scroll-snap-align: start; }
+.case-gallery img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; background: var(--color-surface-raised); }
+.case-gallery:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
 
 /* ---------- affiliation ----------
    It sits on the section label's own line, pushed to the far right: it names
@@ -425,6 +481,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 }
 .img-slot span { font: var(--body-s); color: var(--color-on-surface-muted); max-width: 24em; }
 .img-slot span::before { content: "Image"; display: block; font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-subtle); margin-bottom: var(--space-2xs); }
+.img-slot--video span::before { content: "Video"; }
 .row .img-slot { margin-top: var(--space-md); }
 
 /* ---------- footer ----------
@@ -466,6 +523,8 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 	}
 	.container { padding-left: var(--space-md); padding-right: var(--space-md); }
 	.split, .row, .case-body { grid-template-columns: 1fr; gap: var(--space-sm); }
+	.case-pair { grid-template-columns: 1fr; }
+	.case-kpis { grid-template-columns: 1fr; }
 	.split { gap: var(--space-lg); }
 	/* no room for both on one line: the affiliation drops under the label and
 	   stacks, so the name keeps one line instead of wrapping around the logo */
