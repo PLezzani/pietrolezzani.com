@@ -174,7 +174,12 @@ img, video { max-width: 100%; height: auto; display: block; }
 .split { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-xl); align-items: start; }
 /* Content that opens under the hairline, at the same distance from the label
    as the first row of a list. Every section starts on the same line. */
-.ruled { margin-top: var(--space-lg); border-top: 1px solid var(--color-border); padding-top: var(--space-lg); }
+/* A section's label is not separated from what it introduces. It is already
+   set apart by size, colour and its accent square, and a rule under it reads
+   as a lid closing the label off from the sentence it belongs to. Space does
+   the work instead. The dividers between one row and the next stay: those do
+   separate two things. */
+.ruled { margin-top: var(--space-xl); }
 .stack > * + * { margin-top: var(--space-md); }
 
 /* ---------- header ----------
@@ -277,6 +282,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 /* ---------- editorial rows (offers, cases, situations) ---------- */
 .rows { margin-top: var(--space-lg); }
 .row { border-top: 1px solid var(--color-border); padding: var(--space-lg) 0; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-xl); }
+.rows .row:first-child { border-top: none; padding-top: var(--space-md); }
 .row:last-child { border-bottom: 1px solid var(--color-border); }
 .row h3 { font: var(--display-m); letter-spacing: var(--ls-display-m); }
 .row h3 a { text-decoration: none; }
