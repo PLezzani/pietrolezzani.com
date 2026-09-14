@@ -305,7 +305,18 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 .disclosure:hover .disclosure-sign { border-color: var(--color-on-surface); }
 @media (prefers-reduced-motion: reduce) { .disclosure-sign::after { transition: none; } }
 /* duration and pricing basis of a format, on their own line above the description */
-.row .terms { color: var(--color-on-surface); font: var(--body-strong); margin-bottom: var(--space-xs); }
+/* The length of an engagement belongs to its name, not to a line under it: a
+   buyer reads the two titles to compare them, and the weeks are half of what
+   is being compared. A hairline pill, label type, muted, never filled, so it
+   reads as a piece of the title rather than as a second button on the page. */
+.tag {
+	display: inline-flex; align-items: center; white-space: nowrap;
+	vertical-align: middle; margin-left: var(--space-xs);
+	padding: 2px var(--space-sm); border: 1px solid var(--color-border);
+	border-radius: var(--rounded-pill);
+	font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase;
+	color: var(--color-on-surface-muted);
+}
 .row .proof { color: var(--color-accent); font: var(--body-l); margin-top: var(--space-md); }
 .row .more { display: inline-block; margin-top: var(--space-md); font: var(--nav); text-decoration: none; border-bottom: 1px solid var(--color-border); padding-bottom: 2px; }
 .row .more:hover { color: var(--color-accent); border-color: var(--color-accent); }
