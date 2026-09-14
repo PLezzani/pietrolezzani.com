@@ -743,23 +743,54 @@ html.from-home::after {
 .img-slot span::before { content: "Image"; display: block; font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-subtle); margin-bottom: var(--space-2xs); }
 .row .img-slot { margin-top: var(--space-md); }
 
-/* ---------- footer ----------
-   The footer inverts the ground and closes the page. On a light ground weight
-   500 reads as emphasis, so every line here steps back to 400. */
-.site-footer {
+/* ---------- inverted section ----------
+   One section on the page takes the cream ground, and it is the one with the
+   only action on the site. A change of ground is the loudest device available
+   here, louder than any size of type, so it is spent where a reader has to
+   decide whether to book the call. The page then has two cream blocks and no
+   more: the sentence it wants read, and the thing it wants done. Everything
+   inside flips to the inverse tokens, borders included, and the button turns
+   over: black fill on cream instead of cream on black, with the same accent
+   arriving from where the cursor crossed the edge. The hairline that separates
+   one section from the next is dropped here, since the ground already does it. */
+.section--invert {
 	background: var(--color-surface-inverse);
 	color: var(--color-on-surface-inverse);
+	border-top: none;
+}
+.section--invert .muted { color: var(--color-on-surface-inverse-muted); }
+.section--invert .plan li { border-color: var(--color-border-inverse); }
+.section--invert .plan li:not(:last-child)::after { background: var(--color-border-inverse); }
+.section--invert .btn-primary {
+	background-color: var(--color-surface);
+	color: var(--color-on-surface);
+}
+/* the label is already the colour it has to become, so nothing flips under the
+   blue: it only has to stay put */
+.section--invert .btn-primary:hover, .section--invert .btn-primary:focus-visible { color: var(--color-on-surface); }
+
+/* ---------- footer ----------
+   The footer keeps the page's own ground. It used to invert it, which made
+   sense while it was the last light block on the page; now that the call to
+   action is cream, a cream footer under it would read as one block with the
+   action, and the quietest part of the page would be as loud as the loudest.
+   So it closes on black, set apart by a hairline and by the air above it, and
+   every line steps back to 400: what is here is reference, not argument. */
+.site-footer {
+	background: var(--color-surface);
+	color: var(--color-on-surface);
+	border-top: 1px solid var(--color-border);
 	padding: var(--space-2xl) 0 var(--space-lg);
 }
 .footer-main { display: flex; flex-wrap: wrap; gap: var(--space-lg) var(--space-xl); justify-content: space-between; align-items: start; }
 .footer-brand { font: var(--display-m); letter-spacing: var(--ls-display-m); }
-.footer-role { margin-top: var(--space-2xs); font: var(--body-l); font-weight: 400; color: var(--color-on-surface-inverse-muted); }
+.footer-role { margin-top: var(--space-2xs); font: var(--body-l); font-weight: 400; color: var(--color-on-surface-muted); }
 .footer-contact { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); }
-.footer-contact a { font: var(--body-l); font-weight: 400; text-decoration: none; border-bottom: 1px solid var(--color-border-inverse); padding-bottom: 2px; }
+.footer-contact a { font: var(--body-l); font-weight: 400; text-decoration: none; border-bottom: 1px solid var(--color-border); padding-bottom: 2px; }
 .footer-contact a:hover { color: var(--color-accent); border-color: var(--color-accent); }
-.footer-legal { margin-top: var(--space-2xl); padding-top: var(--space-md); border-top: 1px solid var(--color-border-inverse); display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-lg); justify-content: space-between; }
-.footer-legal p, .footer-legal a { font: var(--body-s); font-weight: 400; color: var(--color-on-surface-inverse-muted); text-decoration: none; }
-.footer-legal a:hover { color: var(--color-on-surface-inverse); }
+.footer-legal { margin-top: var(--space-2xl); padding-top: var(--space-md); border-top: 1px solid var(--color-border); display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-lg); justify-content: space-between; }
+.footer-legal p, .footer-legal a { font: var(--body-s); font-weight: 400; color: var(--color-on-surface-muted); text-decoration: none; }
+.footer-legal a:hover { color: var(--color-on-surface); }
 
 /* ---------- responsive ---------- */
 @media (max-width: 1024px) {
