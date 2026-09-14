@@ -754,7 +754,12 @@ html.from-home::after {
    automatic minimum is its own width, and width 100% would make that the whole
    column, so one screen would fill the strip and the peek would be gone. */
 .case-gallery > * { flex: 0 0 min(720px, 82%); min-width: 0; scroll-snap-align: start; }
-.case-gallery img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; background: var(--color-surface-raised); }
+/* Where the pieces were drawn square, the strip takes them square and its
+   cells narrow: a 16 by 10 cut would take a third of each away, and a square
+   720px wide would be a screen tall. The peek from the right is kept. */
+.case-gallery--square > * { flex-basis: min(520px, 74%); }
+.case-gallery img, .case-gallery video { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; background: var(--color-surface-raised); }
+.case-gallery--square img, .case-gallery--square video, .case-gallery--square .img-slot { aspect-ratio: 1 / 1; }
 .case-gallery:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
 
 /* ---------- affiliation band ----------
