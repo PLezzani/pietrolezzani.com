@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-US" style="--cover: url('/assets/img/cover-optikpi.jpg')">
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,8 +27,7 @@
 	<link rel="apple-touch-icon" href="/wp-content/uploads/2024/09/Favicon_PietroLezzani-300x300.png" />
 
 	<link rel="preload" href="/assets/fonts/darker-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
-	<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
-	<script>document.documentElement.classList.add("js");</script>
+	<script>(function(){var d=document.documentElement;d.classList.add("js");try{var r=document.referrer?new URL(document.referrer):null,n=performance.getEntriesByType("navigation")[0];if(r&&r.origin===location.origin&&r.pathname==="/"&&(!n||n.type==="navigate")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("from-home")}catch(e){}})();</script>
 	<link rel="stylesheet" href="/assets/css/site.css" />
 
 	<!-- Cloudflare Web Analytics: inserire lo snippet con il token quando disponibile. -->
@@ -41,7 +40,7 @@
 			<a class="brand" href="/">Pietro Lezzani</a>
 			<nav class="site-nav" aria-label="Main">
 				<a class="nav-link" href="/#work">Work</a>
-				<!-- About: torna in navigazione quando la pagina è riscritta (AUDIT-03). -->
+				<a class="nav-link" href="/about/">About</a>
 				<a class="btn btn-primary btn-small" href="https://cal.com/pietro-lezzani-axnl82">Book a call</a>
 			</nav>
 		</div>
@@ -51,8 +50,8 @@
 
 		<section class="case-head">
 			<div class="container">
-				<h1>OptiKPI</h1>
-				<p class="decision">Flattening the learning curve with agentic AI</p>
+				<p class="case-client">OptiKPI</p>
+				<h1>Flattening the learning curve with agentic AI</h1>
 				<dl class="case-facts">
 					<div>
 						<dt>Stage</dt>
@@ -73,7 +72,7 @@
 		<!-- 1. hero -->
 		<figure class="case-figure">
 			<div class="container">
-				<img src="/assets/img/cover-optikpi.jpg" alt="The OptiKPI 2.0 workflow builder on a laptop screen." width="1200" height="720" />
+				<img src="/assets/img/cover-optikpi.jpg" alt="The OptiKPI 2.0 dashboard open in a browser on a laptop standing in a server rack." width="1920" height="1152" />
 			</div>
 		</figure>
 
@@ -84,10 +83,17 @@
 					<p>OptiKPI is a customer intelligence platform for gaming operators. It started as an MVP and grew for years in the hands of good engineers who had never worked on user experience. Let me say this the way it deserves: it was not a bad product. It had worked for years, it had real customers, and it had reached the limit of the structure it was built on. Almost every product that starts this way gets to that point, usually at the worst moment, which is when the company begins selling to customers larger than the ones the product was designed for.</p>
 					<p>From there every new feature cost more than the last. Each one landed on a structure never meant to hold it, and the product kept talking to the first kind of customer while the company was chasing another.</p>
 				</div>
-				<!-- 3. video, optional: only if a loop of the product exists. Remove the block otherwise. -->
-				<div class="section-media">
-					<div class="img-slot img-slot--video" style="--ratio: 16 / 9"><span>Optional. A short loop of 2.0 in use: one path through the new information architecture, from the home to a workflow.</span></div>
-				</div>
+			</div>
+			<!-- 3. video: the product, cut to the eighteen seconds that show the
+			     structure. Full width, outside the container like the hero.
+			     Muted loop, fetched only when it comes into view. -->
+			<div class="section-media section-media--grow section-media--full">
+				<video class="case-video" data-in-view
+					src="/assets/videos/optikpi-product.mp4"
+					poster="/assets/img/optikpi-video-poster.jpg"
+					width="1440" height="810"
+					muted loop playsinline preload="none"
+					aria-label="OptiKPI 2.0: the workflow builder, the performance of a welcome message, and the dashboard."></video>
 			</div>
 		</section>
 
@@ -144,11 +150,9 @@
 				<div class="more-cases">
 					<a class="more-case" href="/energy-co/">
 						<span>Edison, Risolve</span>
-						<img class="case-thumb" src="/assets/img/logo-edison.png" alt="" width="360" height="84" loading="lazy" decoding="async" />
 					</a>
 					<a class="more-case" href="/talentware/">
 						<span>Talentware</span>
-						<img class="case-thumb" src="/assets/img/logo-talentware.png" alt="" width="360" height="84" loading="lazy" decoding="async" />
 					</a>
 				</div>
 			</div>
@@ -177,5 +181,7 @@
 	<script src="/assets/js/nav-scroll.js" defer></script>
 	<script src="/assets/js/reveal.js" defer></script>
 	<script src="/assets/js/button-fill.js" defer></script>
+	<script src="/assets/js/video-in-view.js" defer></script>
+	<script src="/assets/js/case-arrival.js" defer></script>
 </body>
 </html>

@@ -23,18 +23,23 @@
 	--color-border-inverse: #CBCAC5;
 
 	--font-display: "Darker Grotesque", Georgia, serif;
-	--font-text: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	--font-text: "Darker Grotesque", Georgia, serif;
 
 	--display-xl: 500 88px/0.95 var(--font-display);
 	--display-l: 500 64px/1 var(--font-display);
 	--display-m: 500 44px/1.05 var(--font-display);
 	--display-s: 500 32px/1.1 var(--font-display);
-	--body-l: 500 18px/1.55 var(--font-text);
-	--body: 500 16px/1.6 var(--font-text);
-	--body-s: 500 14px/1.5 var(--font-text);
-	--body-strong: 600 18px/1.45 var(--font-text);
-	--label: 500 13px/1.2 var(--font-text);
-	--nav: 500 16px/1.2 var(--font-text);
+	/* One family for the whole site. Darker Grotesque carries a much lower
+	   x-height than a text face, so every size here is raised by roughly a
+	   third against the equivalent in a neutral sans, and the leading is
+	   tightened to match: at the old numbers the same words read a size
+	   smaller than they are. */
+	--body-l: 500 24px/1.45 var(--font-text);
+	--body: 500 21px/1.5 var(--font-text);
+	--body-s: 500 18px/1.45 var(--font-text);
+	--body-strong: 600 24px/1.4 var(--font-text);
+	--label: 600 15px/1.2 var(--font-text);
+	--nav: 500 20px/1.2 var(--font-text);
 
 	--ls-display-xl: -0.02em;
 	--ls-display-l: -0.02em;
@@ -64,7 +69,7 @@
 	   budget in the first third, so a longer one reads as a pause, not as slower. */
 	--reveal-ease: cubic-bezier(0.33, 1, 0.68, 1);
 
-	--container: 1280px;
+	--container: 1920px;
 	--measure: 34em;
 }
 
@@ -176,11 +181,14 @@ img { max-width: 100%; height: auto; display: block; }
 @media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
 /* an anchored section must clear the header instead of hiding behind it */
 section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
-.site-header .container { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
-.brand { font: var(--nav); text-decoration: none; }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); height: var(--header-h); }
+.brand { font: var(--nav); text-decoration: none; white-space: nowrap; }
 .site-nav { display: flex; align-items: center; gap: var(--space-lg); }
-.nav-link { font: var(--nav); text-decoration: none; padding: var(--space-2xs) 0; }
+.site-nav .btn { white-space: nowrap; }
+.nav-link { font: var(--nav); text-decoration: none; padding: var(--space-2xs) 0; white-space: nowrap; }
 .nav-link:hover { color: var(--color-accent); }
+/* the page you are on: underlined, not coloured, so accent keeps meaning hover */
+.nav-link[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
 
 /* ---------- buttons ----------
    The accent grows from the point where the cursor crossed the edge. The radius
@@ -264,6 +272,28 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 .row h3 a { text-decoration: none; }
 .row h3 a:hover { color: var(--color-accent); }
 .row p { max-width: var(--measure); color: var(--color-on-surface-muted); font: var(--body-l); }
+
+/* ---------- disclosure ----------
+   Built by assets/js/disclosure.js on phones only: the title of a situation
+   becomes the control that opens its sentence. It keeps the title's type and
+   adds the one round sign the site uses for opening things, a plus that loses
+   its vertical bar once open. Nothing rotates or slides. */
+.disclosure {
+	display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
+	width: 100%; padding: 0; border: 0; background: none;
+	font: inherit; letter-spacing: inherit; color: inherit; text-align: left; cursor: pointer;
+}
+.disclosure:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+.disclosure-sign { position: relative; flex: none; width: 40px; height: 40px; border: 1px solid var(--color-border); border-radius: var(--rounded-pill); }
+.disclosure-sign::before, .disclosure-sign::after {
+	content: ""; position: absolute; left: 50%; top: 50%; background: var(--color-on-surface);
+	transform: translate(-50%, -50%); transition: opacity 160ms ease;
+}
+.disclosure-sign::before { width: 14px; height: 1px; }
+.disclosure-sign::after { width: 1px; height: 14px; }
+.disclosure[aria-expanded="true"] .disclosure-sign::after { opacity: 0; }
+.disclosure:hover .disclosure-sign { border-color: var(--color-on-surface); }
+@media (prefers-reduced-motion: reduce) { .disclosure-sign::after { transition: none; } }
 /* duration and pricing basis of a format, on their own line above the description */
 .row .terms { color: var(--color-on-surface); font: var(--body-strong); margin-bottom: var(--space-xs); }
 .row .proof { color: var(--color-accent); font: var(--body-l); margin-top: var(--space-md); }
@@ -304,8 +334,12 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 }
 
 /* ---------- plan ----------
-   Three squares in a row, joined by a hairline. The line is the whole point:
-   it says the three are one sequence, not three things on offer. */
+   Three steps in a row, joined by a hairline. The line is the whole point:
+   it says the three are one sequence, not three things on offer. The boxes
+   are as tall as the longest of the three and no taller: a square was a shape
+   imposed on the text rather than taken from it, and it left the short steps
+   mostly empty. Grid stretches the row on its own, so the height is simply
+   whatever the fullest step needs. */
 .plan {
 	counter-reset: step;
 	margin-top: var(--space-xl);
@@ -314,10 +348,9 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 }
 .plan li {
 	counter-increment: step; position: relative;
-	aspect-ratio: 1 / 1;
 	border: 1px solid var(--color-border);
 	padding: clamp(var(--space-md), 3vw, var(--space-lg));
-	display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-md);
+	display: flex; flex-direction: column; gap: var(--space-md);
 }
 .plan li::before {
 	content: counter(step, decimal-leading-zero);
@@ -331,52 +364,209 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 .plan p { font: var(--body-l); }
 
 /* ---------- case accordion ---------- */
-.cases { margin-top: var(--space-lg); border-top: 1px solid var(--color-border); }
-.case { border-bottom: 1px solid var(--color-border); }
-.case summary {
-	list-style: none; cursor: pointer;
-	display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
-	padding: var(--space-md) 0;
+/* ---------- case cards ----------
+   Three cards side by side, one per decision. Each is the cover of the case
+   with the client's mark and the outcome over it; the facts wait underneath
+   and rise over the image on hover or focus, which is the whole interaction.
+   The card is not a card in the shadowed sense: a hairline, a picture, and a
+   panel that slides. Nothing floats. */
+.cases { margin-top: var(--space-lg); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+
+.case-card {
+	position: relative; overflow: hidden;
+	aspect-ratio: 479 / 560;
+	border: 1px solid var(--color-border);
+	background: var(--color-surface-raised);
+	transition: border-color 300ms var(--reveal-ease);
 }
-.case summary::-webkit-details-marker { display: none; }
-.case summary h3 { font: var(--display-m); letter-spacing: var(--ls-display-m); flex: 1 1 auto; }
-/* A closed row still shows its case, through the client's mark. No tile and no
-   fill: the marks are recoloured to on-surface and sit straight on the ground.
-   The three are balanced by area in the file, so one box serves all of them. */
-.case-thumb {
-	flex: none; width: 120px; height: 28px; object-fit: contain;
-	transition: width 200ms ease, opacity 140ms ease;
+.case-card:hover, .case-card:focus-within { border-color: var(--color-on-surface); }
+
+.case-card-image {
+	position: absolute; inset: 0; width: 100%; height: 100%;
+	object-fit: cover;
+	transition: transform 300ms var(--reveal-ease), opacity 300ms var(--reveal-ease);
 }
-.case[open] .case-thumb { width: 0; opacity: 0; }
-@media (prefers-reduced-motion: reduce) { .case-thumb { transition: none; } }
-.case summary:hover h3 { color: var(--color-accent); }
-.case summary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
-.toggle { position: relative; flex: none; width: 40px; height: 40px; border: 1px solid var(--color-border); border-radius: var(--rounded-pill); }
-.toggle::before, .toggle::after { content: ""; position: absolute; left: 50%; top: 50%; background: var(--color-on-surface); transition: transform 160ms ease, opacity 160ms ease; }
-.toggle::before { width: 14px; height: 1px; transform: translate(-50%, -50%); }
-.toggle::after { width: 1px; height: 14px; transform: translate(-50%, -50%); }
-.case[open] .toggle::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
-.case summary:hover .toggle { border-color: var(--color-on-surface); }
-.case-body { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-xl); padding: var(--space-2xs) 0 var(--space-lg); }
-.case[open] .case-body { animation: case-in 220ms ease; }
-@keyframes case-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .case[open] .case-body { animation: none; } }
-.case-body p { max-width: var(--measure); color: var(--color-on-surface-muted); font: var(--body-l); }
-.case-body .proof { color: var(--color-accent); margin-top: var(--space-md); }
-.case-cover { width: 100%; aspect-ratio: 5 / 3; object-fit: cover; background: var(--color-surface-raised); }
-/* the same facts the case page opens with, compacted to the accordion's text column */
-.case-body .case-facts { margin-top: var(--space-lg); gap: var(--space-md); grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
-.case-body .case-facts dd { font: var(--body-s); }
-.case-body .more { display: inline-block; margin-top: var(--space-md); font: var(--nav); text-decoration: none; border-bottom: 1px solid var(--color-border); padding-bottom: 2px; }
-.case-body .more:hover { color: var(--color-accent); border-color: var(--color-accent); }
+/* A flat veil, not a gradient: the mark and the title sit on a picture that was
+   not composed for text, and an even wash is the one thing that makes them
+   legible without inventing a light source. At 55% the lightest cover still
+   clears 4.5:1 behind the title; at 45% it measured 3.3:1, which passes for
+   large text but leaves nothing for a cover lighter than today's. */
+.case-card::before {
+	content: ""; position: absolute; inset: 0; z-index: 1;
+	background: rgba(0, 0, 0, 0.55);
+	transition: opacity 300ms var(--reveal-ease);
+}
+.case-card:hover .case-card-image, .case-card:focus-within .case-card-image { transform: scale(1.03); }
+
+/* Title and panel are one column, so the panel can never reach the title
+   however many lines it takes: it starts where the title ends and slides
+   within what is left. The title keeps its place and turns to ink as the
+   ground behind it becomes cream, which is what makes the two read as one
+   sheet rising. */
+.case-card-stack {
+	position: absolute; inset: 0; z-index: 3;
+	display: flex; flex-direction: column;
+	pointer-events: none;
+}
+/* The title is never positioned, on any screen: the link's ::after has to
+   find the card as its nearest positioned ancestor, or the whole-card target
+   shrinks to the title. */
+.case-card-title {
+	flex: none; padding: var(--space-md);
+	font: var(--display-s); letter-spacing: var(--ls-display-s);
+	transition: color 300ms var(--reveal-ease), background-color 300ms var(--reveal-ease);
+}
+.case-card:hover .case-card-title, .case-card:focus-within .case-card-title { background: var(--color-surface-inverse); }
+.case-card-title a { color: var(--color-on-surface); text-decoration: none; }
+.case-card:hover .case-card-title a, .case-card:focus-within .case-card-title a { color: var(--color-on-surface-inverse); }
+
+/* the link covers the card, so the whole surface is the target while the
+   accessible name stays the title alone */
+.case-card-link { pointer-events: auto; }
+.case-card-link::after { content: ""; position: absolute; inset: 0; z-index: 5; }
+.case-card-link:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+/* the mark is the only place the client is named, since the title states the
+   outcome instead. It is the name set in our own type rather than a borrowed
+   logo: three marks at three different weights and proportions never sit on a
+   picture as one line does. */
+.case-mark {
+	position: absolute; z-index: 2; left: var(--space-md); bottom: var(--space-md);
+	font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase;
+	color: var(--color-on-surface);
+}
+
+/* The panel waits just below the card and rises over the image. It carries the
+   sentence and the facts, so what it reveals is information, never the way in:
+   the link is on the title and works whether the panel has risen or not. */
+/* The panel is the room left under the title, and it clips: the sheet inside
+   travels its own full height, so at rest it is exactly out of sight however
+   many lines the title took, and the two can never overlap. */
+.case-card-panel { flex: 1 1 auto; overflow: hidden; display: flex; }
+.case-card-sheet {
+	flex: 1 1 auto; transform: translateY(100%);
+	background: var(--color-surface-inverse); color: var(--color-on-surface-inverse);
+	padding: var(--space-md);
+	display: flex; flex-direction: column; gap: var(--space-md);
+	transition: transform 300ms var(--reveal-ease);
+}
+.case-card:hover .case-card-sheet, .case-card:focus-within .case-card-sheet { transform: translateY(0); }
+.case-card-sheet p { font: 400 var(--body-s); color: var(--color-on-surface-inverse); }
+.case-card-sheet .case-facts {
+	margin-top: 0; padding-top: 0; border-top: 0;
+	grid-template-columns: 1fr; gap: var(--space-2xs);
+}
+.case-card-sheet .case-facts > div {
+	display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-md);
+	padding: var(--space-2xs) 0;
+	border-bottom: 1px solid var(--color-border-inverse);
+}
+.case-card-sheet .case-facts dt { font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-inverse-muted); }
+.case-card-sheet .case-facts dd { margin: 0; font: 400 var(--body-s); text-align: right; }
+
+@media (prefers-reduced-motion: reduce) {
+	.case-card, .case-card-image, .case-card-sheet { transition: none; }
+	.case-card:hover .case-card-image, .case-card:focus-within .case-card-image { transform: none; }
+}
+
+/* ---------- about ----------
+   The About page is built from the same parts as the rest of the site: the
+   head of a case, the rows of the home, the list of cases. Only two things
+   is its own: the portrait beside the head. The way of working is the
+   same split as the argument on the home, expanded. */
+/* The top of the About is one grid, so the portrait can hold its place
+   while the reader scrolls. Introduction and background sit on the left,
+   with the same spacing they had as two sections; the portrait sits on the
+   right, spanning both, cut upright at 2 by 3 with its top edge on the line
+   where the text starts. It is sticky: it stays put under the bar until the
+   last line of the background reaches its bottom edge, then leaves with the
+   page. A sticky element stops at the end of its container, which is why the
+   background has to share the portrait's grid rather than have a section of
+   its own, even though it is laid out exactly as one.
+   Mirrored at export, so the gaze turns up and left, to the title, and the
+   cut leaves the room in front of the face. */
+.about-top { padding-top: var(--space-3xl); }
+.about-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 2fr); column-gap: var(--space-xl); }
+.about-intro { grid-column: 1; grid-row: 1; }
+/* An invisible stand-in for the portrait, as tall as it, in the first row:
+   it gives that row the portrait's height, so the background starts below
+   the portrait's bottom edge with the space it had as a section of its own,
+   while the portrait itself spans both rows and can travel down them. */
+.about-grid::before { content: ""; grid-column: 2; grid-row: 1; aspect-ratio: 2 / 3; }
+.about-background { grid-column: 1; grid-row: 2; margin-top: calc(var(--space-xl) + var(--space-2xl)); }
+.about-portrait {
+	grid-column: 2; grid-row: 1 / 3; align-self: start;
+	margin: 0; position: sticky; top: calc(var(--header-h) + var(--space-md));
+}
+.about-portrait img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; object-position: 35% 50%; background: var(--color-surface-raised); }
+.about-background .prose { margin-top: var(--space-lg); }
+/* the last line is trimmed to its baseline, so the photograph's bottom edge meets the words, not the space under them */
+.about-background .prose p:last-child { text-box: trim-end alphabetic; }
+/* the case list on the About names the outcome large and the client small */
+.more-case .more-case-client { flex: none; font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-muted); }
+
+/* ---------- case transition ----------
+   Home to case, rebuilt from the reference in two halves that meet on one
+   full-screen picture. On the home (assets/js/case-transition.js) the card's
+   picture grows to fill the window in 1.5s while the words on the card fade in
+   0.3s; then the browser navigates. On the case page the same picture is
+   already there, full screen, and after 0.1s it moves down and in for 1.2s
+   until it sits exactly on the case's hero, where it hands over to the real
+   one (assets/js/case-arrival.js). This is the one arrival on the site that is longer
+   than the reveal, and it is the one the reader asked for with a click. */
+.case-transition {
+	position: fixed; z-index: 100; overflow: hidden;
+	background: var(--color-surface-raised);
+	pointer-events: none;
+}
+.case-transition img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.case-transition-veil { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); }
+/* The card stays above the growing copy and gives up everything but its
+   words: its own picture and veil go at once, since the copy under it is the
+   same picture in the same place, and its words fade the way the reference's do. */
+.case-card.is-leaving { z-index: 101; background: transparent; border-color: transparent; }
+.case-card.is-leaving::before, .case-card.is-leaving .case-card-image { opacity: 0; transition: none; }
+.case-card.is-leaving .case-card-title,
+.case-card.is-leaving .case-mark,
+.case-card.is-leaving .case-card-sheet { opacity: 0; transition: opacity 300ms var(--reveal-ease); }
+
+/* The second half, on the case page. The inline script in the head marks the
+   page only when it was reached from the home by a fresh click, so a reload,
+   a step back through history or a link between cases never plays it. This
+   cover holds the first paint at full screen; assets/js/case-arrival.js then
+   replaces it with a copy and moves that copy onto the hero. If the script
+   never runs, the cover leaves on its own after 2.5s, so the page can never
+   stay hidden behind a picture. */
+html.from-home::after {
+	content: ""; position: fixed; inset: 0; z-index: 100;
+	background: var(--color-surface-raised) var(--cover) center / cover no-repeat;
+	pointer-events: none;
+	animation: arrival-failsafe 300ms linear 2.5s forwards;
+}
+@keyframes arrival-failsafe { to { opacity: 0; visibility: hidden; } }
+/* the travelling copy lives in page coordinates, so it scrolls with the hero */
+.case-transition.is-arriving { position: absolute; }
+@media (prefers-reduced-motion: reduce) { html.from-home::after { display: none; } }
 
 /* ---------- case study ----------
    One structure for all three pages. The decision line under the name is the
    sentence that has to do the work: it sits at display-m and is never muted. */
 .case-head { padding-top: var(--space-3xl); padding-bottom: var(--space-xl); }
-.case-head h1 { font: var(--display-xl); letter-spacing: var(--ls-display-xl); }
-.case-head .decision { margin-top: var(--space-md); font: var(--display-m); letter-spacing: var(--ls-display-m); max-width: 18em; }
-.case-figure img { width: 100%; aspect-ratio: 5 / 3; object-fit: cover; background: var(--color-surface-raised); }
+/* The outcome is the page: it takes the display scale and the h1. The client
+   is named above it in label type, the same trattamento the mark gets on the
+   home card, because who it was for qualifies the claim rather than making it. */
+.case-client, .eyebrow { font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-muted); }
+.case-head h1, .about-intro h1 { margin-top: var(--space-md); font: var(--display-xl); letter-spacing: var(--ls-display-xl); max-width: 16em; }
+.about-intro .lede { margin-top: var(--space-lg); max-width: var(--measure); font: var(--body-l); }
+/* The cover runs edge to edge: the figure drops the browser's default margin
+   and the container gives up its width and its gutters here only. At 5 by 3
+   a full-width picture outgrows the window on a wide screen, so it is capped
+   at the window's height and cropped from the centre instead. */
+.case-figure { margin: 0; }
+.case-figure > .container { max-width: none; padding-left: 0; padding-right: 0; }
+.case-figure img {
+	display: block; width: 100%; aspect-ratio: 5 / 3; max-height: 100vh; max-height: 100svh;
+	object-fit: cover; background: var(--color-surface-raised);
+}
 
 .prose { max-width: var(--measure); }
 .prose p { font: var(--body-l); }
@@ -384,7 +574,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 
 /* the one place a claim stands alone, and only when the number is verifiable */
 .proof { color: var(--color-accent); font: var(--body-l); max-width: var(--measure); }
-.case-body .proof, .row .proof { margin-top: var(--space-md); }
+.row .proof { margin-top: var(--space-md); }
 .prose + .proof { margin-top: var(--space-xl); }
 
 /* The facts of the engagement as a row rather than a box: what it was, when,
@@ -439,6 +629,34 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 /* Two screens side by side, the block used most on the reference. Square
    corners, same height, one gap. Stacks below 720px. */
 .case-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); }
+
+/* The product video arrives by growing, the way it does on the reference:
+   it starts narrow and widens to the full column as the reader scrolls it
+   into place. The growth is tied to the scroll rather than to a clock, so
+   the reader sets its pace, and it is the third and last thing on this site
+   allowed to be: a video that simply appears at full width lands like a
+   slide, while one that opens says the page is still being read.
+   The frame keeps the final height from the start, so nothing below it
+   jumps while the video grows inside it. Where scroll-driven animation is
+   not supported, and wherever reduced motion is asked for, the video is
+   simply there at full width. */
+/* Full width: the media leaves the container the way the hero figure does and
+   spans the viewport, which is why it is a direct child of the section and not
+   of .container. The section carries no horizontal padding, so nothing has to
+   be undone here. */
+.section-media--full { width: 100%; }
+.section-media--grow { aspect-ratio: 16 / 9; display: grid; place-items: center; }
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		.section-media--grow video {
+			width: 62%;
+			animation: media-grow linear both;
+			animation-timeline: view();
+			animation-range: entry 15% cover 55%;
+		}
+		@keyframes media-grow { to { width: 100%; } }
+	}
+}
 .case-pair img { width: 100%; display: block; aspect-ratio: 4 / 3; object-fit: cover; background: var(--color-surface-raised); }
 
 /* The gallery is a scroll-snap strip, no script. Each screen takes most of
@@ -481,7 +699,6 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 }
 .img-slot span { font: var(--body-s); color: var(--color-on-surface-muted); max-width: 24em; }
 .img-slot span::before { content: "Image"; display: block; font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-subtle); margin-bottom: var(--space-2xs); }
-.img-slot--video span::before { content: "Video"; }
 .row .img-slot { margin-top: var(--space-md); }
 
 /* ---------- footer ----------
@@ -511,6 +728,32 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 	}
 }
 
+/* Three cards need room: under 1100px the card gets too short for the panel
+   to hold the sentence and the facts, so the row becomes two and the third
+   card takes the line below. */
+@media (max-width: 1100px) {
+	.cases { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Name, Work, About and the button need 382px on one line at the normal
+   scale, so it keeps that scale only from 450px up, with room to spare. Below
+   that the bar tightens:
+   the words step down to 18px, the gaps to 12, the button slims, and it
+   needs 311px. Phones up to 369px, the common 360px Android among them, take
+   one more step, since 311 would leave them a single pixel. The
+   side margins never move, so the name stays aligned with the page. */
+@media (max-width: 449px) {
+	.site-header .container { gap: var(--space-xs); }
+	.site-header .site-nav { gap: var(--space-xs); }
+	.site-header .brand, .site-header .nav-link, .site-header .btn-small { font-size: 18px; }
+	.site-header .btn-small { padding-left: var(--space-sm); padding-right: var(--space-sm); }
+}
+@media (max-width: 369px) {
+	.site-header .container, .site-header .site-nav { gap: var(--space-2xs); }
+	.site-header .brand, .site-header .nav-link, .site-header .btn-small { font-size: 16px; }
+	.site-header .btn-small { padding-left: var(--space-xs); padding-right: var(--space-xs); }
+}
+
 @media (max-width: 720px) {
 	:root {
 		--display-xl: 500 44px/1 var(--font-display);
@@ -522,8 +765,25 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 		--header-h: 64px;
 	}
 	.container { padding-left: var(--space-md); padding-right: var(--space-md); }
-	.split, .row, .case-body { grid-template-columns: 1fr; gap: var(--space-sm); }
+	.split, .row { grid-template-columns: 1fr; gap: var(--space-sm); }
 	.case-pair { grid-template-columns: 1fr; }
+	/* on a phone: one column, the portrait between the introduction and the
+	   background, and nothing sticks */
+	.about-top { padding-top: var(--space-xl); }
+	.about-grid { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-lg); }
+	.about-grid::before { display: none; }
+	.about-intro { grid-row: 1; }
+	.about-portrait { grid-column: 1; grid-row: 2; position: static; }
+	.about-background { grid-row: 3; margin-top: var(--space-2xl); }
+	/* On a phone the upright cut would be the tallest thing on the page. A file
+	   cut for the phone keeps the same framing at the top and loses the lectern
+	   at the bottom, at 4 by 5. */
+	.about-portrait img { aspect-ratio: 4 / 5; object-position: 50% 0; }
+	/* On a phone the head of a case used to fill the whole first screen, so the
+	   cover, and the picture arriving from the home card, landed below the fold.
+	   Less air above the title and the facts in two columns bring it back up. */
+	.case-head { padding-top: var(--space-xl); padding-bottom: var(--space-lg); }
+	.case-head .case-facts { grid-template-columns: 1fr 1fr; gap: var(--space-md); margin-top: var(--space-lg); }
 	.case-kpis { grid-template-columns: 1fr; }
 	.split { gap: var(--space-lg); }
 	/* no room for both on one line: the affiliation drops under the label and
@@ -531,13 +791,67 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 	.section-head { flex-direction: column; align-items: flex-start; gap: var(--space-md); }
 	.affiliation { flex-direction: column; align-items: flex-start; gap: var(--space-xs); }
 	.affiliation img { width: 120px; }
-	.case-thumb { width: 80px; height: 19px; }
+	/* No hover on a touch screen, so the sheet cannot wait to be asked for, and
+	   the card should not stop being a card either. It keeps its frame, its
+	   picture, its veil and the title over them, and the sheet simply sits
+	   below the picture instead of over it. Nothing is stacked here and nothing
+	   is clipped: the card takes its height from what it holds, so no text can
+	   be cut off however long the title or the facts run. */
+	/* Three cards stacked run about five phone screens, in the middle of the
+	   page and on the way to the one action. The row turns into a strip the
+	   reader swipes instead: each card takes 82% of the width so the next one
+	   shows at the right edge, which is the whole invitation to scroll, and
+	   snap makes the gesture land. Same mechanism as the case galleries, no
+	   script, and the strip takes focus so it can be scrolled from a keyboard.
+	   It bleeds into the container gutters so a card can sit flush left while
+	   the next still peeks. No dots: the section label already says there are
+	   three, and a second interactive element is one more than this page wants. */
+	.cases {
+		display: flex; gap: var(--space-md);
+		overflow-x: auto; scroll-snap-type: x mandatory;
+		scrollbar-width: none; -webkit-overflow-scrolling: touch;
+		margin-left: calc(var(--space-md) * -1); margin-right: calc(var(--space-md) * -1);
+		padding-left: var(--space-md); padding-right: var(--space-md);
+		scroll-padding-left: var(--space-md);
+	}
+	.cases::-webkit-scrollbar { display: none; }
+	.cases:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+	.case-card { flex: 0 0 82%; scroll-snap-align: start; }
+	/* a grid with two rows, the picture and the title sharing the first cell:
+	   that is how the title sits on the picture here without being positioned */
+	.case-card { aspect-ratio: auto; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; }
+	/* the picture goes back into the flow and keeps its own proportion */
+	.case-card-image { grid-area: 1 / 1; position: relative; inset: auto; height: auto; aspect-ratio: 4 / 3; }
+	/* the veil belongs to the picture, not to the sheet under it */
+	.case-card::before { inset: 0 0 auto 0; width: 100%; aspect-ratio: 4 / 3; }
+	.case-card:hover .case-card-image, .case-card:focus-within .case-card-image { transform: none; }
+	/* the stack stops being a layer, so the title and the sheet can be placed
+	   one over the picture and one after it */
+	.case-card-stack { display: contents; }
+	.case-mark { top: var(--space-md); bottom: auto; }
+	.case-card-title {
+		grid-area: 1 / 1; align-self: start; z-index: 4;
+		padding: calc(var(--space-md) * 2 + 1.2em) var(--space-md) 0;
+	}
+	/* a tap on a phone counts as hover and focus, and the ink title the
+	   pointer state asks for would land on the dark picture: here the title
+	   stays cream whatever the state */
+	.case-card:hover .case-card-title, .case-card:focus-within .case-card-title { background: none; }
+	.case-card:hover .case-card-title a, .case-card:focus-within .case-card-title a { color: var(--color-on-surface); }
+	/* the sheet fills everything under the picture, so the strip shows three
+	   cards of one colour to the bottom edge. The sentence stays at the top,
+	   where it is read first, and the facts sit on the bottom edge, so across
+	   the strip both line up: a card with less to say opens the gap between
+	   the two, never above the sentence or below the facts */
+	.case-card-panel { grid-area: 2 / 1; display: flex; flex-direction: column; overflow: visible; }
+	.case-card-sheet { flex: 1 1 auto; transform: none; }
+	.case-card-sheet .case-facts { margin-top: auto; }
 	/* stacked: the joining hairline turns vertical */
 	.plan { grid-template-columns: 1fr; gap: var(--space-md); }
-	.plan li { aspect-ratio: auto; }
 	.plan li:not(:last-child)::after { top: 100%; left: var(--space-md); width: 1px; height: var(--space-md); }
+	/* Work stays in the bar on a phone: it is the way to the cases, and the
+	   bar has room for it down to the narrowest screens */
 	.site-nav { gap: var(--space-md); }
-	.site-nav .nav-link { display: none; }
 	.btn { display: block; }
 	.btn-small { display: inline-block; }
 	.site-footer { padding-top: var(--space-xl); }

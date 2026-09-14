@@ -27,7 +27,6 @@
 	<link rel="apple-touch-icon" href="/wp-content/uploads/2024/09/Favicon_PietroLezzani-300x300.png" />
 
 	<link rel="preload" href="/assets/fonts/darker-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
-	<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
 	<script>document.documentElement.classList.add("js");</script>
 	<link rel="stylesheet" href="/assets/css/site.css" />
 
@@ -41,7 +40,7 @@
 			<a class="brand" href="/">Pietro Lezzani</a>
 			<nav class="site-nav" aria-label="Main">
 				<a class="nav-link" href="#work">Work</a>
-				<!-- About: torna in navigazione quando la pagina è riscritta (AUDIT-03). -->
+				<a class="nav-link" href="/about/">About</a>
 				<a class="btn btn-primary btn-small" href="https://cal.com/pietro-lezzani-axnl82">Book a call</a>
 			</nav>
 		</div>
@@ -68,17 +67,17 @@
 			<div class="container">
 				<h2 class="label">3 situations I get called into</h2>
 				<div class="rows">
-					<article class="row">
+					<article class="row" data-disclosure>
 						<h3>Your roadmap belongs to your customers.</h3>
-						<p>The biggest account asked, so it got built. Then the next one asked. The quarter closes with a dozen releases and no way to say which of them moved retention, and you are the one who has to explain that to the board.</p>
+						<p id="situation-roadmap">The biggest account asked, so it got built. Then the next one asked. The quarter closes with a dozen releases and no way to say which of them moved retention, and you are the one who has to explain that to the board.</p>
 					</article>
-					<article class="row">
+					<article class="row" data-disclosure>
 						<h3>You moved upmarket and the product stayed behind.</h3>
-						<p>The product was built for small customers and now sells to large ones. Onboarding takes weeks, every feature lands on a structure that was never meant to hold it, and sales has started apologising in demos.</p>
+						<p id="situation-upmarket">The product was built for small customers and now sells to large ones. Onboarding takes weeks, every feature lands on a structure that was never meant to hold it, and sales has started apologising in demos.</p>
 					</article>
-					<article class="row">
+					<article class="row" data-disclosure>
 						<h3>The strategy is approved and the product does not show it.</h3>
-						<p>The board signed off in January. By June the product looks the same, because the internal team is full and the agency building it executes the brief instead of questioning it.</p>
+						<p id="situation-strategy">The board signed off in January. By June the product looks the same, because the internal team is full and the agency building it executes the brief instead of questioning it.</p>
 					</article>
 				</div>
 			</div>
@@ -121,98 +120,91 @@
 		<section class="section" id="work">
 			<div class="container">
 				<h2 class="label">3 decisions and what came of them</h2>
-				<div class="cases">
-					<details class="case" name="work" open>
-						<summary>
-							<h3>Offering solutions as an ecosystem</h3>
-							<img class="case-thumb" src="/assets/img/logo-edison.png" alt="Edison, Risolve" width="360" height="84" loading="lazy" decoding="async" />
-							<span class="toggle" aria-hidden="true"></span>
-						</summary>
-						<div class="case-body">
-							<div>
-								<p>Edison was selling home services next to the energy bill and leaving the customer to work out what one had to do with the other. We put the energy supply at the centre and turned the services into extensions around it. The interface came last, which is why it worked.</p>
+				<div class="cases" tabindex="0" role="region" aria-label="Three decisions">
+				<article class="case-card">
+					<img class="case-card-image" src="/assets/img/cover-edison-risolve.jpg" alt="Screens of the Risolve service centre, mobile and desktop, with the extensions around it." width="1920" height="1152" loading="lazy" decoding="async" />
+					<p class="case-mark">Edison, Risolve</p>
+					<div class="case-card-stack">
+						<h3 class="case-card-title"><a class="case-card-link" href="/energy-co/">Offering solutions as an ecosystem</a></h3>
+						<div class="case-card-panel">
+							<div class="case-card-sheet">
+								<p>Home services sold next to the energy bill. We put the supply at the centre and turned the services into extensions around it.</p>
 								<dl class="case-facts">
-									<div>
-										<dt>Stage</dt>
-										<dd>Enterprise</dd>
-									</div>
-									<div>
-										<dt>Project</dt>
-										<dd>Product design</dd>
-									</div>
-									<div>
-										<dt>Year</dt>
-										<dd>2024</dd>
-									</div>
-									<div>
-										<dt>Mentions</dt>
-										<dd>ADI Design Index 2025</dd>
-									</div>
+								<div>
+									<dt>Stage</dt>
+									<dd>Enterprise</dd>
+								</div>
+								<div>
+									<dt>Project</dt>
+									<dd>Product design</dd>
+								</div>
+								<div>
+									<dt>Year</dt>
+									<dd>2024</dd>
+								</div>
+								<div>
+									<dt>Mentions</dt>
+									<dd>ADI Design Index 2025</dd>
+								</div>
 								</dl>
-								<a class="more" href="/energy-co/">Read the case</a>
 							</div>
-							<img class="case-cover" src="/assets/img/cover-edison-risolve.jpg" alt="Screens of the Risolve service centre, mobile and desktop, with the extensions around it." width="1200" height="720" loading="lazy" decoding="async" />
 						</div>
-					</details>
-					<details class="case" name="work">
-						<summary>
-							<h3>Turning customer feedback into a product strategy</h3>
-							<img class="case-thumb" src="/assets/img/logo-talentware.png" alt="Talentware" width="360" height="84" loading="lazy" decoding="async" />
-							<span class="toggle" aria-hidden="true"></span>
-						</summary>
-						<div class="case-body">
-							<div>
-								<p>Talentware built whatever the last customer asked for, so nothing was ever chosen and nothing could be tested. We put in the missing piece: who decides, on what criterion, and a product strategy the roadmap could hold on to. Sales multiplied the customer base in the meantime, and the product carried it without being rewritten.</p>
-								<!-- Cifre in attesa della finestra temporale dai founder (piano, sezione 8, punto 2). Quando arriva:
-								<p class="proof">From roughly 10 to 45 customers during the engagement.</p> -->
+					</div>
+				</article>
+				<article class="case-card">
+					<img class="case-card-image" src="/assets/img/cover-talentware.jpg" alt="The Talentware career plan on a laptop next to the skills evaluation on a phone." width="1920" height="1152" loading="lazy" decoding="async" />
+					<p class="case-mark">Talentware</p>
+					<div class="case-card-stack">
+						<h3 class="case-card-title"><a class="case-card-link" href="/talentware/">Turning customer feedback into a product strategy</a></h3>
+						<div class="case-card-panel">
+							<div class="case-card-sheet">
+								<p>The roadmap was written by whatever was asked last. We put in the missing piece: who decides, and on what criterion.</p>
+							<!-- Cifre in attesa della finestra temporale dai founder (piano, sezione 8, punto 2).
+							     Quando arriva, la riga entra come quarto fatto: Customers, From roughly 10 to 45. -->
 								<dl class="case-facts">
-									<div>
-										<dt>Stage</dt>
-										<dd>Scale-up</dd>
-									</div>
-									<div>
-										<dt>Project</dt>
-										<dd>Product strategy, Design governance, Design system</dd>
-									</div>
-									<div>
-										<dt>Year</dt>
-										<dd>2024 to 2026</dd>
-									</div>
+								<div>
+									<dt>Stage</dt>
+									<dd>Scale-up</dd>
+								</div>
+								<div>
+									<dt>Project</dt>
+									<dd>Product strategy, Design governance, Design system</dd>
+								</div>
+								<div>
+									<dt>Year</dt>
+									<dd>2024 to 2026</dd>
+								</div>
 								</dl>
-								<a class="more" href="/talentware/">Read the case</a>
 							</div>
-							<img class="case-cover" src="/assets/img/cover-talentware.jpg" alt="The Talentware career plan on desktop next to the skills evaluation on mobile." width="1200" height="720" loading="lazy" decoding="async" />
 						</div>
-					</details>
-					<details class="case" name="work">
-						<summary>
-							<h3>Flattening the learning curve with agentic AI</h3>
-							<img class="case-thumb" src="/assets/img/logo-optikpi.png" alt="OptiKPI" width="360" height="84" loading="lazy" decoding="async" />
-							<span class="toggle" aria-hidden="true"></span>
-						</summary>
-						<div class="case-body">
-							<div>
-								<p>OptiKPI's MVP had done years of honest work and reached the end of what its structure allowed, right as the company started selling to bigger operators. With the founder we chose to stop and rebuild rather than patch. Version 2.0 starts from the information architecture, and the next features go in without breaking the ones before.</p>
-								<!-- Risultato: in attesa di un dato verificabile (piano, sezione 8, punto 3). Senza, il caso esce senza numero. -->
+					</div>
+				</article>
+				<article class="case-card">
+					<img class="case-card-image" src="/assets/img/cover-optikpi.jpg" alt="The OptiKPI 2.0 dashboard open in a browser on a laptop standing in a server rack." width="1920" height="1152" loading="lazy" decoding="async" />
+					<p class="case-mark">OptiKPI</p>
+					<div class="case-card-stack">
+						<h3 class="case-card-title"><a class="case-card-link" href="/optikpi/">Flattening the learning curve with agentic AI</a></h3>
+						<div class="case-card-panel">
+							<div class="case-card-sheet">
+								<p>The MVP had reached the end of what its structure allowed. With the founder we chose to rebuild rather than patch.</p>
 								<dl class="case-facts">
-									<div>
-										<dt>Stage</dt>
-										<dd>Scale-up</dd>
-									</div>
-									<div>
-										<dt>Project</dt>
-										<dd>Product strategy, Product design</dd>
-									</div>
-									<div>
-										<dt>Year</dt>
-										<dd>2024 to 2026</dd>
-									</div>
+								<div>
+									<dt>Stage</dt>
+									<dd>Scale-up</dd>
+								</div>
+								<div>
+									<dt>Project</dt>
+									<dd>Product strategy, Product design</dd>
+								</div>
+								<div>
+									<dt>Year</dt>
+									<dd>2024 to 2026</dd>
+								</div>
 								</dl>
-								<a class="more" href="/optikpi/">Read the case</a>
 							</div>
-							<img class="case-cover" src="/assets/img/cover-optikpi.jpg" alt="The OptiKPI 2.0 workflow builder on a laptop screen." width="1200" height="720" loading="lazy" decoding="async" />
 						</div>
-					</details>
+					</div>
+				</article>
 				</div>
 			</div>
 		</section>
@@ -243,10 +235,7 @@
 		<section class="section" id="book">
 			<div class="container">
 				<h2 class="display-l">Start with a conversation, not a brief</h2>
-				<div class="stack body-l measure" style="margin-top: var(--space-lg)">
-					<p>Thirty minutes, three questions: the deadline your team cannot carry, who decides and on what budget, what happens if nothing changes.</p>
-					<p>If there is no real deadline I will tell you on the call, and you will have spent half an hour. If there is, this is what happens next.</p>
-				</div>
+				<p class="body-l measure" style="margin-top: var(--space-lg)">Thirty minutes, three questions: the deadline your team cannot carry, who decides and on what budget, what happens if nothing changes.</p>
 				<ol class="plan">
 					<li><p>A 30 minute call, three questions.</p></li>
 					<li><p>A one page proposal within 48 hours: scope, duration, price, what is excluded.</p></li>
@@ -281,5 +270,7 @@
 	<script src="/assets/js/reveal.js" defer></script>
 	<script src="/assets/js/button-fill.js" defer></script>
 	<script src="/assets/js/highlight-text.js" defer></script>
+	<script src="/assets/js/disclosure.js" defer></script>
+	<script src="/assets/js/case-transition.js" defer></script>
 </body>
 </html>
