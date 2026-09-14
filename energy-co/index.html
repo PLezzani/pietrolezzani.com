@@ -87,6 +87,17 @@
 					<p>Edison was about to launch Risolve, a set of home services sold alongside the energy supply: the things a house needs and nobody plans for. The offer was ready before there was a way to tell it. On the page it read as a price list next to a bill, and it left the customer to work out what a home service had to do with their electricity contract. A customer who has to do that work usually does not do it.</p>
 				</div>
 			</div>
+			<!-- 3. video: the ecosystem, the home at the centre and the services
+			     around it. Full width, outside the container like the hero.
+			     Muted loop, fetched only when it comes into view. -->
+			<div class="section-media section-media--grow section-media--full">
+				<video class="case-video" data-in-view
+					src="/assets/videos/edison-ecosystem.mp4"
+					poster="/assets/img/edison-video-poster.jpg"
+					width="1440" height="810"
+					muted loop playsinline preload="none"
+					aria-label="The home at the centre and the Risolve services turning around it, the energy supply among them."></video>
+			</div>
 		</section>
 
 		<!-- 4. the decision -->
@@ -98,7 +109,6 @@
 				</div>
 				<!-- 5. gallery: 4 to 6 screens, one alt each -->
 				<div class="section-media case-gallery" tabindex="0" role="region" aria-label="Screens">
-					<div class="img-slot" style="--ratio: 16 / 10"><span>The centre: the energy supply the customer already has, as the starting screen.</span></div>
 					<div class="img-slot" style="--ratio: 16 / 10"><span>An extension being added to the centre.</span></div>
 					<div class="img-slot" style="--ratio: 16 / 10"><span>The same structure on the site.</span></div>
 					<div class="img-slot" style="--ratio: 16 / 10"><span>The same structure in the app, so the two stop speaking different languages.</span></div>
@@ -175,5 +185,6 @@
 	<script src="/assets/js/reveal.js" defer></script>
 	<script src="/assets/js/button-fill.js" defer></script>
 	<script src="/assets/js/case-arrival.js" defer></script>
+	<script src="/assets/js/video-in-view.js" defer></script>
 </body>
 </html>
