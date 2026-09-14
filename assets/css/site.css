@@ -677,7 +677,10 @@ html.from-home::after {
 	scrollbar-width: none; -webkit-overflow-scrolling: touch;
 }
 .case-gallery::-webkit-scrollbar { display: none; }
-.case-gallery > * { flex: 0 0 min(720px, 82%); scroll-snap-align: start; }
+/* min-width 0 is not decoration: a picture in the strip is a flex item whose
+   automatic minimum is its own width, and width 100% would make that the whole
+   column, so one screen would fill the strip and the peek would be gone. */
+.case-gallery > * { flex: 0 0 min(720px, 82%); min-width: 0; scroll-snap-align: start; }
 .case-gallery img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; background: var(--color-surface-raised); }
 .case-gallery:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
 
