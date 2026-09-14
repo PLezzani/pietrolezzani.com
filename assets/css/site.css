@@ -93,7 +93,11 @@ h1, h2, h3, h4, p, ul, ol { margin: 0; }
 h1, h2, h3 { text-wrap: balance; }
 ul, ol { padding: 0; list-style: none; }
 a { color: inherit; }
-img { max-width: 100%; height: auto; display: block; }
+/* Video sits here beside img on purpose. Both carry width and height
+   attributes, which the browser reads as a style; without height auto the
+   declared height wins over any aspect ratio, and the element keeps the pixel
+   height of the file whatever width it is given. */
+img, video { max-width: 100%; height: auto; display: block; }
 
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 
@@ -655,6 +659,9 @@ html.from-home::after {
 			animation-range: entry 15% cover 55%;
 		}
 		@keyframes media-grow { to { width: 100%; } }
+		/* On a phone the frame is a fifth as wide, so the same fraction would
+		   open from something too small to read. It starts closer to full. */
+		@media (max-width: 720px) { .section-media--grow video { width: 80%; } }
 	}
 }
 .case-pair img { width: 100%; display: block; aspect-ratio: 4 / 3; object-fit: cover; background: var(--color-surface-raised); }
