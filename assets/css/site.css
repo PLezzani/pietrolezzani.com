@@ -177,9 +177,10 @@ img, video { max-width: 100%; height: auto; display: block; }
 /* A section's label is not separated from what it introduces. It is already
    set apart by size, colour and its accent square, and a rule under it reads
    as a lid closing the label off from the sentence it belongs to. Space does
-   the work instead. The dividers between one row and the next stay: those do
+   the work instead, and it is the same lg everywhere: whatever a section opens
+   with, a headline or a row of cards, it starts at the same distance. The dividers between one row and the next stay: those do
    separate two things. */
-.ruled { margin-top: var(--space-xl); }
+.ruled { margin-top: var(--space-lg); }
 .stack > * + * { margin-top: var(--space-md); }
 
 /* ---------- header ----------
@@ -282,7 +283,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 /* ---------- editorial rows (offers, cases, situations) ---------- */
 .rows { margin-top: var(--space-lg); }
 .row { border-top: 1px solid var(--color-border); padding: var(--space-lg) 0; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-xl); }
-.rows .row:first-child { border-top: none; padding-top: var(--space-md); }
+.rows .row:first-child { border-top: none; padding-top: 0; }
 .row:last-child { border-bottom: 1px solid var(--color-border); }
 .row h3 { font: var(--display-m); letter-spacing: var(--ls-display-m); }
 .row h3 a { text-decoration: none; }
@@ -712,10 +713,6 @@ html.from-home::after {
 .case-gallery img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; background: var(--color-surface-raised); }
 .case-gallery:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
 
-/* min-height reproduces the line box the label occupies when it stands alone,
-   so the divider below lands at the same distance as in every other section. */
-.section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); min-height: 1.6em; }
-
 /* ---------- affiliation band ----------
    The one borrowed name on the site, on a strip of its own directly under the
    hero, between two hairlines. It is the first thing after the claim because
@@ -831,7 +828,6 @@ html.from-home::after {
 	.case-head .case-facts { grid-template-columns: 1fr 1fr; gap: var(--space-md); margin-top: var(--space-lg); }
 	.case-kpis { grid-template-columns: 1fr; }
 	.split { gap: var(--space-lg); }
-	.section-head { flex-direction: column; align-items: flex-start; gap: var(--space-md); }
 	/* the band keeps its two lines centred, the name above the mark */
 	.affiliation-band img { width: 120px; }
 	/* No hover on a touch screen, so the sheet cannot wait to be asked for, and
