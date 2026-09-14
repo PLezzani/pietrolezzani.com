@@ -20,6 +20,39 @@
 	function release() { root.classList.remove('from-home'); }
 	if (!hero || reduce.matches || !('animate' in Element.prototype)) { release(); return; }
 
+	// The picture travels towards a hero measured where the page stands now, so
+	// a scroll while it is in flight would have it land beside its target. The
+	// page is held still for as long as the arrival lasts and not a moment
+	// longer: every way out of the animation passes through unlock, including
+	// the fallback, and a last timer releases the page even if none of them is
+	// ever reached. Nothing is done to overflow, because hiding the scrollbar
+	// would shift the layout by its width and move the very hero being aimed
+	// at; the reader's gestures are refused instead.
+	var scrollKeys = { 32: 1, 33: 1, 34: 1, 35: 1, 36: 1, 38: 1, 40: 1 };
+	function refuse(e) { if (e.cancelable) e.preventDefault(); }
+	function refuseKey(e) {
+		var t = e.target || {};
+		if (t.isContentEditable || t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT') return;
+		if (scrollKeys[e.keyCode]) refuse(e);
+	}
+	var locked = false;
+	function lock() {
+		if (locked) return;
+		locked = true;
+		window.addEventListener('wheel', refuse, { passive: false });
+		window.addEventListener('touchmove', refuse, { passive: false });
+		window.addEventListener('keydown', refuseKey);
+	}
+	function unlock() {
+		if (!locked) return;
+		locked = false;
+		window.removeEventListener('wheel', refuse, { passive: false });
+		window.removeEventListener('touchmove', refuse, { passive: false });
+		window.removeEventListener('keydown', refuseKey);
+	}
+	lock();
+	setTimeout(unlock, 3000);
+
 	var started = false;
 	function start() {
 		if (started) return;
@@ -55,7 +88,7 @@
 		], { duration: 1200, delay: 100, easing: 'cubic-bezier(0.76, 0, 0.24, 1)', fill: 'forwards' }); // power3 in-out
 
 		var gone = false;
-		function end() { if (!gone) { gone = true; layer.remove(); } }
+		function end() { if (!gone) { gone = true; layer.remove(); unlock(); } }
 		move.onfinish = end;
 		setTimeout(end, 1600);
 	}
