@@ -1,0 +1,11 @@
+<!doctype html><meta charset=utf-8><pre id=out style="font:11px monospace">pending</pre>
+<iframe id=f src="/" style="width:1200px;height:300px;border:0"></iframe>
+<script>
+let done=false;
+setInterval(()=>{if(done)return;const d=f.contentDocument;if(!d||d.readyState!=='complete')return;
+const nav=d.querySelector('.site-nav');
+document.getElementById('out').textContent='desktop: toggle='+!!d.querySelector('.nav-toggle')+
+ ' panel='+!!d.querySelector('.site-nav-panel')+
+ ' ordine bar='+JSON.stringify([...nav.children].map(e=>e.textContent.trim()));
+done=true;},300);
+</script>
