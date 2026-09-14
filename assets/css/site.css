@@ -123,11 +123,17 @@ img, video { max-width: 100%; height: auto; display: block; }
 	transition: opacity var(--reveal-duration) var(--reveal-ease),
 	            transform var(--reveal-duration) var(--reveal-ease);
 }
+/* A second way in, for the band under the hero: the element resolves out of a
+   blur instead of rising. Nothing moves, so a strip that sits on a hairline
+   does not appear to slide against it, and the pair arrives one after the
+   other rather than together. */
+.js .reveal-blur { transform: none; filter: blur(8px); }
+.js .reveal-blur.is-in { filter: none; transition: opacity var(--reveal-duration) var(--reveal-ease), filter var(--reveal-duration) var(--reveal-ease); }
 .js .reveal-2.is-in { transition-delay: var(--reveal-stagger); }
 .js .reveal-3.is-in { transition-delay: calc(var(--reveal-stagger) * 2); }
-@keyframes reveal-failsafe { to { opacity: 1; transform: none; } }
+@keyframes reveal-failsafe { to { opacity: 1; transform: none; filter: none; } }
 @media (prefers-reduced-motion: reduce) {
-	.js .reveal, .js .reveal.is-in { opacity: 1; transform: none; animation: none; transition: none; }
+	.js .reveal, .js .reveal.is-in { opacity: 1; transform: none; filter: none; animation: none; transition: none; }
 }
 
 /* ---------- type ---------- */
@@ -689,20 +695,27 @@ html.from-home::after {
 .case-gallery img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; background: var(--color-surface-raised); }
 .case-gallery:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
 
-/* ---------- affiliation ----------
-   It sits on the section label's own line, pushed to the far right: it names
-   the section rather than belonging to the title underneath. The logo is
-   admissible only because it is a single colour and that colour is on-surface,
-   so it adds no hue the palette does not already have. */
 /* min-height reproduces the line box the label occupies when it stands alone,
    so the divider below lands at the same distance as in every other section. */
 .section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); min-height: 1.6em; }
-.affiliation { display: flex; align-items: center; gap: var(--space-md); }
-/* Label type, but not the section-label component: no accent square, and the
-   name keeps on-surface while the label beside it stays muted. One is a label,
-   the other is what the section is about. */
-.affiliation p { font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; }
-.affiliation img { width: 150px; }
+
+/* ---------- affiliation band ----------
+   The one borrowed name on the site, on a strip of its own directly under the
+   hero, between two hairlines. It is the first thing after the claim because
+   it is what makes the claim credible, and it is a strip rather than a line
+   inside a section because a borrowed name qualifies the whole page, not the
+   paragraph it happens to sit next to. Centred, at label size, low: this is a
+   seal, not a heading, and a reader who never stops on it has lost nothing.
+   The logo is admissible only because it is a single colour and that colour
+   is on-surface, so it adds no hue the palette does not already have. */
+.affiliation-band { border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+.affiliation-band > .container {
+	display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+	gap: var(--space-xs) var(--space-md);
+	padding-top: var(--space-md); padding-bottom: var(--space-md);
+}
+.affiliation-band p { font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-muted); }
+.affiliation-band img { width: 150px; }
 
 /* ---------- image slots (temporary) ----------
    Dashed boxes that mark where an image is meant to go. Each carries a note
@@ -801,11 +814,9 @@ html.from-home::after {
 	.case-head .case-facts { grid-template-columns: 1fr 1fr; gap: var(--space-md); margin-top: var(--space-lg); }
 	.case-kpis { grid-template-columns: 1fr; }
 	.split { gap: var(--space-lg); }
-	/* no room for both on one line: the affiliation drops under the label and
-	   stacks, so the name keeps one line instead of wrapping around the logo */
 	.section-head { flex-direction: column; align-items: flex-start; gap: var(--space-md); }
-	.affiliation { flex-direction: column; align-items: flex-start; gap: var(--space-xs); }
-	.affiliation img { width: 120px; }
+	/* the band keeps its two lines centred, the name above the mark */
+	.affiliation-band img { width: 120px; }
 	/* No hover on a touch screen, so the sheet cannot wait to be asked for, and
 	   the card should not stop being a card either. It keeps its frame, its
 	   picture, its veil and the title over them, and the sheet simply sits

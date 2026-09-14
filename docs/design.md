@@ -193,12 +193,15 @@ components:
     typography: "{typography.display-l}"
     rounded: "{rounded.none}"
     padding: 96px 0px
-  affiliation:
+  affiliation-band:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
+    textColor: "{colors.on-surface-muted}"
     typography: "{typography.label}"
     rounded: "{rounded.none}"
     padding: 24px 0px
+    borderTop: "1px {colors.border}"
+    borderBottom: "1px {colors.border}"
+    align: center
   footer-inverse:
     backgroundColor: "{colors.surface-inverse}"
     textColor: "{colors.on-surface-inverse}"
@@ -255,7 +258,7 @@ The scale has a deliberate gap. Text lives at 15, 18, 21 and 24px; display start
 
 ## Motion
 
-There is almost none, and what there is has one job: to make text arrive rather than be found already in place. A heading rises 18px and fades over 1100ms on a decelerating curve, once, and never again. The hero plays on load; everything else plays when it comes into view, triggered slightly early so the movement has finished by the time the reader is looking at it. Where several lines belong together they are staggered by 140ms, which is enough to read as a sequence and too little to read as a queue.
+There is almost none, and what there is has one job: to make text arrive rather than be found already in place. A heading rises 18px and fades over 1100ms on a decelerating curve, once, and never again. The one exception is the affiliation band under the hero, which resolves out of a blur without moving, because a strip that rises against the hairline it sits on appears to slide along it. The hero plays on load; everything else plays when it comes into view, triggered slightly early so the movement has finished by the time the reader is looking at it. Where several lines belong together they are staggered by 140ms, which is enough to read as a sequence and too little to read as a queue.
 
 The curve matters as much as the duration. An exponential ease-out spends nearly its whole budget in the first third and leaves a long imperceptible tail, so lengthening one makes the text pause rather than slow down. A cubic ease-out distributes the movement, and that is what makes a slower reveal read as slower. Duration, rise, stagger and curve are tokens: change the number, not the rule.
 
@@ -305,7 +308,7 @@ The About page is built from the parts the rest of the site already has: the hea
 
 `footer-inverse` is the second and last ground change: the page ends on cream rather than fading out on black. It carries the name in `display-m`, the role and city under it, contact links in `body-l` underlined with `divider-inverse`, and a legal line below a rule. It holds no call to action. The one action already appears three times above it, and a fourth in the footer would turn a close into a nag.
 
-`affiliation` names a network or a body the practice belongs to. It sits on the `section-label` own line, pushed to the far right: the name in `label` type and the organisation's logo beside it. It takes the label typography but not the `section-label` component: no accent square, and it keeps `on-surface` while the label beside it stays `on-surface-muted`. One of the two names the section, the other is what the section is about, and the colour is what tells them apart on a line where the size no longer does. That placement is the point. The affiliation qualifies the section, not the title underneath it, and putting it in the title column made it read as a footnote to the heading. Below 720px there is no room for both on one line, so it drops under the label and stacks, which keeps the name on a single line instead of wrapping around the logo. A borrowed logo is admissible on one condition, that it is a single colour and that colour is `on-surface`, so it adds no hue the palette does not already carry; a logo in its own brand colours is not, and no amount of importance changes that. The condition holds wherever a borrowed mark appears, `case-mark` included. Keep it near 180px wide, well under the display type above it, because the affiliation supports the claim rather than making it.
+`affiliation-band` names the one network the practice belongs to, and it is a strip of its own between two hairlines, directly under the hero. It sits there because it is what makes the claim above it credible, and it is a strip rather than a line inside a section because a borrowed name qualifies the whole page rather than the paragraph it happens to stand next to. The name is in `label` type in `on-surface-muted`, the organisation's mark beside it, both centred: this is a seal, not a heading, and a reader who never stops on it has lost nothing. It arrives the way the reference logo clouds do, resolving out of an 8px blur instead of rising, the name first and the mark a beat later, because a strip that rises against a hairline appears to slide along it. Nothing moves afterwards and nothing repeats: a row of marks that never stops travelling is an advertisement, and one borrowed name does not need a carousel. A borrowed logo is admissible on one condition, that it is a single colour and that colour is `on-surface`, so it adds no hue the palette does not already carry; a logo in its own brand colours is not, and no amount of importance changes that. The condition holds wherever a borrowed mark appears, `case-mark` included. Keep it near 150px wide, 120px on a phone where the name takes its own line above it, because the affiliation supports the claim rather than making it. The section it used to sit in is `Approach`, which is about how the two sides of the table meet and never needed the logo to say so.
 
 Sections follow one order without exception: `section-label`, then a `divider`, then the title, then the content. A label that appears below the title it labels reads as a caption for whatever precedes it, which is never what was meant. The divider sits `lg` below the label in every section, list or not, and the content opens `lg` below the divider. That repeated distance is what makes four different sections read as one page: a reader who has learned where the line falls should never have to relearn it.
 

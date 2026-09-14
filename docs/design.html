@@ -173,7 +173,7 @@
 	.plan p { margin: 0; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
 
 	.affil-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
-	.affil { display: flex; align-items: center; gap: var(--space-md); }
+	.affil { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-xs) var(--space-md); padding: var(--space-md) 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
 	.affil p { margin: 0; font-size: var(--type-label-size); font-weight: var(--type-label-weight); line-height: var(--type-label-lh); letter-spacing: var(--type-label-ls); text-transform: uppercase; }
 	.affil img { display: block; width: 150px; }
 
@@ -342,16 +342,12 @@
 			<li><p>Work starts on a written scope, never on a verbal yes.</p></li>
 		</ol>
 
-		<h3 class="t-lb" style="margin-top:var(--space-xl)">Affiliation</h3>
-		<div class="affil-head" style="margin-top:var(--space-sm)">
-			<span class="t-lb seclabel">Affiliation</span>
-			<div class="affil">
-				<p>Part of Bain Advisory Network</p>
-				<img src="/assets/img/bain-company.svg" alt="Bain &amp; Company" width="279" height="31" />
-			</div>
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Affiliation band</h3>
+		<div class="affil" style="margin-top:var(--space-sm)">
+			<p>Part of Bain Advisory Network</p>
+			<img src="/assets/img/bain-company.svg" alt="Bain &amp; Company" width="279" height="31" />
 		</div>
-		<hr class="rule" style="margin-top:var(--space-lg)" />
-		<p class="note" style="margin-top:var(--space-sm)">The affiliation sits on the label's own line, far right: it qualifies the section, not the title below it. Order is always label, divider, title, content, with the divider lg below the label in every section. A borrowed logo is admissible only in one colour, and that colour is on-surface.</p>
+		<p class="note" style="margin-top:var(--space-sm)">The affiliation is a strip of its own between two hairlines, directly under the hero: it qualifies the page, not the paragraph it would otherwise sit next to. Centred, label size, muted, and it resolves out of a blur instead of rising, the name first and the mark after. A borrowed logo is admissible only in one colour, and that colour is on-surface.</p>
 
 		<h3 class="t-lb" style="margin-top:var(--space-xl)">Footer on the inverse ground</h3>
 		<div class="ftr" style="margin-top:var(--space-sm)">
