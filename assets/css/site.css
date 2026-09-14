@@ -743,6 +743,18 @@ html.from-home::after {
 .img-slot span::before { content: "Image"; display: block; font: var(--label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--color-on-surface-subtle); margin-bottom: var(--space-2xs); }
 .row .img-slot { margin-top: var(--space-md); }
 
+/* ---------- policy ----------
+   A legal page is not read from the top: it is read in pieces, by someone
+   looking for one answer. So it is a sequence of labelled blocks with the same
+   air between them as between sections, each holding a whole answer, and the
+   measure of the text is the page's own. Nothing else is added: a page that
+   says no data is taken should not need a special design to be believed. */
+.policy { margin-top: var(--space-2xl); }
+.policy .label { display: flex; }
+.policy .label + .prose { margin-top: var(--space-lg); }
+.policy .prose + .label { margin-top: var(--space-2xl); }
+.policy .prose a { text-underline-offset: 3px; }
+
 /* ---------- inverted section ----------
    One section on the page takes the cream ground, and it is the one with the
    only action on the site. A change of ground is the loudest device available
