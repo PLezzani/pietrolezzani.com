@@ -30,7 +30,6 @@
 	<script>document.documentElement.classList.add("js");</script>
 	<link rel="stylesheet" href="/assets/css/site.css" />
 
-	<!-- Cloudflare Web Analytics: inserire lo snippet con il token quando disponibile. -->
 </head>
 <body>
 	<a class="skip" href="#main">Skip to content</a>
@@ -272,5 +271,8 @@
 	<script src="/assets/js/highlight-text.js" defer></script>
 	<script src="/assets/js/disclosure.js" defer></script>
 	<script src="/assets/js/case-transition.js" defer></script>
+	<!-- Cloudflare Web Analytics: senza cookie, nessun dato personale, nessun banner.
+	     In fondo al body perche' non ha niente a che fare con il primo disegno della pagina. -->
+	<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "797ed2557d5d4b498b085b58b9d78dec"}'></script>
 </body>
 </html>
