@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Pietro Lezzani, design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+	/* ---- tokens: mirror of docs/design.md, single source of truth ---- */
+	:root {
+		--color-surface: #000000;
+		--color-surface-raised: #191919;
+		--color-surface-inverse: #FEFCF6;
+		--color-on-surface: #FEFCF6;
+		--color-on-surface-muted: #989794;
+		--color-on-surface-subtle: #666562;
+		--color-on-surface-inverse: #000000;
+		--color-on-surface-inverse-muted: #5C5B58;
+		--color-accent: #006FED;
+		--color-border: #333230;
+		--color-border-inverse: #CBCAC5;
+
+		--font-display: "Darker Grotesque", Georgia, serif;
+		--font-text: "Darker Grotesque", Georgia, serif;
+
+		--type-display-xl-size: 88px;   --type-display-xl-weight: 500; --type-display-xl-lh: 0.95; --type-display-xl-ls: -0.02em;
+		--type-display-l-size: 64px;    --type-display-l-weight: 500;  --type-display-l-lh: 1;     --type-display-l-ls: -0.02em;
+		--type-display-m-size: 44px;    --type-display-m-weight: 500;  --type-display-m-lh: 1.05;  --type-display-m-ls: -0.015em;
+		--type-display-s-size: 32px;    --type-display-s-weight: 500;  --type-display-s-lh: 1.1;   --type-display-s-ls: -0.01em;
+		--type-body-l-size: 24px;       --type-body-l-weight: 500;     --type-body-l-lh: 1.45;
+		--type-body-size: 21px;         --type-body-weight: 500;       --type-body-lh: 1.5;
+		--type-body-s-size: 18px;       --type-body-s-weight: 500;     --type-body-s-lh: 1.45;
+		--type-body-strong-size: 24px;  --type-body-strong-weight: 600; --type-body-strong-lh: 1.4;
+		--type-label-size: 15px;        --type-label-weight: 600;      --type-label-lh: 1.2;  --type-label-ls: 0.08em;
+		--type-nav-size: 20px;          --type-nav-weight: 500;        --type-nav-lh: 1.2;
+
+		--rounded-none: 0px;
+		--rounded-sm: 2px;
+		--rounded-pill: 9999px;
+
+		--space-3xs: 4px;  --space-2xs: 8px;  --space-xs: 12px; --space-sm: 16px;
+		--space-md: 24px;  --space-lg: 40px;  --space-xl: 64px; --space-2xl: 96px; --space-3xl: 144px;
+	}
+
+	/* ---- page chrome: neutral on purpose, the tokens are the subject ---- */
+	* { box-sizing: border-box; }
+	body {
+		margin: 0;
+		background: var(--color-surface);
+		color: var(--color-on-surface);
+		font-family: var(--font-text);
+		font-size: var(--type-body-size);
+		font-weight: var(--type-body-weight);
+		line-height: var(--type-body-lh);
+		/* Grayscale smoothing thins light glyphs on a dark ground.
+		   It is why body text is set at 500 rather than 400. */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		padding: var(--space-xl) var(--space-lg) var(--space-3xl);
+	}
+	.wrap { max-width: 1120px; margin: 0 auto; }
+	h1 {
+		font-family: var(--font-display);
+		font-size: var(--type-display-l-size);
+		font-weight: var(--type-display-l-weight);
+		line-height: var(--type-display-l-lh);
+		letter-spacing: var(--type-display-l-ls);
+		margin: 0 0 var(--space-sm);
+	}
+	h2 {
+		font-family: var(--font-display);
+		font-size: var(--type-display-s-size);
+		font-weight: var(--type-display-s-weight);
+		line-height: var(--type-display-s-lh);
+		margin: 0 0 var(--space-md);
+	}
+	.lede { color: var(--color-on-surface-muted); max-width: 34em; margin: 0 0 var(--space-2xs); }
+	section { padding-top: var(--space-2xl); }
+	section + section { border-top: 1px solid var(--color-border); margin-top: var(--space-2xl); }
+	.note { color: var(--color-on-surface-subtle); font-size: var(--type-body-s-size); max-width: 34em; }
+	code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85em; color: var(--color-on-surface-muted); }
+
+	.grid { display: grid; gap: var(--space-md); }
+	.cols-3 { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+	.cols-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+	/* ---- colours ---- */
+	.swatch { border: 1px solid var(--color-border); }
+	.swatch .chip { height: 104px; display: flex; align-items: flex-end; padding: var(--space-xs); }
+	.swatch .meta { padding: var(--space-xs); border-top: 1px solid var(--color-border); }
+	.swatch .name { font-weight: 500; }
+	.swatch .val { color: var(--color-on-surface-subtle); font-size: var(--type-body-s-size); }
+
+	/* ---- type specimens ---- */
+	.spec { padding: var(--space-md) 0; border-top: 1px solid var(--color-border); display: grid; grid-template-columns: 1fr; gap: var(--space-2xs); }
+	.spec .tag { color: var(--color-on-surface-subtle); font-size: var(--type-body-s-size); }
+	.d-xl { font-family: var(--font-display); font-size: var(--type-display-xl-size); font-weight: var(--type-display-xl-weight); line-height: var(--type-display-xl-lh); letter-spacing: var(--type-display-xl-ls); }
+	.d-l  { font-family: var(--font-display); font-size: var(--type-display-l-size);  font-weight: var(--type-display-l-weight);  line-height: var(--type-display-l-lh);  letter-spacing: var(--type-display-l-ls); }
+	.d-m  { font-family: var(--font-display); font-size: var(--type-display-m-size);  font-weight: var(--type-display-m-weight);  line-height: var(--type-display-m-lh);  letter-spacing: var(--type-display-m-ls); }
+	.d-s  { font-family: var(--font-display); font-size: var(--type-display-s-size);  font-weight: var(--type-display-s-weight);  line-height: var(--type-display-s-lh);  letter-spacing: var(--type-display-s-ls); }
+	.t-bl { font-size: var(--type-body-l-size); font-weight: var(--type-body-l-weight); line-height: var(--type-body-l-lh); max-width: 34em; }
+	.t-b  { font-size: var(--type-body-size);   font-weight: var(--type-body-weight); line-height: var(--type-body-lh);   max-width: 34em; }
+	.t-bs { font-size: var(--type-body-s-size); font-weight: var(--type-body-s-weight); line-height: var(--type-body-s-lh); max-width: 34em; }
+	.t-bstr { font-size: var(--type-body-strong-size); font-weight: var(--type-body-strong-weight); line-height: var(--type-body-strong-lh); max-width: 34em; }
+	.t-lb { font-size: var(--type-label-size); font-weight: var(--type-label-weight); line-height: var(--type-label-lh); letter-spacing: var(--type-label-ls); text-transform: uppercase; }
+	.t-nav{ font-size: var(--type-nav-size); font-weight: var(--type-nav-weight); line-height: var(--type-nav-lh); }
+
+	/* ---- spacing + radius ---- */
+	.bar { background: var(--color-accent); height: 16px; }
+	.rad { width: 120px; height: 76px; background: var(--color-surface-raised); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; color: var(--color-on-surface-muted); font-size: var(--type-body-s-size); }
+
+	/* ---- components, styled from the same tokens ---- */
+	.btn {
+		display: inline-block; border: 1px solid transparent; cursor: pointer;
+		font-family: var(--font-text); font-size: var(--type-nav-size);
+		font-weight: var(--type-nav-weight); line-height: var(--type-nav-lh);
+		border-radius: var(--rounded-pill); padding: 16px 32px; text-decoration: none;
+	}
+	.btn-primary { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); }
+	.btn-primary:hover, .btn-primary.is-hover { background: var(--color-accent); color: var(--color-on-surface); }
+	.btn-ghost { background: transparent; color: var(--color-on-surface); border-color: var(--color-border); }
+	.btn-ghost:hover, .btn-ghost.is-hover { border-color: var(--color-on-surface); }
+	.btn[disabled], .btn.is-disabled { background: var(--color-surface-raised); color: var(--color-on-surface-subtle); cursor: not-allowed; }
+	.btn:focus-visible, .btn.is-focus { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+	.navlink { color: var(--color-on-surface); text-decoration: none; padding: 8px 0; }
+	.navlink:hover, .navlink.is-hover { color: var(--color-accent); }
+
+	.seclabel { display: inline-flex; align-items: center; gap: var(--space-2xs); color: var(--color-on-surface-muted); }
+	.seclabel::before { content: ""; width: 10px; height: 10px; background: var(--color-accent); flex: none; }
+
+	.rule { height: 1px; background: var(--color-border); border: 0; margin: 0; }
+
+	.row { border-top: 1px solid var(--color-border); padding: var(--space-lg) 0; }
+	.row h3 { font-family: var(--font-display); font-size: var(--type-display-m-size); font-weight: var(--type-display-m-weight); line-height: var(--type-display-m-lh); letter-spacing: var(--type-display-m-ls); margin: 0 0 var(--space-xs); }
+	.row p { margin: 0; color: var(--color-on-surface-muted); max-width: 34em; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
+
+	.proof { color: var(--color-accent); font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); padding: var(--space-md) 0; max-width: 34em; }
+
+	.facts { margin: 0; padding-top: var(--space-md); border-top: 1px solid var(--color-border); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg); }
+	.facts dt { color: var(--color-on-surface-muted); }
+	.facts dd { margin: var(--space-2xs) 0 0; font-size: var(--type-body-size); line-height: var(--type-body-lh); }
+
+	.inverse { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding: var(--space-lg); }
+	.band { background: var(--color-surface-inverse); color: var(--color-on-surface-inverse); padding: var(--space-2xl) var(--space-lg); }
+	.band p { margin: 0; max-width: 16em; }
+
+	.cases { border-top: 1px solid var(--color-border); }
+	.case { border-bottom: 1px solid var(--color-border); }
+	.case summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding: var(--space-md) 0; }
+	.case summary::-webkit-details-marker { display: none; }
+	.case summary h3 { margin: 0; font-family: var(--font-display); font-size: var(--type-display-m-size); font-weight: var(--type-display-m-weight); line-height: var(--type-display-m-lh); letter-spacing: var(--type-display-m-ls); }
+	.case summary:hover h3 { color: var(--color-accent); }
+	.toggle { position: relative; flex: none; width: 40px; height: 40px; border: 1px solid var(--color-border); border-radius: var(--rounded-pill); }
+	.toggle::before, .toggle::after { content: ""; position: absolute; left: 50%; top: 50%; background: var(--color-on-surface); }
+	.toggle::before { width: 14px; height: 1px; transform: translate(-50%, -50%); }
+	.toggle::after { width: 1px; height: 14px; transform: translate(-50%, -50%); }
+	.case[open] .toggle::after { opacity: 0; }
+	.case-body { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-xl); padding: var(--space-2xs) 0 var(--space-lg); }
+	.case-body p { margin: 0; color: var(--color-on-surface-muted); max-width: 34em; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
+	.cover { aspect-ratio: 5 / 3; background: var(--color-surface-raised); border: 1px dashed var(--color-border); }
+	.thumb { flex: none; width: 100px; height: 60px; background: var(--color-surface-raised); border: 1px dashed var(--color-border); }
+	.case[open] .thumb { display: none; }
+	.case summary h3 { flex: 1 1 auto; }
+
+	.plan { counter-reset: step; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg); margin: 0; padding: 0; list-style: none; }
+	.plan li { counter-increment: step; position: relative; aspect-ratio: 1 / 1; border: 1px solid var(--color-border); padding: var(--space-lg); display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-md); }
+	.plan li::before { content: counter(step, decimal-leading-zero); font-size: var(--type-label-size); font-weight: var(--type-label-weight); letter-spacing: var(--type-label-ls); color: var(--color-accent); }
+	.plan li:not(:last-child)::after { content: ""; position: absolute; top: calc(var(--space-lg) + 8px); left: 100%; width: var(--space-lg); height: 1px; background: var(--color-border); }
+	.plan p { margin: 0; font-size: var(--type-body-l-size); line-height: var(--type-body-l-lh); }
+
+	.affil-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
+	.affil { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-xs) var(--space-md); padding: var(--space-md) 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+	.affil p { margin: 0; font-size: var(--type-label-size); font-weight: var(--type-label-weight); line-height: var(--type-label-lh); letter-spacing: var(--type-label-ls); text-transform: uppercase; }
+	.affil img { display: block; width: 150px; }
+
+	/* footer on the cream ground: every line steps back to weight 400 */
+	.ftr { background: var(--color-surface); color: var(--color-on-surface); border-top: 1px solid var(--color-border); padding: var(--space-2xl) var(--space-lg) var(--space-lg); }
+	.ftr-main { display: flex; flex-wrap: wrap; gap: var(--space-lg) var(--space-xl); justify-content: space-between; align-items: start; }
+	.ftr-brand { margin: 0; font-family: var(--font-display); font-size: var(--type-display-m-size); font-weight: var(--type-display-m-weight); line-height: var(--type-display-m-lh); letter-spacing: var(--type-display-m-ls); }
+	.ftr-role { margin: var(--space-2xs) 0 0; font-size: var(--type-body-l-size); font-weight: 400; line-height: var(--type-body-l-lh); color: var(--color-on-surface-muted); }
+	.ftr-contact { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); }
+	.ftr-contact a { color: var(--color-on-surface); font-size: var(--type-body-l-size); font-weight: 400; text-decoration: none; border-bottom: 1px solid var(--color-border); padding-bottom: 2px; }
+	.ftr-legal { margin-top: var(--space-2xl); padding-top: var(--space-md); border-top: 1px solid var(--color-border); display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-lg); justify-content: space-between; }
+	.ftr-legal p, .ftr-legal a { margin: 0; font-size: var(--type-body-s-size); font-weight: 400; color: var(--color-on-surface-muted); text-decoration: none; }
+	.inverse .t-bl { color: var(--color-on-surface-inverse); }
+
+	/* ---- do / don't ---- */
+	.dd { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg); }
+	.dd ul { margin: 0; padding-left: 1.2em; }
+	.dd li { margin-bottom: var(--space-2xs); color: var(--color-on-surface-muted); }
+	.dd h3 { font-size: var(--type-body-size); font-weight: 600; color: var(--color-on-surface); margin: 0 0 var(--space-sm); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+	<header>
+		<span class="t-lb seclabel">Design system</span>
+		<h1 style="margin-top:var(--space-md)">Pietro Lezzani</h1>
+		<p class="lede t-bl">Design system for a product strategy and design practice, built to make a decision legible rather than to display craft.</p>
+		<p class="note">This page is the human readable mirror of <code>docs/design.md</code>, which is the source of truth. Every value below is rendered from the same tokens.</p>
+	</header>
+
+	<section>
+		<h2>Colors</h2>
+		<div class="grid cols-3">
+			<div class="swatch"><div class="chip" style="background:var(--color-surface)"><span class="t-bs" style="color:var(--color-on-surface)">on-surface on surface</span></div><div class="meta"><div class="name">surface</div><div class="val">#000000</div></div></div>
+			<div class="swatch"><div class="chip" style="background:var(--color-surface-raised)"><span class="t-bs" style="color:var(--color-on-surface)">on-surface on raised</span></div><div class="meta"><div class="name">surface-raised</div><div class="val">#191919</div></div></div>
+			<div class="swatch"><div class="chip" style="background:var(--color-surface-inverse)"><span class="t-bs" style="color:var(--color-on-surface-inverse)">on-surface-inverse</span></div><div class="meta"><div class="name">surface-inverse</div><div class="val">#FEFCF6</div></div></div>
+			<div class="swatch"><div class="chip" style="background:var(--color-on-surface)"><span class="t-bs" style="color:var(--color-surface)">the reading colour</span></div><div class="meta"><div class="name">on-surface</div><div class="val">#FEFCF6</div></div></div>
+			<div class="swatch"><div class="chip" style="background:var(--color-on-surface-muted)"><span class="t-bs" style="color:var(--color-surface)">secondary text</span></div><div class="meta"><div class="name">on-surface-muted</div><div class="val">#989794</div></div></div>
+			<div class="swatch"><div class="chip" style="background:var(--color-on-surface-subtle)"><span class="t-bs" style="color:var(--color-surface)">tertiary text</span></div><div class="meta"><div class="name">on-surface-subtle</div><div class="val">#666562</div></div></div>
+			<div class="swatch"><div class="chip" style="background:var(--color-accent)"><span class="t-bs" style="color:var(--color-on-surface)">the only colour</span></div><div class="meta"><div class="name">accent</div><div class="val">#006FED</div></div></div>
+			<div class="swatch"><div class="chip" style="background:var(--color-border)"><span class="t-bs" style="color:var(--color-on-surface)">hairline</span></div><div class="meta"><div class="name">border</div><div class="val">#333230</div></div></div>
+		</div>
+		<p class="note" style="margin-top:var(--space-md)">Cream on black measures about 19:1. Muted text still clears 7:1. The accent is used for text at 24px and above only.</p>
+	</section>
+
+	<section>
+		<h2>Typography</h2>
+		<div class="spec"><span class="tag">display-xl, Darker Grotesque 88 / 500 / 0.95 / -0.02em</span><div class="d-xl">You are building everything and choosing nothing.</div></div>
+		<div class="spec"><span class="tag">display-l, 64 / 500 / 1 / -0.02em</span><div class="d-l">Three decisions and what came of them</div></div>
+		<div class="spec"><span class="tag">display-m, 44 / 500 / 1.05 / -0.015em</span><div class="d-m">From an MVP to a reference point</div></div>
+		<div class="spec"><span class="tag">display-s, 32 / 500 / 1.1 / -0.01em</span><div class="d-s">Two ways to start</div></div>
+		<div class="spec"><span class="tag">body-l, Darker Grotesque 24 / 500 / 1.45</span><div class="t-bl">A product on its own does not make a company successful. What gets decided around it does.</div></div>
+		<div class="spec"><span class="tag">body, Darker Grotesque 21 / 500 / 1.5</span><div class="t-b">Every quarter closes with a list of releases and no way to say which of them mattered, and you are the one who has to explain that to the board.</div></div>
+		<div class="spec"><span class="tag">body-s, Darker Grotesque 18 / 500 / 1.45</span><div class="t-bs">Two phases, priced by phase. Four months. Development and primary research excluded.</div></div>
+		<div class="spec"><span class="tag">body-strong, Darker Grotesque 24 / 600 / 1.4</span><div class="t-bstr">Product audit and roadmap. Two to three weeks.</div></div>
+		<div class="spec"><span class="tag">label, Darker Grotesque 15 / 600 / 0.08em, uppercase</span><div class="t-lb">Selected work</div></div>
+		<div class="spec"><span class="tag">nav, Darker Grotesque 20 / 500</span><div class="t-nav">Work &nbsp; About &nbsp; Book a call</div></div>
+		<p class="note" style="margin-top:var(--space-md)">Body text sits at 500, not 400. The page renders with grayscale font smoothing, which thins light glyphs on a black ground; 400 turns washed out. On the inverse cream ground, step body back down to 400, where 500 would read as emphasis.</p>
+	</section>
+
+	<section>
+		<h2>Spacing</h2>
+		<div class="grid" style="gap:var(--space-sm)">
+			<div><div class="bar" style="width:var(--space-3xs)"></div><span class="t-bs">3xs, 4px</span></div>
+			<div><div class="bar" style="width:var(--space-2xs)"></div><span class="t-bs">2xs, 8px</span></div>
+			<div><div class="bar" style="width:var(--space-xs)"></div><span class="t-bs">xs, 12px</span></div>
+			<div><div class="bar" style="width:var(--space-sm)"></div><span class="t-bs">sm, 16px</span></div>
+			<div><div class="bar" style="width:var(--space-md)"></div><span class="t-bs">md, 24px</span></div>
+			<div><div class="bar" style="width:var(--space-lg)"></div><span class="t-bs">lg, 40px</span></div>
+			<div><div class="bar" style="width:var(--space-xl)"></div><span class="t-bs">xl, 64px</span></div>
+			<div><div class="bar" style="width:var(--space-2xl)"></div><span class="t-bs">2xl, 96px</span></div>
+			<div><div class="bar" style="width:var(--space-3xl)"></div><span class="t-bs">3xl, 144px</span></div>
+		</div>
+		<p class="note" style="margin-top:var(--space-md)">The large end carries the design: xl and above separate sections, and that generosity is what keeps a black page composed.</p>
+	</section>
+
+	<section>
+		<h2>Radius</h2>
+		<div style="display:flex; gap:var(--space-md); flex-wrap:wrap">
+			<div class="rad" style="border-radius:var(--rounded-none)">none, 0px</div>
+			<div class="rad" style="border-radius:var(--rounded-sm)">sm, 2px</div>
+			<div class="rad" style="border-radius:var(--rounded-pill)">pill</div>
+		</div>
+		<p class="note" style="margin-top:var(--space-md)">If you read it, square corners. If you click it, a pill.</p>
+	</section>
+
+	<section>
+		<h2>Motion</h2>
+		<p class="note">Text arrives rather than being found in place: 18px of rise and a fade over 1100ms, once, on a cubic ease-out. The hero plays on load, everything else when it enters the view. Lines that belong together are staggered by 140ms. The curve is chosen so the duration is felt: an exponential ease-out spends its budget in the first third, so lengthening it reads as a pause rather than as slower. Nothing is tied to scroll position, nothing is pinned, nothing repeats. Under reduced motion every reveal is skipped, and the hidden state always carries a delayed keyframe that reveals it without script, so a failed file can never leave the page wordless.</p>
+	</section>
+
+	<section>
+		<h2>Elevation &amp; depth</h2>
+		<div class="grid cols-2">
+			<div style="padding:var(--space-md); border-top:1px solid var(--color-border)"><div class="t-lb seclabel">Level 0</div><p class="t-bs" style="color:var(--color-on-surface-muted)">Flat on surface, separated by a hairline rule. The default for every content block.</p></div>
+			<div style="padding:var(--space-md); background:var(--color-surface-raised); border-radius:var(--rounded-sm)"><div class="t-lb">Level 1</div><p class="t-bs" style="color:var(--color-on-surface-muted)">Raised ground, held for a technical aside that needs to sit apart. No shadow, only a change of ground.</p></div>
+		</div>
+		<div class="inverse" style="margin-top:var(--space-md)"><div class="t-lb">Inverse ground</div><p class="t-bl" style="margin:var(--space-2xs) 0 0">For long reading passages, the page inverts to cream with black text. Sustained legibility beats atmosphere when a case study runs long.</p></div>
+		<p class="note" style="margin-top:var(--space-md)">There are no shadows anywhere in this system, by design.</p>
+	</section>
+
+	<section>
+		<h2>Components</h2>
+
+		<h3 class="t-lb" style="margin-top:var(--space-lg)">Buttons</h3>
+		<div style="display:flex; gap:var(--space-md); flex-wrap:wrap; align-items:center; margin-top:var(--space-sm)">
+			<a href="#" class="btn btn-primary">Book a 30 minute call</a>
+			<span class="btn btn-primary is-hover">Hover state</span>
+			<a href="#" class="btn btn-ghost">Ghost</a>
+			<span class="btn btn-ghost is-hover">Ghost hover</span>
+			<span class="btn is-disabled">Disabled</span>
+			<span class="btn btn-primary is-focus">Focus ring</span>
+		</div>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Navigation</h3>
+		<div style="display:flex; gap:var(--space-lg); margin-top:var(--space-sm)">
+			<a href="#" class="navlink t-nav">Work</a>
+			<a href="#" class="navlink t-nav">About</a>
+			<span class="navlink t-nav is-hover">Hover</span>
+			<a href="#" class="btn btn-primary" style="padding:10px 20px">Book a call</a>
+		</div>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Section label</h3>
+		<div style="margin-top:var(--space-sm)"><span class="t-lb seclabel">Selected work</span></div>
+		<p class="note" style="margin-top:var(--space-sm)">No line between the label and the title it introduces: the label is already set apart by size, colour and its square, and a rule there reads as a lid. The title opens xl below it. Hairlines separate one row from the next and one section from the next, nothing else.</p>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Offer row and case row</h3>
+		<div class="row">
+			<h3>Product audit and roadmap</h3>
+			<p>Two to three weeks. You end with your problems ranked by their effect on the number you are measured on, and a six month roadmap where every initiative carries a success criterion.</p>
+		</div>
+		<div class="row">
+			<h3>Edison, Risolve</h3>
+			<p>Home services sold next to an energy bill, with the customer left to work out what they had to do with each other. We built a centre with extensions instead of a catalogue.</p>
+			<div class="proof">Selected for the ADI Design Index 2025, 344 projects out of more than a thousand.</div>
+		</div>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Case accordion</h3>
+		<div class="cases" style="margin-top:var(--space-sm)">
+			<details class="case" name="ds-cases" open>
+				<summary><h3>Edison, Risolve</h3><span class="toggle" aria-hidden="true"></span></summary>
+				<div class="case-body">
+					<div>
+						<p>Home services sold next to an energy bill. We built a centre with extensions instead of a catalogue.</p>
+						<div class="proof">Selected for the ADI Design Index 2025, 344 projects out of more than a thousand.</div>
+					</div>
+					<div class="cover"></div>
+				</div>
+			</details>
+			<details class="case" name="ds-cases">
+				<summary><h3>Talentware</h3><span class="thumb" aria-hidden="true"></span><span class="toggle" aria-hidden="true"></span></summary>
+				<div class="case-body"><div><p>A closed row keeps a thumbnail, and it holds the client's mark rather than a crop of the cover: a mark reads at this size, a screenshot does not. The mark is recoloured to on-surface like every borrowed logo, and the three are balanced by area in the exported files so one box serves them all.</p></div><div class="cover"></div></div>
+			</details>
+		</div>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Statement band</h3>
+		<div class="band" style="margin-top:var(--space-sm)">
+			<p class="d-l">A product on its own does not make a company successful. What gets decided around it does.</p>
+		</div>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Plan steps</h3>
+		<ol class="plan" style="margin-top:var(--space-sm)">
+			<li><p>A 30-45 minute call, 3 questions: the deadline your team cannot carry, who decides and on what budget, what happens if nothing changes.</p></li>
+			<li><p>A one page proposal within 48 hours: scope, duration, price, what is excluded.</p></li>
+			<li><p>Work starts on a written scope, never on a verbal yes.</p></li>
+		</ol>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Affiliation band</h3>
+		<div class="affil" style="margin-top:var(--space-sm)">
+			<p>Part of Bain Advisory Network</p>
+			<img src="/assets/img/bain-company.svg" alt="Bain &amp; Company" width="279" height="31" />
+		</div>
+		<p class="note" style="margin-top:var(--space-sm)">The affiliation is a strip of its own between two hairlines, directly under the hero: it qualifies the page, not the paragraph it would otherwise sit next to. Centred, label size, muted, and it resolves out of a blur instead of rising, the name first and the mark after. A borrowed logo is admissible only in one colour, and that colour is on-surface.</p>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Footer on the page ground</h3>
+		<div class="ftr" style="margin-top:var(--space-sm)">
+			<div class="ftr-main">
+				<div>
+					<p class="ftr-brand">Pietro Lezzani</p>
+					<p class="ftr-role">Product strategy and design. Milan.</p>
+				</div>
+				<div class="ftr-contact">
+					<a href="#">info@pietrolezzani.com</a>
+					<a href="#">LinkedIn</a>
+				</div>
+			</div>
+			<div class="ftr-legal">
+				<p>&copy; 2026 Pietro Lezzani</p>
+				<a href="#">Privacy policy</a>
+			</div>
+		</div>
+
+		<h3 class="t-lb" style="margin-top:var(--space-xl)">Case facts</h3>
+		<dl class="facts" style="margin-top:var(--space-sm)">
+			<div><dt class="t-lb">Engagement</dt><dd>2 phases, priced by phase</dd></div>
+			<div><dt class="t-lb">When</dt><dd>April to July 2024</dd></div>
+			<div><dt class="t-lb">Not included</dt><dd>Development, primary research</dd></div>
+		</dl>
+		<p class="note" style="margin-top:var(--space-sm)">A column is left out when its answer is not confirmed. The row becomes narrower and nothing is invented to fill it.</p>
+	</section>
+
+	<section>
+		<h2>Do's and don'ts</h2>
+		<div class="dd">
+			<div>
+				<h3>✓ Do</h3>
+				<ul>
+					<li>Reserve the accent for what has been earned: a proof, a label, a hover. One blue event per screen.</li>
+					<li>Keep body measure near 34em, even when the viewport allows more.</li>
+					<li>Keep the densest and the airiest section far apart in density, several times over. Even spacing everywhere is what makes a page read flat.</li>
+					<li>Let a section change ground when it needs to feel different, instead of reaching for a border or a fill.</li>
+					<li>Set claims that carry a number in the proof line, and only when the number is verifiable.</li>
+					<li>Say a fact once. If a paragraph introduces a step and the step repeats it, the paragraph goes and the step keeps the detail.</li>
+					<li>Use display sizes for statements, text sizes for anything a reader works through. One family, and the gap in the scale is what tells them apart.</li>
+					<li>While an image is not available, leave a dashed slot with a note on the subject. A wrong image is worse than a marked gap.</li>
+				</ul>
+			</div>
+			<div>
+				<h3>✗ Don't</h3>
+				<ul>
+					<li>Never add a shadow, a glow, or a blurred layer.</li>
+					<li>Never hide text behind a state that only script can undo, and never tie motion to scroll position.</li>
+					<li>Never introduce a grey that is not the cream stepped down, or a second accent hue.</li>
+					<li>Never let body text stay at 500 once it moves onto the cream ground, footer included. Step it down to 400.</li>
+					<li>Never set an argument above 88px: past that a sentence stops being read and starts being chanted.</li>
+					<li>Never place a second call to action on a page.</li>
+					<li>Never use stock photography, icon sets, or a gradient.</li>
+					<li>Never place a section label below the title it labels, and never show a borrowed logo in its own brand colours.</li>
+					<li>Never arrange mockups as a gallery. Images show the decision, not the craft.</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+</div>
+</body>
+</html>

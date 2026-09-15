@@ -3,3 +3,31 @@
 # di clienti la cui pubblicabilità non è confermata.
 aggiornamento-sito-piano-e-contenuti.md
 /docs-interni/
+
+# Skill degli agenti: strumenti locali, ricreabili con `npx skills add`.
+# Non vanno nel repo perché con .nojekyll GitHub Pages le servirebbe sul dominio.
+.agents/
+.claude/skills/
+
+# macOS
+.DS_Store
+
+# Sorgenti dei media: pesanti e non necessari al sito. Nel repo vanno solo le
+# versioni pronte per il web, e un binario committato resta nella storia per
+# sempre, anche se poi lo si cancella.
+/assets/videos/OptiKPI_4k.mp4
+/assets/videos/OptiKPI_AskAnything_2.mp4
+/assets/videos/MeetCopilot.mov
+/assets/img/OptiKPI_Workflow_1.png
+/assets/img/OptiKPI_Engage_3.png
+/assets/img/OptiKPI_Audience_4.png
+/assets/videos/Edison_Ecosistema.mov
+/assets/img/0065_Arrital_WZ8_8463.jpg
+/assets/img/Edison_Risolve_Cover.png
+/assets/img/Edison_Website_Home_1.png
+/assets/img/Edison_Risolve_Website_2.png
+/assets/img/Edison_Risolve_Services_3.png
+/assets/img/Edison_Risolve_Help_4.png
+/assets/img/Edison_Risolve_DesignSystem.png
+/assets/img/OptiKPI_Dashboard_Cover.png
+/assets/img/Talentware_Cover.png
