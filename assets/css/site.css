@@ -131,6 +131,10 @@ img, video { max-width: 100%; height: auto; display: block; }
 .js .reveal-blur.is-in { filter: none; transition: opacity var(--reveal-duration) var(--reveal-ease), filter var(--reveal-duration) var(--reveal-ease); }
 .js .reveal-2.is-in { transition-delay: var(--reveal-stagger); }
 .js .reveal-3.is-in { transition-delay: calc(var(--reveal-stagger) * 2); }
+/* the band under the hero arrives after the three lines above it, on the
+   same load: it belongs to the first screen, not to what is scrolled to */
+.js .reveal-4.is-in { transition-delay: calc(var(--reveal-stagger) * 3); }
+.js .reveal-5.is-in { transition-delay: calc(var(--reveal-stagger) * 4); }
 @keyframes reveal-failsafe { to { opacity: 1; transform: none; filter: none; } }
 @media (prefers-reduced-motion: reduce) {
 	.js .reveal, .js .reveal.is-in { opacity: 1; transform: none; filter: none; animation: none; transition: none; }

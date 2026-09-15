@@ -21,11 +21,21 @@
 		return;
 	}
 
-	var inHero = [], later = [];
-	all.forEach(function (el) { (el.closest('.hero') ? inHero : later).push(el); });
+	// The hero plays on load, and so does anything marked to arrive with it: the
+	// band under the hero is part of the first screen, and waiting for it to be
+	// scrolled into view made it appear long after the sentence above it.
+	var onLoad = [], later = [];
+	all.forEach(function (el) {
+		(el.closest('.hero') || el.hasAttribute('data-reveal-load') ? onLoad : later).push(el);
+	});
 
-	// the hero has nothing to wait for
-	window.requestAnimationFrame(function () { inHero.forEach(show); });
+	// Two frames, not one. The first paints the hidden state, the second starts
+	// the transition from it. With a single frame a browser that runs this
+	// before its first paint has nothing to move from, and the text is simply
+	// there: that is what was happening on a phone.
+	window.requestAnimationFrame(function () {
+		window.requestAnimationFrame(function () { onLoad.forEach(show); });
+	});
 
 	if (!('IntersectionObserver' in window)) { later.forEach(show); return; }
 
