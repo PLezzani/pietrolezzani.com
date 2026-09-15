@@ -7,17 +7,19 @@ Origine: export statico di un sito WordPress + Elementor (tema "PixelPier" di Va
 Hosting: GitHub Pages, deploy automatico ad ogni push su `main`. HTTPS forzato.
 Lingua dei contenuti: inglese. Lingua di lavoro con l'utente: italiano.
 
-## Riposizionamento in corso (dal 2026-09-08, branch `redesign`)
+## Riposizionamento (dal 2026-09-08, pubblicato il 2026-09-15)
 
-È in corso un riposizionamento del sito: da "chi sono e cosa so fare" a "in quale
-momento del tuo prodotto ha senso chiamarmi, e cosa hai in mano dopo".
+Il sito è stato riposizionato: da "chi sono e cosa so fare" a "in quale momento del
+tuo prodotto ha senso chiamarmi, e cosa hai in mano dopo". Il lavoro è stato fatto sul
+branch `redesign` e portato su `main` il 15 settembre 2026. Le regole qui sotto
+continuano a valere per ogni modifica futura.
 
 **Fonte unica di verità per copy e struttura**: `aggiornamento-sito-piano-e-contenuti.md`,
 nella root del progetto ma **volutamente non versionato** (vedi `.gitignore`): il repo è
 pubblico e il documento contiene dati commerciali e nomi clienti non ancora pubblicabili.
 Non committarlo, non citarne tariffe o soglie di prezzo dentro file versionati.
 
-Regole del riposizionamento, che valgono su questo branch e dopo il merge:
+Regole del riposizionamento, che valgono per ogni modifica da qui in avanti:
 
 1. **Il copy del documento è definitivo.** Non va migliorato, allungato, reso più caldo
    o più commerciale. Se una frase sembra brusca, è voluto.
@@ -35,8 +37,13 @@ Decisioni prese con Pietro l'8 settembre 2026:
 - **URL invariati**: le pagine caso restano `/optikpi/`, `/talentware/`, `/energy-co/`.
   Niente prefisso `/work/`: sposterebbe URL appena presi in carico da Search Console.
 - **`/energy-co/` diventa il caso Edison Risolve** (stesso URL, contenuto nuovo).
-- **`/about/` fuori perimetro** per ora.
-- **Analytics: Cloudflare Web Analytics** (gratuito, senza cookie, nessun banner).
+- **`/about/` è in scope** (decisione dell'11 settembre: la pagina esiste e è pubblicata).
+- **Analytics: Cloudflare Web Analytics** (gratuito, senza cookie, nessun banner). Lo
+  snippet è in fondo al body delle sei pagine nuove. Il dominio è passato ai nameserver
+  Cloudflare il 14 settembre: i record della posta (Microsoft 365) sono tutti in DNS only,
+  solo i quattro A e `www` passano dal proxy.
+- **Pagine vecchie rimosse**: i sei `/tag/*/` e il PDF del CV non esistono più. `/work/`
+  resta come rimando alla home, perché era indicizzata.
 - Il dominio gemello `pietrolezzani.eu` viene spento il 17 settembre 2026: nessun
   intervento da questo repo.
 
@@ -70,8 +77,9 @@ Decisioni prese con Pietro l'8 settembre 2026:
 ## Struttura
 
 - `index.html` — home · `about/ work/ blog/ contact/ privacy-policy/` — pagine
-- `bunero/ energy-co/ mood/ optikpi/ symphony/ talentware/` — progetti portfolio
-- `tag/*/` — archivi per tag · `wp-content/` — CSS/JS/immagini ereditati
+- `energy-co/ optikpi/ talentware/` — le tre pagine caso
+- `assets/` — CSS, JS, font, immagini e video del sito nuovo · `wp-content/` — resti del
+  tema vecchio, ormai solo favicon e immagini OG
 - `sitemap.xml`, `robots.txt`, `CNAME` (non toccare CNAME), `AUDIT.md` (backlog)
 
 ## Flusso di lavoro
