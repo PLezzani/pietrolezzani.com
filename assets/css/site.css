@@ -736,14 +736,17 @@ html.from-home::after {
 		@media (max-width: 720px) { .section-media--grow video { width: 80%; } }
 	}
 }
-.case-pair img, .case-pair video { width: 100%; display: block; aspect-ratio: 4 / 3; object-fit: cover; background: var(--color-surface-raised); }
-/* A board is not a screen. Where the pair holds one, a design system laid
-   out wide, the cells take the frame it was drawn in instead of cropping a
-   quarter of it away. Both cells move together: two ratios side by side
-   would read as a mistake. */
-.case-pair--wide img, .case-pair--wide .img-slot { aspect-ratio: 16 / 9; }
-/* and upright where it holds a panel taller than it is wide */
-.case-pair--tall img, .case-pair--tall video, .case-pair--tall .img-slot { aspect-ratio: 9 / 10; }
+/* A board is not a screen, and a panel is not a screen either. The pair takes
+   the frame its material was drawn in, 4 by 3 unless told otherwise, and both
+   cells always take it together: two ratios side by side read as a mistake.
+   The frame is one number in one place, so a page can set it inline for what
+   it happens to hold without a new class for every proportion. */
+.case-pair img, .case-pair video, .case-pair .img-slot {
+	aspect-ratio: var(--pair-ratio, 4 / 3);
+}
+.case-pair img, .case-pair video { width: 100%; display: block; object-fit: cover; background: var(--color-surface-raised); }
+.case-pair--wide { --pair-ratio: 16 / 9; }
+.case-pair--tall { --pair-ratio: 9 / 10; }
 
 /* The gallery is a scroll-snap strip, no script. Each screen takes most of
    the width so the next one peeks in from the right, which is the whole
