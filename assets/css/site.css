@@ -672,6 +672,8 @@ html.from-home::after {
    Hairline boxes, no fill: the number is the only thing that should be loud.
    The placeholder variant is dashed, like an image slot, and leaves with it. */
 .case-kpis { list-style: none; margin: var(--space-xl) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+/* two numbers, two columns: a third empty cell would read as one missing */
+.case-kpis:has(> :nth-child(2):last-child) { grid-template-columns: repeat(2, 1fr); }
 .kpi { border: 1px solid var(--color-border); padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-xs); min-height: 160px; justify-content: space-between; }
 .kpi strong { font: var(--display-l); letter-spacing: var(--ls-display-l); }
 .kpi span { font: var(--body-s); color: var(--color-on-surface-muted); }
