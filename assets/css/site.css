@@ -702,7 +702,9 @@ html.from-home::after {
    optional video, one gallery, and pairs of screens side by side. */
 .case-chapter .label + .prose { margin-top: var(--space-lg); }
 .case-chapter .section-media { margin-top: var(--space-xl); }
-.section-media img, .section-media video { width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: cover; background: var(--color-surface-raised); }
+/* 16 by 9 unless the block says otherwise: a piece drawn in another frame
+   keeps its own rather than being cut to fit the default. */
+.section-media img, .section-media video { width: 100%; display: block; aspect-ratio: var(--media-ratio, 16 / 9); object-fit: cover; background: var(--color-surface-raised); }
 
 /* Two screens side by side, the block used most on the reference. Square
    corners, same height, one gap. Stacks below 720px. */
