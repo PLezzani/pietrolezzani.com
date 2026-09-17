@@ -5,10 +5,11 @@
  * a poster, and this script starts the video only when it comes into view,
  * pausing it when it leaves.
  *
- * Without this script, or without IntersectionObserver, the video simply
- * shows its poster with native controls: it can still be played, it just
- * does not play by itself. The same happens when the reader asks for reduced
- * motion, where nothing should start moving on its own.
+ * The controls are in the markup, not added here: without this script, or
+ * without IntersectionObserver, the video shows its poster and can still be
+ * played by hand. This file takes them away only once it has taken charge,
+ * and puts them back the moment it cannot, which is what happens when the
+ * reader asks for reduced motion or a phone refuses to autoplay.
  */
 (function () {
 	var videos = Array.prototype.slice.call(document.querySelectorAll('video[data-in-view]'));
@@ -20,6 +21,9 @@
 		videos.forEach(function (v) { v.pause(); v.setAttribute('controls', ''); });
 	}
 	if (reduce.matches || !('IntersectionObserver' in window)) { handOver(); return; }
+
+	// from here the script is in charge, so the bar goes
+	videos.forEach(function (v) { v.removeAttribute('controls'); });
 
 	var io = new IntersectionObserver(function (entries) {
 		entries.forEach(function (e) {
