@@ -103,7 +103,13 @@
 		if (document.hidden) visible = false; else { visible = true; start(); }
 	});
 
-	window.addEventListener('resize', resize);
+	// The hero's height depends on how many lines the title takes, and that
+	// changes without a window resize: when the preloaded face swaps in for the
+	// fallback, and on any reflow of the text. Measure again on both, or the
+	// bitmap keeps the old size and is stretched by CSS, squares into rectangles.
+	if ('ResizeObserver' in window) new ResizeObserver(resize).observe(hero);
+	else window.addEventListener('resize', resize);
+	if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);
 	resize();
 	start();
 })();
