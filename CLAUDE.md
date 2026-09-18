@@ -18,6 +18,11 @@ continuano a valere per ogni modifica futura.
 nella root del progetto ma **volutamente non versionato** (vedi `.gitignore`): il repo è
 pubblico e il documento contiene dati commerciali e nomi clienti non ancora pubblicabili.
 Non committarlo, non citarne tariffe o soglie di prezzo dentro file versionati.
+**Unica eccezione, decisa da Pietro il 15 settembre 2026**: la riga "Engagements start at
+€8,000." in home. Era una delle due opzioni che il piano stesso proponeva per la pagina
+(sezione 8, punto 4) ed è pubblicata di proposito. Tutto il resto (tariffe giornaliere,
+storico, margini, nomi non confermati) resta fuori dai file versionati, commenti HTML
+inclusi: i commenti arrivano al browser e stanno nel repo pubblico.
 
 Regole del riposizionamento, che valgono per ogni modifica da qui in avanti:
 
