@@ -17,7 +17,10 @@
 
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+	var io = null;
 	function handOver() {
+		// the observer goes too, or it would start the loop again on the next scroll
+		if (io) { io.disconnect(); io = null; }
 		videos.forEach(function (v) { v.pause(); v.setAttribute('controls', ''); });
 	}
 	if (reduce.matches || !('IntersectionObserver' in window)) { handOver(); return; }
@@ -25,7 +28,7 @@
 	// from here the script is in charge, so the bar goes
 	videos.forEach(function (v) { v.removeAttribute('controls'); });
 
-	var io = new IntersectionObserver(function (entries) {
+	io = new IntersectionObserver(function (entries) {
 		entries.forEach(function (e) {
 			var v = e.target;
 			if (e.isIntersecting) {
