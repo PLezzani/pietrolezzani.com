@@ -27,7 +27,7 @@
 	<link rel="apple-touch-icon" href="/wp-content/uploads/2024/09/Favicon_PietroLezzani-300x300.png" />
 
 	<link rel="preload" href="/assets/fonts/darker-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
-	<script>(function(){var d=document.documentElement;d.classList.add("js");try{var r=document.referrer?new URL(document.referrer):null,n=performance.getEntriesByType("navigation")[0];if(r&&r.origin===location.origin&&r.pathname==="/"&&(!n||n.type==="navigate")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("from-home")}catch(e){}})();</script>
+	<script>(function(){var d=document.documentElement;d.classList.add("js");try{var q=new URLSearchParams(location.search);if(q.get("from")==="home"){q.delete("from");var s=q.toString();history.replaceState(null,"",location.pathname+(s?"?"+s:"")+location.hash);if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("from-home")}}catch(e){}})();</script>
 	<link rel="stylesheet" href="/assets/css/site.css" />
 
 </head>

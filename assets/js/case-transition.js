@@ -45,7 +45,13 @@
 			e.preventDefault();
 			busy = true;
 
-			var href = link.href;
+			// The case page needs to know the picture is on its way, and it must
+			// not guess it from the referrer: a link opened in a new tab has the
+			// same referrer and no picture in flight. So the URL carries the mark,
+			// and the case page strips it before anything else reads it.
+			var target = new URL(link.href, location.href);
+			target.searchParams.set('from', 'home');
+			var href = target.href;
 			var r = img.getBoundingClientRect();
 			var scale = currentScale(img);
 
