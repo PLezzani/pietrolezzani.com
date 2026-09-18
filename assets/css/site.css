@@ -314,12 +314,10 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--space-md)); }
 .hero > .container { position: relative; z-index: 1; width: 100%; }
 /* interactive ground: a canvas of small squares, see assets/js/hero-field.js */
 .hero-field { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
-/* phase 2: a reel takes the same slot. Keep it muted, looped, and behind the text. */
-.hero-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
 /* The ground has to end without an edge, or the hero reads as a panel sitting on
    the page instead of the top of it. Masking beats fading a drawn colour: it
-   works whatever fills the slot, the canvas today and a reel later. */
-.hero-field, .hero-media {
+   works whatever fills the slot, so a reel could take it later. */
+.hero-field {
 	-webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 96%);
 	mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 96%);
 }

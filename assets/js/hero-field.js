@@ -5,8 +5,8 @@
  * No dependencies, no build step. Respects prefers-reduced-motion (renders once,
  * still) and stops drawing while the hero is off screen.
  *
- * Phase 2: replace the canvas with a <video class="hero-media"> reel and delete
- * this file. The CSS for .hero-media is already in site.css.
+ * A reel could take the same slot one day; the mask on .hero-field in site.css
+ * is written to work whatever fills it.
  */
 (function () {
 	var canvas = document.querySelector('.hero-field');
